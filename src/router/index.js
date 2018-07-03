@@ -10,7 +10,10 @@ import People from '../components/userConsole/People/People'
 import ReadPerson from '../components/userConsole/People/ReadPerson'
 import UpdatePerson from '../components/userConsole/People/UpdatePerson'
 
-import Opportunities from '../components/userConsole/Opportunities/Opportunities'
+import FeedPage from '../components/userConsole/feed/FeedPage'
+
+import VolunteerOpportunities from '../components/userConsole/volunteerOpportunities/VolunteerOpportunities'
+
 import Admin from '../components/admin/Admin'
 import UpdateUser from '../components/admin/UpdateUser'
 import ReadUser from '../components/admin/ReadUser'
@@ -65,6 +68,14 @@ const router = new Router({
       path: '/',
       component: UserConsoleHeader,
       children: [
+        {
+          path: '/feed',
+          component: FeedPage
+        },
+        {
+          path: '/volunteeropportunities',
+          component: VolunteerOpportunities
+        },
         //  ------------------------------------------ People ----------------------------------
         {
           path: '/people',
@@ -89,11 +100,6 @@ const router = new Router({
           }
         }
       ]
-    },
-    // ------------------------------------------ Opportunities ----------------------------------
-    {
-      path: '/opportunities',
-      component: Opportunities
     },
     // ------------------------------------------ Admin ----------------------------------
     {

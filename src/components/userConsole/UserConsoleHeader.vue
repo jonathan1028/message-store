@@ -1,31 +1,33 @@
 <template>
-  <div class="header">
-    <div class="header-content">
-        <div class="main-nav">
-          <!-- Logo -->
-          <div class="logo">Agilent CRM</div>
-          <!-- Main navigation -->
-          <div class="nav-buttons">
-            <!-- Logged in navigation -->
-            <div class="authenticated-nav" v-if="userId">
-              <router-link to="/people">People</router-link>
+  <div>
+    <div class="header">
+      <div class="header-content">
+          <div class="main-nav">
+            <!-- Logo -->
+            <div class="logo">GCN</div>
+            <div class="nav-buttons">
+              <!-- Logged in navigation -->
+              <!-- <div class="authenticated-nav" v-if="userId">
+                <router-link to="/people">People</router-link>
+                <div>|</div>
+                <router-link to="/opportunities">Opportunities</router-link>
+                <div>|</div>
+              </div>
+              <router-link to="/admin">Admin Panel</router-link>
               <div>|</div>
-              <router-link to="/opportunities">Opportunities</router-link>
-              <div>|</div>
+              <router-link to="/newusers">New User Accounts</router-link> -->
             </div>
-            <router-link to="/admin">Admin Panel</router-link>
-            <div>|</div>
-            <router-link to="/newusers">New User Accounts</router-link>
           </div>
-        </div>
-        <!-- Login buttons   -->
-        <div class="login">
-          <a>
-            <div v-if="userId" @click="logout()">Logout</div>
-            <router-link v-else to="/login">Login</router-link>
-          </a>
-        </div>
+          <!-- Login buttons   -->
+          <div class="login">
+            <a>
+              <div v-if="userId" @click="logout()">Logout</div>
+              <router-link v-else to="/login">Login</router-link>
+            </a>
+          </div>
+      </div>
     </div>
+    <router-view></router-view>
   </div>
 </template>
 
@@ -54,7 +56,7 @@ export default {
 
 <style>
 .header{
-  position: fixed;
+  /* position: fixed; */
   width: 100%;
   height: 40px;
   background-color: white;

@@ -13,7 +13,7 @@
 
       </li>
     </ul>
-    <table>
+    <!-- <table>
       <thead>
         <tr>
           <th
@@ -26,9 +26,6 @@
             <span class="arrow" :class="sortOrders[item.dbField] > 0 ? 'asc' : 'dsc'">
             </span>
           </th>
-          <!-- <th>
-            Links
-          </th> -->
         </tr>
 
       </thead>
@@ -50,17 +47,9 @@
             {{entry[col.dbField]}}
           </div>
           </td>
-          <!-- <td>
-            <button
-              @click="updatePerson(entry)"
-            >Edit</button>
-            <button
-              @click="deletePerson(entry)"
-            >Delete</button>
-          </td> -->
         </tr>
       </tbody>
-    </table>
+    </table> -->
   </div>
 </template>
 
@@ -68,7 +57,7 @@
 import { ALL_PEOPLE_QUERY, DELETE_PERSON_MUTATION } from '../../../constants/graphql'
 
 export default {
-  name: 'OpportunitiesTable',
+  name: 'MyOpportunities',
   props: {
     data: Array,
     columns: Array,
