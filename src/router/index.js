@@ -1,11 +1,13 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 
-import AppLogin from '../components/AppLogin'
-import People from '../components/People'
-import ReadPerson from '../components/ReadPerson'
-import UpdatePerson from '../components/UpdatePerson'
-import Opportunities from '../components/Opportunities'
+import Login from '../components/public/Login'
+
+import People from '../components/userConsole/People/People'
+import ReadPerson from '../components/userConsole/People/ReadPerson'
+import UpdatePerson from '../components/userConsole/People/UpdatePerson'
+
+import Opportunities from '../components/userConsole/Opportunities/Opportunities'
 import Admin from '../components/admin/Admin'
 import UpdateUser from '../components/admin/UpdateUser'
 import ReadUser from '../components/admin/ReadUser'
@@ -25,7 +27,7 @@ export default new Router({
     },
     {
       path: '/login',
-      component: AppLogin
+      component: Login
     },
     // ------------------------------------------ People ----------------------------------
     {

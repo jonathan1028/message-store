@@ -30,7 +30,7 @@
 </template>
 
 <script>
-import { GC_USER_ID, GC_AUTH_TOKEN } from '../constants/settings'
+import { GC_USER_ID, GC_AUTH_TOKEN } from '../../constants/settings'
 
 export default {
   name: 'AppHeader',

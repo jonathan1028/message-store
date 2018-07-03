@@ -32,11 +32,11 @@
 </template>
 
 <script>
-import { GC_USER_ID, GC_AUTH_TOKEN } from '../constants/settings'
-import { CREATE_USER_MUTATION, SIGNIN_USER_MUTATION } from '../constants/graphql'
+import { GC_USER_ID, GC_AUTH_TOKEN } from '../../constants/settings'
+import { CREATE_USER_MUTATION, SIGNIN_USER_MUTATION } from '../../constants/graphql'
 
 export default {
-  name: 'AppLogin',
+  name: 'Login',
   data () {
     return {
       email: '',

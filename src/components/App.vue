@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-      <app-header></app-header>
+      <user-console-header></user-console-header>
       <div class="main-content">
         <router-view></router-view>
         <!-- Standard page layout code -->
@@ -9,12 +9,12 @@
 </template>
 
 <script>
-import AppHeader from './AppHeader'
+import UserConsoleHeader from './userConsole/UserConsoleHeader'
 
 export default {
   name: 'app',
   components: {
-    AppHeader
+    UserConsoleHeader
   }
 }
 </script>
