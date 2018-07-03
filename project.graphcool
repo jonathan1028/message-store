@@ -1,5 +1,16 @@
 # project: cjj61omlj2d790156bk4oimkn
-# version: 1
+# version: 2
+
+type User @model {
+  createdAt: DateTime!
+  email: String @isUnique
+  id: ID! @isUnique
+  name: String
+  opportunities: [Opportunity!]! @relation(name: "UserOpportunities")
+  password: String
+  persons: [Person!]! @relation(name: "UsersPersons")
+  updatedAt: DateTime!
+}
 
 type File @model {
   contentType: String!
@@ -13,20 +24,15 @@ type File @model {
 }
 
 type Opportunity @model {
-  amount: Float
-  contacts: [Person!]! @relation(name: "PersonOpportunities")
-  createdAt: DateTime!
-  description: String
-  estimatedCloseDate: DateTime
   id: ID! @isUnique
-  jobName: String
-  nextStep: String
-  ownedBy: User @relation(name: "UserOpportunities")
-  probability: Int
-  source: String
-  stage: String
-  status: String
+  createdAt: DateTime!
   updatedAt: DateTime!
+  ownedBy: User @relation(name: "UserOpportunities")
+  name: String
+  description: String
+  startTime: DateTime
+  endTime: DateTime
+  address: String
 }
 
 type Person @model {
@@ -36,22 +42,10 @@ type Person @model {
   firstName: String
   id: ID! @isUnique
   lastName: String
-  opportunities: [Opportunity!]! @relation(name: "PersonOpportunities")
   ownedBy: User @relation(name: "UsersPersons")
   phone1: String
   phone2: String
   phoneTag1: String
   phoneTag2: String
-  updatedAt: DateTime!
-}
-
-type User @model {
-  createdAt: DateTime!
-  email: String @isUnique
-  id: ID! @isUnique
-  name: String
-  opportunities: [Opportunity!]! @relation(name: "UserOpportunities")
-  password: String
-  persons: [Person!]! @relation(name: "UsersPersons")
   updatedAt: DateTime!
 }

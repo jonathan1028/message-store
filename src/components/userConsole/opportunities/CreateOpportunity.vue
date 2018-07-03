@@ -3,45 +3,35 @@
     <form class="box">
       <h1>New Opportunity</h1>
       <div class="field">
-        <label>Job Name</label>
+        <label>Name</label>
         <input
-          v-model="jobName"
+          v-model="name"
+          type="text">
+      </div>
+
+      <div class="field">
+        <label>Description</label>
+        <input
+          v-model="description"
           type="text">
       </div>
       <div class="field">
-        <label>Stage</label>
+        <label>Start Time</label>
+        <datepicker
+          placeholder="Select Date"
+          v-model="startTime"
+        ></datepicker>
+      </div>
+      <div class="field">
+        <label>End Time</label>
         <input
-          v-model="stage"
+          v-model="endTime"
           type="text">
       </div>
       <div class="field">
-        <label>Status</label>
+        <label>Location</label>
         <input
-          v-model="status"
-          type="text">
-      </div>
-      <div class="field">
-        <label>Amount</label>
-        <input
-          v-model="amount"
-          type="text">
-      </div>
-      <div class="field">
-        <label>Source</label>
-        <input
-          v-model="source"
-          type="text">
-      </div>
-      <div class="field">
-        <label>Estimated Closing Date</label>
-        <input
-          v-model="estimatedCloseDate"
-          type="text">
-      </div>
-      <div class="field">
-        <label>Probability</label>
-        <input
-          v-model="probability"
+          v-model="address"
           type="text">
       </div>
       <button @click.prevent="cancel()">Cancel</button>
@@ -51,25 +41,21 @@
 </template>
 
 <script>
+import Datepicker from 'vuejs-datepicker'
 // import { CREATE_PERSON_MUTATION } from '../constants/graphql'
 import { CREATE_OPPORTUNITY_MUTATION, ALL_OPPORTUNITIES_QUERY } from '../../../constants/graphql'
 import { GC_USER_ID } from '../../../constants/settings'
 
 export default {
   name: 'CreateOpportunity',
+  components: { Datepicker },
   data () {
     return {
-      jobName: '',
-      stage: '',
-      status: '',
-      amount: 0,
-      source: '',
-      estimatedCloseDate: null,
-      probability: ''
-      // firstName: '',
-      // lastName: '',
-      // phone1: '',
-      // email: ''
+      name: '',
+      description: '',
+      startTime: null,
+      endTime: null,
+      address: ''
     }
   },
   methods: {
@@ -102,15 +88,12 @@ export default {
         variables: {
           // Sets variables in graphql.js
           // eslint-disable-next-line
-          jobName: this.jobName,
-          contacts: ['cjfa2o9tq6n290118sp0ym1n7'],
+          name: this.name,
           ownedById: currentUser,
-          stage: this.stage,
-          status: this.status,
-          amount: parseFloat(this.amount),
-          source: this.source,
-          estimatedCloseDate: this.estimatedCloseDate,
-          probability: parseInt(this.probability)
+          description: this.description,
+          startTime: this.startTime,
+          endTime: this.endTime,
+          address: this.address
         },
         update: (store, { data: { createOpportunity } }) => {
           // Pull data from the stored query

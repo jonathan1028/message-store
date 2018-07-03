@@ -1,52 +1,67 @@
 <template>
-  <table>
-    <thead>
-      <tr>
-        <th
-          v-for='(item, index) in columns'
-          :key='index'
-          :index="index"
-          @click="sortBy(item.dbField)"
-          :class="{ active: sortKey == item.dbField }">
-          {{ item.title | capitalize }}
-          <span class="arrow" :class="sortOrders[item.dbField] > 0 ? 'asc' : 'dsc'">
-          </span>
-        </th>
-        <th>
-          Links
-        </th>
-      </tr>
-
-    </thead>
-    <tbody>
-      <tr
-        v-for='(entry, index) in filteredData'
+  <div>
+    <ul>
+      <li
+        class="feedItem"
+        v-for='(item, index) in filteredData'
         :key='index'
-        :index="index"
       >
-        <td v-for='(col, index) in columns'
+        <h1>{{item.name}}</h1>
+        <p>{{item.description}}</p>
+        <p>{{item.startTime}}</p>
+        <p>{{item.endTime}}</p>
+
+      </li>
+    </ul>
+    <table>
+      <thead>
+        <tr>
+          <th
+            v-for='(item, index) in columns'
+            :key='index'
+            :index="index"
+            @click="sortBy(item.dbField)"
+            :class="{ active: sortKey == item.dbField }">
+            {{ item.title | capitalize }}
+            <span class="arrow" :class="sortOrders[item.dbField] > 0 ? 'asc' : 'dsc'">
+            </span>
+          </th>
+          <!-- <th>
+            Links
+          </th> -->
+        </tr>
+
+      </thead>
+      <tbody>
+        <tr
+          v-for='(entry, index) in filteredData'
           :key='index'
           :index="index"
-          @click="viewPerson(entry)"
         >
-        <div v-if="isContacts(col.dbField)">
-          {{getNames(entry[col.dbField])}}
-        </div>
-         <div v-else>
-          {{entry[col.dbField]}}
-        </div>
-        </td>
-        <td>
-          <button
-            @click="updatePerson(entry)"
-          >Edit</button>
-          <button
-            @click="deletePerson(entry)"
-          >Delete</button>
-        </td>
-      </tr>
-    </tbody>
-  </table>
+          <td v-for='(col, index) in columns'
+            :key='index'
+            :index="index"
+            @click="viewPerson(entry)"
+          >
+          <div v-if="isContacts(col.dbField)">
+            {{getNames(entry[col.dbField])}}
+          </div>
+          <div v-else>
+            {{entry[col.dbField]}}
+          </div>
+          </td>
+          <!-- <td>
+            <button
+              @click="updatePerson(entry)"
+            >Edit</button>
+            <button
+              @click="deletePerson(entry)"
+            >Delete</button>
+          </td> -->
+        </tr>
+      </tbody>
+    </table>
+  </div>
 </template>
 
 <script>
@@ -159,6 +174,17 @@ export default {
 </script>
 
 <style>
+.feedItem {
+  background-color: white;
+  margin-top: 1%;
+  padding: 1%;
+  /* border: 1px solid #BFBFBF;
+  background-color: white;
+  box-shadow: 3px 3px 3px 3px #aaaaaa; */
+  -webkit-box-shadow: 0 1px 2px #777;
+  -moz-box-shadow: 0 2px 1px #777;
+  box-shadow: 0 2px 1px #777;
+}
 /* body {
   font-family: Helvetica Neue, Arial, sans-serif;
   font-size: 14px;

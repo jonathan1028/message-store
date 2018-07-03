@@ -37,18 +37,19 @@ export default {
   data () {
     return {
       // showCreatePerson: this.$store.showCreatePerson,
-      allOpportunities: [],
+      allOpportunities: [
+        {name: 'Opp1'},
+        {name: 'Opp2'},
+        {name: 'Opp3'}
+      ],
       sortColumn: '',
       searchQuery: '',
       columns: [
-        {dbField: 'jobName', title: 'job Name'},
-        {dbField: 'contacts', title: 'contact'},
-        {dbField: 'stage', title: 'stage'},
-        {dbField: 'status', title: 'status'},
-        {dbField: 'amount', title: 'amount'},
-        {dbField: 'source', title: 'source'},
-        {dbField: 'estCloseDate', title: 'Est. Close Date'},
-        {dbField: 'probability', title: 'probability'}
+        {dbField: 'name', title: 'Name'},
+        {dbField: 'description', title: 'description'},
+        {dbField: 'startTime', title: 'Start Time'},
+        {dbField: 'endTime', title: 'End Time'},
+        {dbField: 'address', title: 'Location'}
       ]
       // gridData: [
       //   { name: 'Chuck Norris', power: Infinity },
@@ -66,6 +67,7 @@ export default {
       console.log(data)
       return data
     }
+  // }
   },
   apollo: {
     // allPerson here pulls the data from ALL_PEOPLE_QUERY and assigns it to the data(){} object at the top of script

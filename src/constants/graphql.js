@@ -59,20 +59,14 @@ export const ALL_OPPORTUNITIES_QUERY = gql`
   query AllOpportunitiesQuery {
     allOpportunities {
       id
-      jobName
-      stage
-      status
-      amount
-      source
-      estimatedCloseDate
-      probability
+      name
+      description
+      startTime
+      endTime
+      address
       ownedBy {
         id
         name
-      }
-      contacts {
-        id
-        displayName
       }
     }
   }
@@ -177,19 +171,26 @@ export const CREATE_PERSON_MUTATION = gql`
 `
 
 export const CREATE_OPPORTUNITY_MUTATION = gql`
-  mutation CreateOpportunityMutation($jobName: String, $ownedById: ID!, $source: String, $contacts: [ID!], $stage: String, $status: String,
-  $amount: Float, $probability: Int) {
+  mutation CreateOpportunityMutation($name: String, $ownedById: ID!, $description: String, 
+  $startTime: DateTime, $endTime: DateTime, $address: String) {
     createOpportunity(
-      jobName: $jobName
-      contactsIds: $contacts
+      name: $name
       ownedById: $ownedById
-      source: $source
-      stage: $stage
-      status: $status
-      amount: $amount
-      probability: $probability
+      description: $description
+      startTime: $startTime
+      endTime: $endTime
+      address: $address
     ) {
       id
+      name
+      description
+      startTime
+      endTime
+      address
+      ownedBy {
+        id
+        name
+      }
     }
   }
 `
