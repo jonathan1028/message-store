@@ -1,16 +1,5 @@
-# project: cjeq87ww03gm801881tjhtlyu
-# version: 9
-
-type User @model {
-  id: ID! @isUnique
-  createdAt: DateTime!
-  updatedAt: DateTime!
-  email: String @isUnique
-  password: String
-  name: String
-  persons: [Person!]! @relation(name: "UsersPersons")
-  opportunities: [Opportunity!]! @relation(name: "UserOpportunities")
-}
+# project: cjj61omlj2d790156bk4oimkn
+# version: 1
 
 type File @model {
   contentType: String!
@@ -23,35 +12,46 @@ type File @model {
   url: String! @isUnique
 }
 
-type Person @model {
-  id: ID! @isUnique
+type Opportunity @model {
+  amount: Float
+  contacts: [Person!]! @relation(name: "PersonOpportunities")
   createdAt: DateTime!
+  description: String
+  estimatedCloseDate: DateTime
+  id: ID! @isUnique
+  jobName: String
+  nextStep: String
+  ownedBy: User @relation(name: "UserOpportunities")
+  probability: Int
+  source: String
+  stage: String
+  status: String
   updatedAt: DateTime!
-  firstName: String
-  lastName: String
+}
+
+type Person @model {
+  createdAt: DateTime!
   displayName: String
   email: String
+  firstName: String
+  id: ID! @isUnique
+  lastName: String
+  opportunities: [Opportunity!]! @relation(name: "PersonOpportunities")
+  ownedBy: User @relation(name: "UsersPersons")
   phone1: String
   phone2: String
   phoneTag1: String
   phoneTag2: String
-  ownedBy: User @relation(name: "UsersPersons")
-  opportunities: [Opportunity!]! @relation(name: "PersonOpportunities")
+  updatedAt: DateTime!
 }
 
-type Opportunity @model {
-  id: ID! @isUnique
+type User @model {
   createdAt: DateTime!
+  email: String @isUnique
+  id: ID! @isUnique
+  name: String
+  opportunities: [Opportunity!]! @relation(name: "UserOpportunities")
+  password: String
+  persons: [Person!]! @relation(name: "UsersPersons")
   updatedAt: DateTime!
-  jobName: String
-  stage: String
-  status: String
-  amount: Float
-  source: String
-  estimatedCloseDate: DateTime
-  probability: Int
-  nextStep: String
-  description: String
-  contacts: [Person!]! @relation(name: "PersonOpportunities")
-  ownedBy: User @relation(name: "UserOpportunities")
 }
