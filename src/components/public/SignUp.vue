@@ -3,10 +3,25 @@
     <div class="companyName">Good Citizen Network</div>
     <div class="inputs">
       <div class="field">
+        <label for="">Email</label>
         <input
           v-model="email"
           type="text"
-          placeholder="Your email address">
+          placeholder="Email">
+      </div>
+      <div class="field">
+        <label for="">First Name</label>
+        <input
+          v-model="firstName"
+          type="text"
+          placeholder="Good">
+      </div>
+      <div class="field">
+        <label for="">Last Name</label>
+        <input
+          v-model="lastName"
+          type="text"
+          placeholder="Citizen">
       </div>
       <div class="field">
         <input
@@ -16,16 +31,16 @@
       </div>
     </div>
     <div>
-      <button @click="login">
-        Login
+      <button @click="create">
+        Sign Up
       </button>
     </div>
     <div class="linkBlock">
       <router-link
         class="link"
-        to="signup"
+        to="login"
       >
-        Don't have an account? Sign Up
+        Already have an account? Login
       </router-link>
     </div>
   </div>
@@ -41,8 +56,8 @@ export default {
   data () {
     return {
       email: '',
-      // login: true,
-      // name: '',
+      firstName: '',
+      lastName: '',
       password: ''
     }
   },
@@ -50,8 +65,15 @@ export default {
     ...mapGetters(['authenticated'])
   },
   methods: {
-    login () {
-      this.$store.dispatch('login', {email: this.email, password: this.password})
+    create () {
+      this.$store.dispatch('createUser',
+        {
+          email: this.email,
+          firstName: this.firstName,
+          lastName: this.lastName,
+          password: this.password
+        }
+      )
     },
     ...mapActions(['logout'])
   }

@@ -26,6 +26,7 @@ html {
   --shadow3: 1.5vh -1vh 1vh rgba(0, 7, 2, 0.3);
   --shadow1: 0 .5vh 2vh rgba(0, 0, 0, 0.3), 0 0 40px rgba(0, 0, 0, 0.1) inset;
   --shadow2: 1.5vh -1vh 1vh rgba(0, 0, 0, 0.3);
+  --text-color1: #47535d;
 }
 /* ---------------------------- Application Font Styling -------------------------- */
 html {
@@ -104,31 +105,32 @@ a {
     background-size:contain;
 }
 /* ---------------------------------------- Application Form Styling ---------------------------- */
-label {
-  width: 30%;
-  display: block;
-  text-align: right;
-  padding-right: 5%;
-  /* border: .5px solid lightgray; */
-  display: flex;
-  align-items: center;
-  justify-content: flex-end;
-}
-.field {
-  width: 50%;
-  /* border: .5px solid lightgray; */
-  margin-bottom: 1%;
-  display: flex;
-  align-items: center;
-}
-input{
-  height: 3vh;
-  font-size: 2vh;
-  border: .25vh solid lightgray;
-}
-input:hover{
-  border-bottom: .25vh solid var(--color1);
-}
+// label {
+//   width: 30%;
+//   display: block;
+//   text-align: right;
+//   padding-right: 5%;
+//   /* border: .5px solid lightgray; */
+//   display: flex;
+//   align-items: center;
+//   justify-content: flex-end;
+// }
+// .field {
+//   width: 50%;
+//   /* border: .5px solid lightgray; */
+//   margin-bottom: 1%;
+//   display: flex;
+//   align-items: center;
+//   justify-content: flex-start;
+// }
+// input{
+//   height: 3vh;
+//   font-size: 2vh;
+//   border: .25vh solid lightgray;
+// }
+// input:hover{
+//   border-bottom: .25vh solid var(--color1);
+// }
 /* ----------------------------------------- Application List Styling -------------------------- */
 li {
   list-style-type: none;

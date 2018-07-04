@@ -1,8 +1,9 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 
-import Login from '../components/public/Login'
 import PublicHeader from '../components/public/PublicHeader'
+import Login from '../components/public/Login'
+import SignUp from '../components/public/SignUp'
 import Home from '@/components/public/Home'
 
 import UserConsoleHeader from '../components/userConsole/UserConsoleHeader'
@@ -50,13 +51,12 @@ const router = new Router({
           meta: {
             requiresAuth: false
           }
+        },
+        {
+          path: '/signup',
+          name: 'SignUp',
+          component: SignUp
         }
-
-        // {
-        //   path: '/signup',
-        //   name: 'SignUp',
-        //   component: SignUp
-        // }
       ]
     },
     {
