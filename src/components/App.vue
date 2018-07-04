@@ -20,7 +20,8 @@ html {
 }
 /* ------------------------- Application Variables ------------------------- */
 :root {
-  --color1: rgba(45,48,245,1);
+  --theme-color1: #efba34;
+  --theme-color2: #fff2c7;
   --color2: rgb(42, 177, 182);
   --link-color: rgb(48,62,240);
   --shadow3: 1.5vh -1vh 1vh rgba(0, 7, 2, 0.3);
@@ -141,37 +142,53 @@ button{
   padding: 1vh;
   height: auto;
   width: auto;
-  -webkit-box-shadow:0 .3vh 1vh rgba(0, 0, 0, 0.3), 0 0 2vh rgba(0, 0, 0, 0.1) inset;
-  -moz-box-shadow:0 .3vh 1vh rgba(0, 0, 0, 0.3), 0 0 2vh rgba(0, 0, 0, 0.1) inset;
-  box-shadow:0 .3vh 1vh rgba(0, 0, 0, 0.3), 0 0 4vh rgba(0, 0, 0, 0.1) inset;
+  -webkit-box-shadow:0 0 0 rgba(0, 0, 0, 0.3), 0 0 0 rgba(0, 0, 0, 0.1) inset;
+  -moz-box-shadow:0 0 0 rgba(0, 0, 0, 0.3), 0 0 0 rgba(0, 0, 0, 0.1) inset;
+  box-shadow:0 0 0 rgba(0, 0, 0, 0.3), 0 0 0 rgba(0, 0, 0, 0.1) inset;
 }
 button:hover{
   cursor: pointer;
   /* background-color: rgb(250, 250, 250); */
-  -webkit-box-shadow:0 .3vh 1vh rgba(0, 0, 0, 0.3), 0 0 2vh rgba(0, 0, 0, 0.1) inset;
-  -moz-box-shadow:0 .3vh 1vh rgba(0, 0, 0, 0.3), 0 0 2vh rgba(0, 0, 0, 0.1) inset;
-  box-shadow:0 .3vh 1vh rgba(0, 0, 0, 0.2), 0 0 2vh rgba(0, 0, 0, 0.1) inset;
+  // -webkit-box-shadow:0 .3vh 1vh rgba(0, 0, 0, 0.3), 0 0 2vh rgba(0, 0, 0, 0.1) inset;
+  // -moz-box-shadow:0 .3vh 1vh rgba(0, 0, 0, 0.3), 0 0 2vh rgba(0, 0, 0, 0.1) inset;
+  // box-shadow:0 .3vh 1vh rgba(0, 0, 0, 0.2), 0 0 2vh rgba(0, 0, 0, 0.1) inset;
 }
-.button2 {
-    color: white;
-    background-color: var(--color3);
-    font-size: 3vh;
-    cursor: pointer;
-    border-radius: 1.5vh;
-    border: thin solid #888;
-    box-shadow: 1vh 1vh 1vh grey;
-    white-space: nowrap;
-    padding-left: 3vh;
-    padding-right: 3vh;
-}
-.button2:hover {
-    background-color: var(--color-hover2);
-    color: white;
-    border-radius: 1.5vh;
-    border: thin solid white;
-    box-shadow: 1vh 1vh 1vh grey;
-    white-space: nowrap;
-}
+// button{
+//   font-size: 2vh;
+//   padding: 1vh;
+//   height: auto;
+//   width: auto;
+//   -webkit-box-shadow:0 .3vh 1vh rgba(0, 0, 0, 0.3), 0 0 2vh rgba(0, 0, 0, 0.1) inset;
+//   -moz-box-shadow:0 .3vh 1vh rgba(0, 0, 0, 0.3), 0 0 2vh rgba(0, 0, 0, 0.1) inset;
+//   box-shadow:0 .3vh 1vh rgba(0, 0, 0, 0.3), 0 0 4vh rgba(0, 0, 0, 0.1) inset;
+// }
+// button:hover{
+//   cursor: pointer;
+//   /* background-color: rgb(250, 250, 250); */
+//   -webkit-box-shadow:0 .3vh 1vh rgba(0, 0, 0, 0.3), 0 0 2vh rgba(0, 0, 0, 0.1) inset;
+//   -moz-box-shadow:0 .3vh 1vh rgba(0, 0, 0, 0.3), 0 0 2vh rgba(0, 0, 0, 0.1) inset;
+//   box-shadow:0 .3vh 1vh rgba(0, 0, 0, 0.2), 0 0 2vh rgba(0, 0, 0, 0.1) inset;
+// }
+// .button2 {
+//     color: white;
+//     background-color: var(--color3);
+//     font-size: 3vh;
+//     cursor: pointer;
+//     border-radius: 1.5vh;
+//     border: thin solid #888;
+//     box-shadow: 1vh 1vh 1vh grey;
+//     white-space: nowrap;
+//     padding-left: 3vh;
+//     padding-right: 3vh;
+// }
+// .button2:hover {
+//     background-color: var(--color-hover2);
+//     color: white;
+//     border-radius: 1.5vh;
+//     border: thin solid white;
+//     box-shadow: 1vh 1vh 1vh grey;
+//     white-space: nowrap;
+// }
 /* Extra Small Devices, Phones */
 @media (max-width : 480px) {
 }

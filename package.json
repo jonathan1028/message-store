@@ -25,7 +25,7 @@
     "graphql-tools": "^2.21.0",
     "jsonwebtoken": "^8.3.0",
     "lodash": "^4.17.5",
-    "moment": "^2.22.0",
+    "moment": "^2.22.2",
     "subscriptions-transport-ws": "^0.8.3",
     "tachyons": "^4.9.1",
     "vue": "^2.5.2",

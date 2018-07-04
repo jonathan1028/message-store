@@ -7,14 +7,7 @@
       </span> -->
       <div class="box effect6">
         <div class="box-content">
-          <h1>Opportunities</h1>
-          <!-- <button
-            @click="openCreate()"
-          >Add New</button> -->
           <div>
-            <form class="search">
-              <input name="query" v-model="searchQuery" placeholder="Search">
-            </form>
             <!-- <opportunities-table
               :data="processData(allOpportunities)"
               :columns="columns"

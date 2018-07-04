@@ -24,9 +24,10 @@
       </div>
       <div class="field">
         <label>End Time</label>
-        <input
+        <datepicker
+          placeholder="Select Date"
           v-model="endTime"
-          type="text">
+        ></datepicker>
       </div>
       <div class="field">
         <label>Location</label>
@@ -111,3 +112,34 @@ export default {
   }
 }
 </script>
+<style lang="scss" scoped>
+.box {
+  padding: 2vw;
+}
+label {
+  width: 30%;
+  display: block;
+  text-align: right;
+  padding-right: 5%;
+  /* border: .5px solid lightgray; */
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+}
+.field {
+  width: 50%;
+  /* border: .5px solid lightgray; */
+  margin-bottom: 1%;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+}
+input{
+  height: 3vh;
+  font-size: 2vh;
+  border: .25vh solid lightgray;
+}
+input:hover{
+  border-bottom: .25vh solid var(--color1);
+}
+</style>

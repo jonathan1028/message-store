@@ -1,6 +1,7 @@
 // import Authenticator from '../../auth/Authenticator'
 import router from '../../router/index'
-import { GC_USER_ID, GC_AUTH_TOKEN } from '../../constants/settings'
+import { GC_USER_ID } from '../../constants/settings'
+// import { GC_USER_ID, GC_AUTH_TOKEN } from '../../constants/settings'
 // import { SIGNIN_USER_MUTATION } from '../../constants/graphql'
 import { CREATE_USER_MUTATION, SIGNIN_USER_MUTATION } from '../../constants/graphql'
 import apolloClient from '../../apollo-client'
@@ -32,7 +33,7 @@ const mutations = {
     state.authenticated = true
     state.userId = authResult.user.id
 
-    localStorage.setItem(GC_AUTH_TOKEN, authResult.user.id)
+    localStorage.setItem(GC_USER_ID, authResult.user.id)
     // state.accessToken = authData.accessToken
     // state.idToken = authData.idToken
     // state.expiresAt = authData.expiresIn * 1000 + new Date().getTime()
