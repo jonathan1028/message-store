@@ -114,8 +114,7 @@ const actions = {
         mutation: CREATE_USER_MUTATION,
         variables: {
           email: user.email,
-          firstName: user.firstName,
-          lastName: user.lastName,
+          name: user.name,
           password: user.password
         }
       }).then((result) => {

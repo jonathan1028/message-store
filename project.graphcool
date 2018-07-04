@@ -1,12 +1,11 @@
 # project: cjj61omlj2d790156bk4oimkn
-# version: 3
+# version: 4
 
 type User @model {
   createdAt: DateTime!
   email: String @isUnique
   id: ID! @isUnique
-  firstName: String
-  lastName: String
+  name: String
   opportunities: [Opportunity!]! @relation(name: "UserOpportunities")
   password: String
   persons: [Person!]! @relation(name: "UsersPersons")

@@ -15,6 +15,7 @@ import FeedPage from '../components/userConsole/feed/FeedPage'
 
 import VolunteerOpportunities from '../components/userConsole/volunteerOpportunities/VolunteerOpportunities'
 
+import AdminHeader from '../components/admin/AdminHeader'
 import Admin from '../components/admin/Admin'
 import UpdateUser from '../components/admin/UpdateUser'
 import ReadUser from '../components/admin/ReadUser'
@@ -103,21 +104,27 @@ const router = new Router({
     },
     // ------------------------------------------ Admin ----------------------------------
     {
-      path: '/admin',
-      component: Admin
-    },
-    {
-      path: '/newusers',
-      component: NewUsers
-    },
-    {
-      path: '/user/:id',
-      component: ReadUser
-    },
-    {
-      path: '/user/update/:id',
-      component: UpdateUser,
-      name: 'updateUser'
+      path: '/',
+      component: AdminHeader,
+      children: [
+        {
+          path: '/admin',
+          component: Admin
+        },
+        {
+          path: '/newusers',
+          component: NewUsers
+        },
+        {
+          path: '/user/:id',
+          component: ReadUser
+        },
+        {
+          path: '/user/update/:id',
+          component: UpdateUser,
+          name: 'updateUser'
+        }
+      ]
     }
   ],
   // set mode to ‘history’ to remove the hash from the URLs

@@ -104,10 +104,9 @@ export const ALL_LINKS_SEARCH_QUERY = gql`
 // CreateUser mutation will be executed before the signinUser mutation.
 // Bundling two mutations like this allows you to sign up and login in a single request!
 export const CREATE_USER_MUTATION = gql`
-  mutation CreateUserMutation($firstName: String, $lastName: String, $email: String!, $password: String!) {
+  mutation CreateUserMutation($name: String, $email: String!, $password: String!) {
     createUser(
-      firstName: $firstName,
-      lastName: $lastName,
+      name: $name,
       authProvider: {
         email: {
           email: $email,
