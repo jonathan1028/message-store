@@ -1,6 +1,5 @@
 <template>
   <div>
-    <div>|</div>
     <h1 class='box'>Home Page</h1>
     <!-- <h4 v-if="authenticated">
         You are logged in!

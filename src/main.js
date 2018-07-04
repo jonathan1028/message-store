@@ -4,7 +4,7 @@ import apolloProvider from './apollo-provider'
 import App from './components/App'
 import router from './router'
 import { GC_USER_ID } from './constants/settings'
-import store from './store'
+import store from './store/index'
 import moment from 'moment'
 
 let userId = localStorage.getItem(GC_USER_ID)

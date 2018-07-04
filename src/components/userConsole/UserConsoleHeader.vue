@@ -19,11 +19,25 @@
             </div>
           </div>
           <!-- Login buttons   -->
-          <div class="login">
-            <a>
-              <div v-if="userId" @click="logout()">Logout</div>
-              <router-link v-else to="/login">Login</router-link>
-            </a>
+          <div>
+            <!-- <div>
+              {{user.email}}
+            </div> -->
+            <!-- <button
+              v-if="!authenticated"
+              @click="login()">
+                Log In
+            </button> -->
+            <!-- <router-link
+              @click="logout()">
+              Login
+              </router-link> -->
+            <div
+              v-if="authenticated"
+              class="link"
+              @click="logout()">
+                Log Out
+            </div>
           </div>
       </div>
     </div>
@@ -32,25 +46,28 @@
 </template>
 
 <script>
-import { GC_USER_ID, GC_AUTH_TOKEN } from '../../constants/settings'
+// import { GC_USER_ID, GC_AUTH_TOKEN } from '../../constants/settings'
+import { mapGetters, mapActions } from 'vuex'
 
 export default {
   name: 'AppHeader',
-  computed: {
-    // You first retrieve the userId from this.$root.$data.
-    // If the userId is not available, the submit-button won’t be rendered anymore.
-    // That way you make sure only authenticated users can create new links
-    userId () {
-      return this.$root.$data.userId
-    }
-  },
-  methods: {
-    logout () {
-      localStorage.removeItem(GC_USER_ID)
-      localStorage.removeItem(GC_AUTH_TOKEN)
-      this.$root.$data.userId = localStorage.getItem(GC_USER_ID)
-    }
-  }
+  computed: mapGetters(['authenticated', 'userId']),
+  // {
+  //   // You first retrieve the userId from this.$root.$data.
+  //   // If the userId is not available, the submit-button won’t be rendered anymore.
+  //   // That way you make sure only authenticated users can create new links
+  //   userId () {
+  //     return this.$root.$data.userId
+  //   }
+  // },
+  methods: mapActions(['logout'])
+  // methods: {
+  //   logout () {
+  //     localStorage.removeItem(GC_USER_ID)
+  //     localStorage.removeItem(GC_AUTH_TOKEN)
+  //     this.$root.$data.userId = localStorage.getItem(GC_USER_ID)
+  //   }
+  // }
 }
 </script>
 
@@ -123,5 +140,10 @@ export default {
 
 .login a:hover{
   color: gray;
+}
+.link {
+  color: #3273dc;
+  text-decoration: none;
+  cursor: pointer;
 }
 </style>

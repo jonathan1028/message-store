@@ -23,6 +23,7 @@
     "cors": "^2.8.4",
     "graphql": "^0.12.0",
     "graphql-tools": "^2.21.0",
+    "jsonwebtoken": "^8.3.0",
     "lodash": "^4.17.5",
     "moment": "^2.22.0",
     "subscriptions-transport-ws": "^0.8.3",
@@ -32,7 +33,8 @@
     "vue-chartjs": "^3.3.1",
     "vue-router": "^3.0.1",
     "vuejs-datepicker": "^1.5.2",
-    "vuex": "^3.0.1"
+    "vuex": "^3.0.1",
+    "vuex-persist": "^1.4.3"
   },
   "devDependencies": {
     "autoprefixer": "^7.1.2",

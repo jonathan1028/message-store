@@ -1,49 +1,40 @@
 <template>
-  <div>
-    <div class="header">
-      <div class="header-content">
-          <div class="main-nav">
-            <!-- Logo -->
-            <div class="logo">GCN</div>
-            <!-- Main navigation -->
-            <div class="nav-buttons">
-              <!-- Logged in navigation -->
-              <!-- <router-link to="/admin">Admin Panel</router-link>
-              <div>|</div>
-              <router-link to="/newusers">New User Accounts</router-link> -->
-            </div>
+  <div class="header">
+    <div class="header-content">
+        <div class="main-nav">
+          <!-- Logo -->
+          <div class="logo">GCN</div>
+          <!-- Main navigation -->
+          <div class="nav-buttons">
+            <router-link to="/admin">About</router-link>
+            <div>|</div>
+            <router-link to="/newusers">Contact</router-link>
           </div>
-          <!-- Login buttons   -->
-          <div class="login">
-            <a>
-              <div v-if="userId" @click="logout()">Logout</div>
-              <router-link v-else to="/login">Login</router-link>
-            </a>
-          </div>
-      </div>
+        </div>
+        <!-- Login buttons   -->
+        <router-link to="/login">Login</router-link>
+        <!-- <button
+          v-if="!authenticated"
+          @click="login()">
+            Log In
+        </button> -->
+
+        <!-- <button
+          v-if="authenticated"
+          @click="logout()">
+            Log Out
+        </button> -->
     </div>
     <router-view></router-view>
   </div>
 </template>
 
 <script>
-import { GC_USER_ID, GC_AUTH_TOKEN } from '../../constants/settings'
 
 export default {
   name: 'PublicHeader',
-  computed: {
-    // You first retrieve the userId from this.$root.$data.
-    // If the userId is not available, the submit-button won’t be rendered anymore.
-    // That way you make sure only authenticated users can create new links
-    userId () {
-      return this.$root.$data.userId
-    }
-  },
-  methods: {
-    logout () {
-      localStorage.removeItem(GC_USER_ID)
-      localStorage.removeItem(GC_AUTH_TOKEN)
-      this.$root.$data.userId = localStorage.getItem(GC_USER_ID)
+  data () {
+    return {
     }
   }
 }

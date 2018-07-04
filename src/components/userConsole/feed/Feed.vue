@@ -6,50 +6,15 @@
         v-for='(item, index) in filteredData'
         :key='index'
       >
-        <h1>{{item.name}}</h1>
-        <p>{{item.description}}</p>
-        <p>{{item.startTime}}</p>
-        <p>{{item.endTime}}</p>
-
+          <div class="eventTextBlock">
+            <div>{{item.name}}</div>
+            <p>with Organization Name</p>
+            <p class="description">{{item.description}}</p>
+            <p>{{item.startTime}}</p>
+            <p>{{item.endTime}}</p>
+          </div>
       </li>
     </ul>
-    <!-- <table>
-      <thead>
-        <tr>
-          <th
-            v-for='(item, index) in columns'
-            :key='index'
-            :index="index"
-            @click="sortBy(item.dbField)"
-            :class="{ active: sortKey == item.dbField }">
-            {{ item.title | capitalize }}
-            <span class="arrow" :class="sortOrders[item.dbField] > 0 ? 'asc' : 'dsc'">
-            </span>
-          </th>
-        </tr>
-
-      </thead>
-      <tbody>
-        <tr
-          v-for='(entry, index) in filteredData'
-          :key='index'
-          :index="index"
-        >
-          <td v-for='(col, index) in columns'
-            :key='index'
-            :index="index"
-            @click="viewPerson(entry)"
-          >
-          <div v-if="isContacts(col.dbField)">
-            {{getNames(entry[col.dbField])}}
-          </div>
-          <div v-else>
-            {{entry[col.dbField]}}
-          </div>
-          </td>
-        </tr>
-      </tbody>
-    </table> -->
   </div>
 </template>
 
@@ -164,6 +129,9 @@ export default {
 
 <style>
 .feedItem {
+  display: grid;
+  grid-template-columns: 15% 85% 15%;
+  grid-template-rows: 20% 10% 10% 50%;
   background-color: white;
   margin-top: 1%;
   padding: 1%;
@@ -174,113 +142,13 @@ export default {
   -moz-box-shadow: 0 2px 1px #777;
   box-shadow: 0 2px 1px #777;
 }
-/* body {
-  font-family: Helvetica Neue, Arial, sans-serif;
-  font-size: 14px;
-  color: #444;
-} */
-
-/* tr:nth-child(3) { border: solid thin; } */
-table {
-  /* border-collapse is needed to make the borders work properly on rows */
-  margin-top: 1%;
-  border-collapse: collapse;
-  border-bottom: 2px solid lightgray;
-  border-radius: 3px;
-  background-color: white;
-  width: 100%;
+.eventTextBlock {
+  grid-column-start: 2;
+  grid-column-end: 3;
+  font-size: 4vh;
+}
+.description {
+  margin-top: 1vh;
 }
 
-th {
-  height: 40px;
-  background-color: rgb(220,220,220);
-}
-
-/* thead > tr {
-  -webkit-box-shadow:0 1px 4px rgba(0, 0, 0, 0.3), 0 0 40px rgba(0, 0, 0, 0.1) inset;
-  -moz-box-shadow:0 1px 4px rgba(0, 0, 0, 0.3), 0 0 40px rgba(0, 0, 0, 0.1) inset;
-  box-shadow:0 1px 4px rgba(0, 0, 0, 0.3), 0 0 40px rgba(0, 0, 0, 0.1) inset;
-} */
-
-tr {
-  height: 40px;
-  border-bottom: 1px solid lightgray;
-}
-
-tr:hover {
-  background-color: rgb(245, 245, 245);
-}
-
-/* td {
-  background-color: #f9f9f9;
-} */
-
-/* th, td {
-  min-width: 120px;
-  padding: 10px 20px;
-} */
-
-th.active {
-  color: #fff;
-}
-
-th.active .arrow {
-  opacity: 1;
-}
-
-.arrow {
-  display: inline-block;
-  vertical-align: middle;
-  width: 0;
-  height: 0;
-  margin-left: 5px;
-  opacity: 0.66;
-}
-
-.arrow.asc {
-  border-left: 4px solid transparent;
-  border-right: 4px solid transparent;
-  border-bottom: 4px solid #fff;
-}
-
-.arrow.dsc {
-  border-left: 4px solid transparent;
-  border-right: 4px solid transparent;
-  border-top: 4px solid #fff;
-}
-
-.effect7
-{
-  position:relative;
-  -webkit-box-shadow:0 1px 4px rgba(0, 0, 0, 0.3), 0 0 40px rgba(0, 0, 0, 0.1) inset;
-  -moz-box-shadow:0 1px 4px rgba(0, 0, 0, 0.3), 0 0 40px rgba(0, 0, 0, 0.1) inset;
-  box-shadow:0 1px 4px rgba(0, 0, 0, 0.3), 0 0 40px rgba(0, 0, 0, 0.1) inset;
-}
-
-.effect7:before, .effect7:after
-{
-  content:"";
-  position:absolute;
-  z-index:-1;
-  -webkit-box-shadow:0 0 20px rgba(0,0,0,0.8);
-  -moz-box-shadow:0 0 20px rgba(0,0,0,0.8);
-  box-shadow:0 0 20px rgba(0,0,0,0.8);
-  top:0;
-  bottom:0;
-  left:10px;
-  right:10px;
-  -moz-border-radius:100px / 10px;
-  border-radius:100px / 10px;
-}
-
-.effect7:after
-{
-  right:10px;
-  left:auto;
-  -webkit-transform:skew(8deg) rotate(3deg);
-  -moz-transform:skew(8deg) rotate(3deg);
-  -ms-transform:skew(8deg) rotate(3deg);
-  -o-transform:skew(8deg) rotate(3deg);
-  transform:skew(8deg) rotate(3deg);
-}
 </style>
