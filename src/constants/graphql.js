@@ -154,6 +154,8 @@ export const SIGNIN_USER_MUTATION = gql`
       token
       user {
         id
+        name
+        email
       }
     }
   }

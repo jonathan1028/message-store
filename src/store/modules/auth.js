@@ -12,10 +12,12 @@ import apolloClient from '../../apollo-client'
 
 const state = {
   userId: '',
-  authenticated: !!localStorage.getItem('access_token'),
-  accessToken: localStorage.getItem('access_token'),
-  idToken: localStorage.getItem('id_token'),
-  expiresAt: localStorage.getItem('expires_at')
+  user: {},
+  authenticated: false
+  // authenticated: localStorage.getItem('authenticated'),
+  // accessToken: localStorage.getItem('access_token'),
+  // idToken: localStorage.getItem('id_token'),
+  // expiresAt: localStorage.getItem('expires_at')
 }
 
 const getters = {
@@ -32,7 +34,8 @@ const mutations = {
     console.log('Authenticated!!!', authResult)
     state.authenticated = true
     state.userId = authResult.user.id
-
+    state.user = authResult.user
+    console.log('User Info', state.user)
     localStorage.setItem(GC_USER_ID, authResult.user.id)
     // state.accessToken = authData.accessToken
     // state.idToken = authData.idToken
@@ -49,6 +52,7 @@ const mutations = {
     // localStorage.setItem('auth0UserId', state.auth0UserId)
     // console.log('auth0UserId', localStorage.getItem('auth0UserId'))
     // // Checks to see if the auth0 user has been created in the GraphCool db yet
+    router.push({ path: 'feed' })
   },
 
   userId (state, userId) {
@@ -88,15 +92,13 @@ const actions = {
         }
       }).then((result) => {
         // commit('authenticated')
-        commit('authenticated', result.data.signinUser)
-        // const id = result.data.signinUser.user.id
-        // const token = result.data.signinUser.token
-        // this.saveUserData(id, token)
+        if (result.data.signinUser.user.id) {
+          commit('authenticated', result.data.signinUser)
+        } else {
+          console.log('Incorrect username/password')
+        }
       }).catch((error) => {
         alert(error)
-      }).then(async result => {
-        await result
-        router.push({ path: 'feed' })
       })
   },
 
