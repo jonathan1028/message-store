@@ -6,6 +6,11 @@
             <!-- Logo -->
             <div class="logo">GCN</div>
             <div class="nav-buttons">
+              <router-link to="/feed">Feed</router-link>
+              <div>|</div>
+              <router-link to="/myopportunities">My Opportunities</router-link>
+              <div>|</div>
+              <router-link to="/admin">Admin</router-link>
               <!-- Logged in navigation -->
               <!-- <div class="authenticated-nav" v-if="userId">
                 <router-link to="/people">People</router-link>
@@ -71,13 +76,13 @@ export default {
 }
 </script>
 
-<style>
+<style lang="scss" scoped>
 .header{
   /* position: fixed; */
   width: 100%;
-  height: 40px;
+  height: 7vh;
   background-color: white;
-  top: 0;
+  // top: 0;
   -webkit-box-shadow:0 1px 4px rgba(0, 0, 0, 0.3), 0 0 40px rgba(0, 0, 0, 0.1) inset;
   -moz-box-shadow:0 1px 4px rgba(0, 0, 0, 0.3), 0 0 40px rgba(0, 0, 0, 0.1) inset;
   box-shadow:0 1px 4px rgba(0, 0, 0, 0.3), 0 0 40px rgba(0, 0, 0, 0.1) inset;

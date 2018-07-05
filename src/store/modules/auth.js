@@ -78,9 +78,6 @@ const mutations = {
 
 const actions = {
   login ({commit}, {email, password}) {
-    console.log('Email', email)
-    console.log('Password', password)
-
     // const { name, email, password } = this.$data
     apolloClient
       .mutate({
@@ -99,7 +96,7 @@ const actions = {
         alert(error)
       }).then(async result => {
         await result
-        router.replace('feed')
+        router.push({ path: 'feed' })
       })
   },
 

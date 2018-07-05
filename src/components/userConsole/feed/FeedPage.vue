@@ -85,7 +85,7 @@ export default {
   width: 38%;
 }
 .feedPageLayout {
-  margin-top: 3vh;
+  margin-top: 10vh;
   margin-left: 5vw;
   margin-right: 5vw;
   display: grid;

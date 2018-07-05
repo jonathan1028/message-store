@@ -71,11 +71,17 @@ const router = new Router({
       children: [
         {
           path: '/feed',
-          component: FeedPage
+          component: FeedPage,
+          meta: {
+            requiresAuth: true
+          }
         },
         {
           path: '/myopportunities',
-          component: MyOpportunitiesPage
+          component: MyOpportunitiesPage,
+          meta: {
+            requiresAuth: true
+          }
         }
         //  ------------------------------------------ People ----------------------------------
         // {
@@ -109,20 +115,32 @@ const router = new Router({
       children: [
         {
           path: '/admin',
-          component: Admin
+          component: Admin,
+          meta: {
+            requiresAuth: true
+          }
         },
         {
           path: '/newusers',
-          component: NewUsers
+          component: NewUsers,
+          meta: {
+            requiresAuth: true
+          }
         },
         {
           path: '/user/:id',
-          component: ReadUser
+          component: ReadUser,
+          meta: {
+            requiresAuth: true
+          }
         },
         {
           path: '/user/update/:id',
           component: UpdateUser,
-          name: 'updateUser'
+          name: 'updateUser',
+          meta: {
+            requiresAuth: true
+          }
         }
       ]
     }
