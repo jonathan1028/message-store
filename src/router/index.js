@@ -7,9 +7,9 @@ import SignUp from '../components/public/SignUp'
 import Home from '@/components/public/Home'
 
 import UserConsoleHeader from '../components/userConsole/UserConsoleHeader'
-import People from '../components/userConsole/People/People'
-import ReadPerson from '../components/userConsole/People/ReadPerson'
-import UpdatePerson from '../components/userConsole/People/UpdatePerson'
+// import People from '../components/userConsole/People/People'
+// import ReadPerson from '../components/userConsole/People/ReadPerson'
+// import UpdatePerson from '../components/userConsole/People/UpdatePerson'
 
 import FeedPage from '../components/userConsole/feed/FeedPage'
 
@@ -76,30 +76,30 @@ const router = new Router({
         {
           path: '/myopportunities',
           component: MyOpportunitiesPage
-        },
-        //  ------------------------------------------ People ----------------------------------
-        {
-          path: '/people',
-          component: People,
-          meta: {
-            requiresAuth: true
-          }
-        },
-        {
-          path: '/person/:id',
-          component: ReadPerson,
-          meta: {
-            requiresAuth: true
-          }
-        },
-        {
-          path: '/person/update/:id',
-          component: UpdatePerson,
-          name: 'UpdatePerson',
-          meta: {
-            requiresAuth: true
-          }
         }
+        //  ------------------------------------------ People ----------------------------------
+        // {
+        //   path: '/people',
+        //   component: People,
+        //   meta: {
+        //     requiresAuth: true
+        //   }
+        // },
+        // {
+        //   path: '/person/:id',
+        //   component: ReadPerson,
+        //   meta: {
+        //     requiresAuth: true
+        //   }
+        // },
+        // {
+        //   path: '/person/update/:id',
+        //   component: UpdatePerson,
+        //   name: 'UpdatePerson',
+        //   meta: {
+        //     requiresAuth: true
+        //   }
+        // }
       ]
     },
     // ------------------------------------------ Admin ----------------------------------
