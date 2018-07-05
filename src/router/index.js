@@ -15,6 +15,8 @@ import FeedPage from '../components/userConsole/feed/FeedPage'
 
 import MyOpportunitiesPage from '../components/userConsole/volunteerOpportunities/MyOpportunitiesPage'
 
+import ProfilePage from '../components/userConsole/profile/ProfilePage'
+
 import AdminHeader from '../components/admin/AdminHeader'
 import Admin from '../components/admin/Admin'
 import UpdateUser from '../components/admin/UpdateUser'
@@ -82,15 +84,15 @@ const router = new Router({
           meta: {
             requiresAuth: true
           }
+        },
+        //  ------------------------------------------ User Pages ----------------------------------
+        {
+          path: '/profile',
+          component: ProfilePage,
+          meta: {
+            requiresAuth: true
+          }
         }
-        //  ------------------------------------------ People ----------------------------------
-        // {
-        //   path: '/people',
-        //   component: People,
-        //   meta: {
-        //     requiresAuth: true
-        //   }
-        // },
         // {
         //   path: '/person/:id',
         //   component: ReadPerson,
