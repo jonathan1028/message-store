@@ -1,8 +1,10 @@
 <template>
   <div>
-    <form class="search box">
-      <input name="query" v-model="searchQuery" placeholder="Search">
-    </form>
+    <div class="searchBlock">
+      <form class="search">
+        <input name="query" v-model="searchQuery" placeholder="Search">
+      </form>
+    </div>
     <ul class="feedList">
       <li
         class="feedItem"
@@ -153,12 +155,17 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+.searchBlock {
+  display: flex;
+  justify-content: space-between;
+  padding: 1%;
+}
 .search {
   height: 4vh;
-  padding: 1%;
+  // padding: 1%;
   input {
     width: 25vw;
-    height: 3vh;
+    height: 4vh;
     font-size: 2.5vh;
     color: var(--text-color1);
   }

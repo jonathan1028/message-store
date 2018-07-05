@@ -113,7 +113,7 @@ export default {
   }
 }
 .feedPageLayout {
-  margin-top: 3vh;
+  margin-top: 7vh;
   margin-left: 5vw;
   margin-right: 5vw;
   display: grid;

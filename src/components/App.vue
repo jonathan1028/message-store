@@ -20,6 +20,8 @@ html {
 }
 /* ------------------------- Application Variables ------------------------- */
 :root {
+  --page-height: 100vh;
+  --page-width: 100vw;
   --theme-color1: #efba34;
   --theme-color2: #fff2c7;
   --color2: rgb(42, 177, 182);
@@ -77,7 +79,7 @@ a {
 // }
 /* ---------------------------------------- Application Component Styling ---------------------------- */
 .page {
-  height: calc(.98 * var(--page-height));
+  height: calc(.98 * -var(--page-height));
   width: calc(.90 * var(--page-width));
   background-color: white;
   margin: auto;

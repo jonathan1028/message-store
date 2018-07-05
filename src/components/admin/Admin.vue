@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="adminPage">
     <div class="box effect6">
       <div class="box-content">
         <h1>Users</h1>
@@ -58,5 +58,8 @@ export default {
 <style>
 .search{
   width: 38%;
+}
+.adminPage {
+  margin-top: 10vh;
 }
 </style>
