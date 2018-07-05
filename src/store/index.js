@@ -18,6 +18,8 @@ const store = new Vuex.Store({
   state: {
     count: 0,
     person: {},
+    activeModal: null,
+    currentOpportunity: null,
     showCreatePerson: false,
     showCreateOpportunity: false
   },
@@ -30,6 +32,14 @@ const store = new Vuex.Store({
     },
     toggleCreateOpportunity (state) {
       state.showCreateOpportunity = !state.showCreateOpportunity
+    },
+    updateActiveModal (state, data) {
+      console.log('State Change', data)
+      state.activeModal = data
+      console.log('Current State', state.activeModal)
+    },
+    updateCurrentOpportunity (state, data) {
+      state.currentOpportunity = JSON.parse(JSON.stringify(data))
     }
   },
   plugins: [vuexLocal.plugin]

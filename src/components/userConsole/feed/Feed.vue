@@ -3,7 +3,7 @@
     <form class="search box">
       <input name="query" v-model="searchQuery" placeholder="Search">
     </form>
-    <ul>
+    <ul class="feedList">
       <li
         class="feedItem"
         v-for='(item, index) in filteredData'
@@ -29,7 +29,7 @@
           1h
         </div>
         <div class="buttonsBlock">
-          <button>Interested</button>
+          <button @click='interested(item)'>Interested</button>
           <button>Going</button>
           <button>Ignore</button>
         </div>
@@ -37,11 +37,11 @@
           <ul>
             <li
               class="userStatus"
-              v-for='(item, index) in usersOnFeed'
+              v-for='(user, index) in item.interestedUsers'
               :key='index'
             >
-              <div class="userName">{{item.name}} &nbsp;</div>
-              <div>{{item.status}}</div>
+              <div class="userName">{{user.name}} &nbsp;</div>
+              <div>is interested</div>
             </li>
           </ul>
         </div>
@@ -51,6 +51,9 @@
 </template>
 
 <script>
+// import { ALL_USERS_QUERY } from '../../../constants/graphql'
+import { UPDATE_OPPORTUNITY_MUTATION, ALL_OPPORTUNITIES_QUERY } from '../../../constants/graphql'
+// import { USERS_ON_FEED_QUERY } from '../../../constants/graphql'
 import moment from 'moment'
 
 export default {
@@ -69,11 +72,12 @@ export default {
       sortKey: '',
       sortOrders: sortOrders,
       searchQuery: '',
+      allOpportunities: [],
       usersOnFeed: [
-        {name: 'Caleb Jones', status: 'is going'},
-        {name: 'Michael J. Foxworthy', status: 'is interested'},
-        {name: 'Joseph Smith', status: 'volunteered'},
-        {name: 'Michael Johnson', status: 'donated'}
+        // {name: 'Caleb Jones', status: 'is going'},
+        // {name: 'Michael J. Foxworthy', status: 'is interested'},
+        // {name: 'Joseph Smith', status: 'volunteered'},
+        // {name: 'Michael Johnson', status: 'donated'}
 
       ]
     }
@@ -83,7 +87,7 @@ export default {
       var sortKey = this.sortKey
       var filterKey = this.searchQuery && this.searchQuery.toLowerCase()
       var order = this.sortOrders[sortKey] || 1
-      var data = this.data
+      var data = this.allOpportunities
       if (filterKey) {
         data = data.filter(function (row) {
           return Object.keys(row).some(function (key) {
@@ -112,16 +116,57 @@ export default {
     }
   },
   methods: {
+    interested (opportunity) {
+      let userId = localStorage.getItem('graphcool-user-id')
+      console.log('Interested', opportunity.interestedUsers)
+      let interestedUsersIds = opportunity.interestedUsers.map(x => {
+        return x.id
+      })
+      if (opportunity.interestedUsers.find(user => user.id === userId)) {
+        return console.log('User Found')
+      } else {
+        interestedUsersIds.push(userId)
+      }
+
+      console.log('UserIds', interestedUsersIds)
+
+      this.$apollo.mutate({
+        mutation: UPDATE_OPPORTUNITY_MUTATION,
+        variables: {
+          id: opportunity.id,
+          name: opportunity.name,
+          interestedUsersIds: interestedUsersIds
+        },
+        update: (store, { data: { updateOpportunity } }) => {
+          store.writeQuery({ query: ALL_OPPORTUNITIES_QUERY, data: updateOpportunity })
+        }
+      })
+    }
+  },
+  apollo: {
+    // The name of this variable must equal to the name of back-end API function
+    allOpportunities: {
+      query: ALL_OPPORTUNITIES_QUERY
+    }
   }
-  // apollo: {
-  //   usersOnFeed: {
-  //     query: ALL_OPPORTUNITIES_QUERY
-  //   }
-  // }
 }
 </script>
 
 <style lang="scss" scoped>
+.search {
+  height: 4vh;
+  padding: 1%;
+  input {
+    width: 25vw;
+    height: 3vh;
+    font-size: 2.5vh;
+    color: var(--text-color1);
+  }
+}
+.feedList {
+  height: 80vh;
+  overflow-y: scroll;
+}
 .feedItem {
   display: grid;
   grid-template-columns: 10% 68% 10%;

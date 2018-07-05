@@ -13,7 +13,7 @@ import UpdatePerson from '../components/userConsole/People/UpdatePerson'
 
 import FeedPage from '../components/userConsole/feed/FeedPage'
 
-import VolunteerOpportunities from '../components/userConsole/volunteerOpportunities/VolunteerOpportunities'
+import MyOpportunitiesPage from '../components/userConsole/volunteerOpportunities/MyOpportunitiesPage'
 
 import AdminHeader from '../components/admin/AdminHeader'
 import Admin from '../components/admin/Admin'
@@ -74,8 +74,8 @@ const router = new Router({
           component: FeedPage
         },
         {
-          path: '/volunteeropportunities',
-          component: VolunteerOpportunities
+          path: '/myopportunities',
+          component: MyOpportunitiesPage
         },
         //  ------------------------------------------ People ----------------------------------
         {

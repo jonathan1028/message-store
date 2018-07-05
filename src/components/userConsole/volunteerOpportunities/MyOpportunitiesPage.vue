@@ -1,30 +1,35 @@
 <template>
   <div class="feedPageLayout">
     <div class="box">Left Column</div>
-    <div>
-      <div class="box effect6">
-        <div class="box-content">
-          <h1>My Opportunities</h1>
-            <span v-if="!this.$store.state.showCreateOpportunity">
-              <button @click="openCreate()">
-                Create New Opportunity
-              </button>
-              <form class="search">
-                <input name="query" v-model="searchQuery" placeholder="Search">
-              </form>
-            </span>
+    <div class="box">
+        <div>
+          <span
+            class="searchBlock box"
+            v-if="activeModal === null"
+          >
+            <form class="search">
+              <input name="query" v-model="searchQuery" placeholder="Search">
+            </form>
+            <button @click="updateActiveModal('create')">
+              Create New Opportunity
+            </button>
+          </span>
           <div>
-            <span v-if="this.$store.state.showCreateOpportunity">
+            <span v-if="this.$store.state.activeModal === 'create'">
               <create-opportunity></create-opportunity>
+            </span>
+          </div>
+          <div>
+            <span v-if="this.$store.state.activeModal === 'update'">
+              <update-opportunity></update-opportunity>
             </span>
           </div>
           <my-opportunities
             :data="allOpportunities"
             :columns="columns"
-            :filter-key="searchQuery">
+            :searchQuery="searchQuery">
           </my-opportunities>
         </div>
-      </div>
     </div>
     <div class="box">Right Column</div>
   </div>
@@ -34,12 +39,13 @@
 // import Feed from './Feed'
 import { ALL_OPPORTUNITIES_QUERY } from '../../../constants/graphql'
 import CreateOpportunity from './CreateOpportunity'
+import UpdateOpportunity from './UpdateOpportunity'
 import MyOpportunities from './MyOpportunities'
 
 export default {
-  name: 'FeedPage',
+  name: 'MyOpportunitiesPage',
   components: {
-    CreateOpportunity, MyOpportunities
+    CreateOpportunity, UpdateOpportunity, MyOpportunities
   },
   data () {
     return {
@@ -57,7 +63,8 @@ export default {
         {dbField: 'startTime', title: 'Start Time'},
         {dbField: 'endTime', title: 'End Time'},
         {dbField: 'address', title: 'Location'}
-      ]
+      ],
+      activeModal: this.$store.state.activeModal
       // gridData: [
       //   { name: 'Chuck Norris', power: Infinity },
       //   { name: 'Bruce Lee', power: 9000 },
@@ -67,6 +74,10 @@ export default {
     }
   },
   methods: {
+    updateActiveModal (data) {
+      console.log('Test', data)
+      this.$store.commit('updateActiveModal', data)
+    },
     openCreate () {
       this.$store.commit('toggleCreateOpportunity')
     }
@@ -85,9 +96,21 @@ export default {
 }
 </script>
 
-<style scoped>
-.search{
-  width: 38%;
+<style lang="scss" scoped>
+.searchBlock {
+  display: flex;
+  justify-content: space-between;
+  padding: 1%;
+}
+.search {
+  height: 4vh;
+  // padding: 1%;
+  input {
+    width: 25vw;
+    height: 4vh;
+    font-size: 2.5vh;
+    color: var(--text-color1);
+  }
 }
 .feedPageLayout {
   margin-top: 3vh;

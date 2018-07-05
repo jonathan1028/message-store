@@ -13,6 +13,18 @@ export const ALL_USERS_QUERY = gql`
   }
 `
 
+export const USERS_ON_FEED_QUERY = gql`
+  query AllUsersQuery {
+    allUsers {
+      id
+      name
+      email
+      createdAt
+      updatedAt
+    }
+  }
+`
+
 export const ALL_LINKS_QUERY = gql`
   query AllLinksQuery($first: Int, $skip: Int, $orderBy: LinkOrderBy) {
     allLinks(first: $first, skip: $skip, orderBy: $orderBy) {
@@ -66,6 +78,10 @@ export const ALL_OPPORTUNITIES_QUERY = gql`
       address
       ownedBy {
         id
+      }
+      interestedUsers {
+        id
+        name
       }
     }
   }
@@ -194,6 +210,66 @@ export const CREATE_OPPORTUNITY_MUTATION = gql`
   }
 `
 
+export const UPDATE_OPPORTUNITY_MUTATION = gql`
+  mutation UpdateOpportunityMutation($id: ID!, $name: String, $description: String, 
+  $startTime: DateTime, $endTime: DateTime, $address: String, $interestedUsersIds: [ID!]) {
+    updateOpportunity(
+      id: $id,
+      name: $name
+      description: $description
+      startTime: $startTime
+      endTime: $endTime
+      address: $address,
+      interestedUsersIds: $interestedUsersIds
+    ) {
+      id
+      name
+      description
+      startTime
+      endTime
+      address
+      ownedBy {
+        id
+        name
+      }
+      interestedUsers {
+        id
+        name
+      }
+    }
+  }
+`
+
+export const UPDATE_INTERESTED_USERS_MUTATION = gql`
+  mutation UpdateOpportunityMutation($id: ID!, $name: String, $description: String, 
+  $startTime: DateTime, $endTime: DateTime, $address: String, $interestedUsersIds: [ID!]) {
+    updateOpportunity(
+      id: $id,
+      name: $name
+      description: $description
+      startTime: $startTime
+      endTime: $endTime
+      address: $address
+      interestedUsersIds: $interestedUsersIds
+    ) {
+      id
+      name
+      description
+      startTime
+      endTime
+      address
+      ownedBy {
+        id
+        name
+      }
+      interestedUsers {
+        id
+        name
+      }
+    }
+  }
+`
+
 export const UPDATE_USER_MUTATION = gql`
   mutation UpdateUserMutation($id: ID!,  $name: String) {
     updateUser(
@@ -226,6 +302,16 @@ export const UPDATE_PERSON_MUTATION = gql`
 export const DELETE_USER_MUTATION = gql`
   mutation DeleteUserMutation($id: ID!) {
     deleteUser(
+      id: $id,
+    ) {
+      id
+    }
+  }
+`
+
+export const DELETE_OPPORTUNITY_MUTATION = gql`
+  mutation DeleteOpportunityMutation($id: ID!) {
+    deleteOpportunity(
       id: $id,
     ) {
       id

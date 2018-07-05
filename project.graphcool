@@ -1,5 +1,5 @@
 # project: cjj61omlj2d790156bk4oimkn
-# version: 4
+# version: 6
 
 type User @model {
   createdAt: DateTime!
@@ -10,6 +10,7 @@ type User @model {
   password: String
   persons: [Person!]! @relation(name: "UsersPersons")
   updatedAt: DateTime!
+  interestedOpportunities: [Opportunity!]! @relation(name: "InterestedOpportunities")
 }
 
 type File @model {
@@ -33,6 +34,7 @@ type Opportunity @model {
   startTime: DateTime
   endTime: DateTime
   address: String
+  interestedUsers: [User!]! @relation(name: "InterestedOpportunities")
 }
 
 type Person @model {
