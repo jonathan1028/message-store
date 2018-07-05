@@ -16,7 +16,7 @@ export default {
 /* Removes default margin and padding for all html elements */
 * { margin: 0; padding: 0; }
 html {
-  background-color: white;
+  background-color: var(--background-color);
 }
 /* ------------------------- Application Variables ------------------------- */
 :root {
@@ -24,6 +24,7 @@ html {
   --page-width: 100vw;
   --theme-color1: #efba34;
   --theme-color2: #fff2c7;
+  --background-color: #e7e9ea;
   --color2: rgb(42, 177, 182);
   --link-color: rgb(48,62,240);
   --shadow3: 1.5vh -1vh 1vh rgba(0, 7, 2, 0.3);

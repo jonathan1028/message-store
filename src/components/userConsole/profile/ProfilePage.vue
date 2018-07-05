@@ -1,5 +1,5 @@
 <template>
-  <div class="pageLayout box">
+  <div class="pageLayout">
     <div class="profileHeader">
       <div class="profileImage">Image</div>
       <div>Name</div>
@@ -190,9 +190,10 @@ export default {
   width: 38%;
 }
 .pageLayout {
+  background-color: white;
   display: grid;
-  grid-template-columns: 50vw;
-  grid-template-rows: 20vh 5vh auto;
+  grid-template-columns: 100%;
+  grid-template-rows: 20vh auto auto;
   // grid-column-gap: 3vw;
   margin-top: 10vh;
   margin-left: 20vw;
@@ -215,10 +216,12 @@ export default {
   // padding: 3%;
   display: grid;
   grid-template-columns: max-content max-content max-content auto;
-  border: .15vh solid black;
+  // border: .15vh solid black;
 }
 .tab {
   border: .1vh solid black;
+  padding: 3%;
+  font-size: 2vh;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -241,7 +244,9 @@ export default {
   cursor: pointer;
 }
 .panel {
+  margin: auto;
   border: .15vh solid black;
+  padding: 3%;
 }
 .inputs {
   // margin-top: 5vh;
