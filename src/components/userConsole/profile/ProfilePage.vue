@@ -1,10 +1,12 @@
 <template>
   <div class="pageLayout">
+    <!-- test: {{userId}}
+    Users: {{User}} -->
     <div class="profileHeader">
       <div class="profileImage">Image</div>
-      <div>Name</div>
-      <div>Location</div>
-      <div>Last Login</div>
+      <div class="UserName">{{getName(User.firstName, User.lastName)}}</div>
+      <div>Location:</div>
+      <div>Last Login:</div>
       <div>Joined:</div>
       <button>Change Password</button>
     </div>
@@ -38,47 +40,47 @@
           <div class="field">
             <label for="">First Name</label>
             <input
-              v-model="firstName"
+              v-model="User.firstName"
               type="text"
               placeholder="">
           </div>
           <div class="field">
             <label for="">Last Name</label>
             <input
-              v-model="lastName"
+              v-model="User.lastName"
               type="text"
               placeholder="">
           </div>
           <div class="field">
             <label for="">Birth Year</label>
             <input
-              v-model="birthYear"
+              v-model="User.birthYear"
               type="text"
               placeholder="">
           </div>
           <div class="field">
             <label for="">Location</label>
             <input
-              v-model="location"
+              v-model="User.location"
               type="text"
               placeholder="">
           </div>
            <div class="field">
-            <label for="">Phone Numbee</label>
+            <label for="">Phone Number</label>
             <input
-              v-model="phone"
+              v-model="User.phone"
               type="text"
               placeholder="">
           </div>
           <div class="field">
             <label for="">Email Address</label>
             <input
-              v-model="email"
+              v-model="User.email"
               type="text"
               placeholder="">
           </div>
           <div class="buttonsRow">
-            <button>Save Changes</button>
+            <button @click.prevent='update()'>Save Changes</button>
             <button>Cancel</button>
           </div>
         </div>
@@ -87,28 +89,28 @@
         <div class="field">
           <label for="">Location:</label>
           <input
-            v-model="volunteeringLocation"
+            v-model="User.volunteeringLocation"
             type="text"
             placeholder="">
         </div>
         <div class="field">
           <label for="">Frequency:</label>
           <input
-            v-model="volunteeringFrequency"
+            v-model="User.volunteeringFrequency"
             type="text"
             placeholder="">
         </div>
         <div class="field">
           <label for="">Receive Emails:</label>
           <input
-            v-model="receiveVolunteeringEmails"
+            v-model="User.receiveVolunteeringEmails"
             type="text"
             placeholder="">
         </div>
         <div class="field">
           <label for="">Volunteer Interest:</label>
           <input
-            v-model="receiveVolunteeringEmails"
+            v-model="User.volunteerInterest"
             type="text"
             placeholder="">
         </div>
@@ -133,7 +135,10 @@
 
 <script>
 // import Feed from './Feed'
-import { ALL_OPPORTUNITIES_QUERY } from '../../../constants/graphql'
+import { GET_USER_QUERY, UPDATE_USER_MUTATION } from '../../../constants/graphql'
+// import { ALL_USERS_QUERY, UPDATE_USER_MUTATION } from '../../../constants/graphql'
+// import { GC_USER_ID } from '../../../constants/settings'
+
 // import CreateOpportunity from './CreateOpportunity'
 
 export default {
@@ -144,11 +149,10 @@ export default {
   data () {
     return {
       // showCreatePerson: this.$store.showCreatePerson,
-      allOpportunities: [
-        // {name: 'Opp1'},
-        // {name: 'Opp2'},
-        // {name: 'Opp3'}
-      ],
+      // allOpportunities: [
+      // {name: 'Opp1'},
+      // {name: 'Opp2'},
+      // {name: 'Opp3'}
       sortColumn: '',
       searchQuery: '',
       columns: [
@@ -157,7 +161,11 @@ export default {
         {dbField: 'startTime', title: 'Start Time'},
         {dbField: 'endTime', title: 'End Time'},
         {dbField: 'address', title: 'Location'}
-      ]
+      ],
+      lastName: '',
+      keyword: '',
+      userId: this.$store.state.auth.user.id,
+      User: {}
       // gridData: [
       //   { name: 'Chuck Norris', power: Infinity },
       //   { name: 'Bruce Lee', power: 9000 },
@@ -167,19 +175,58 @@ export default {
     }
   },
   methods: {
+    getName (firstName, lastName) {
+      return `${firstName} ${lastName}`
+    },
     openCreate () {
       this.$store.commit('toggleCreateOpportunity')
+    },
+    update () {
+      const phone = this.User.phone
+
+      console.log('Update User Ran', this.User.birthYear)
+      this.$apollo.mutate({
+        mutation: UPDATE_USER_MUTATION,
+        variables: {
+          id: this.User.id,
+          firstName: this.User.firstName,
+          lastName: this.User.lastName,
+          phone: phone,
+          birthYear: this.User.birthYear,
+          email: this.User.email
+        },
+        update: (store, { data: { updateUser } }) => {
+          console.log('Updated User', updateUser)
+          this.$store.commit('updateUser', updateUser)
+          // Get data from store
+          // const data = store.readQuery({ query: ALL_USERS_QUERY })
+          // // Delete the current person and replace it with a copay
+          // let index = data.allUsers.findIndex(x => x.id === this.user.id)
+          // if (index !== -1) {
+          //   data.allUsers[index] = Object.assign({}, this.user)
+          // }
+          // // Update the store
+          // store.writeQuery({ query: ALL_USERS_QUERY, data: data })
+          // 1. Write user to Apollo Store at login
+          // 2. Pull from store at profile page
+          // 3. Update Apollo store at save
+        }
+      })
     }
-    // processData (data) {
-    //   console.log(data)
-    //   return data
-    // }
-  // }
   },
   apollo: {
-    // allPerson here pulls the data from ALL_PEOPLE_QUERY and assigns it to the data(){} object at the top of script
-    allOpportunities: {
-      query: ALL_OPPORTUNITIES_QUERY
+    User: {
+      query: GET_USER_QUERY,
+      // Changing variables to a function with a return makes apollo wait on the data before querrying
+      // and prevents an undefined error
+      variables () {
+        return {
+          id: this.userId
+        }
+      },
+      result ({ data }) {
+        this.User = Object.assign({}, data.User)
+      }
     }
   }
 }
@@ -204,6 +251,10 @@ export default {
   display: grid;
   grid-template-columns: 25% 75%;
   grid-template-rows: 20% 20% 20% 20% 20%;
+  font-size: 2vh;
+}
+.userName {
+  font-size: 4vh;
 }
 .profileImage {
   grid-column-start: 1;

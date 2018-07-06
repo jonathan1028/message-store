@@ -67,7 +67,8 @@ export default {
       this.$store.dispatch('createUser',
         {
           email: this.email,
-          name: this.firstName + ' ' + this.lastName,
+          firstName: this.firstName,
+          lastName: this.lastName,
           password: this.password
         }
       )

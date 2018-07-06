@@ -8,7 +8,7 @@
             <input name="query" v-model="searchQuery" placeholder="Search">
           </form>
           <user-table
-            :data="processData(allUsers)"
+            :data="getData(allUsers)"
             :columns="columns"
             :filter-key="searchQuery">
           </user-table>
@@ -35,14 +35,16 @@ export default {
       searchQuery: '',
       columns: [
         {dbField: 'id', title: 'id'},
-        {dbField: 'name', title: 'name'},
+        {dbField: 'firstName', title: 'first name'},
+        {dbField: 'lastName', title: 'last name'},
         {dbField: 'email', title: 'email'},
         {dbField: 'createdAt', title: 'createdAt'},
         {dbField: 'updatedAt', title: 'updatedAt'}]
     }
   },
   methods: {
-    processData (data) {
+    getData (data) {
+      console.log('Users', data)
       return data
     }
   },

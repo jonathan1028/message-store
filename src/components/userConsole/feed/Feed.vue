@@ -42,7 +42,7 @@
               v-for='(user, index) in item.interestedUsers'
               :key='index'
             >
-              <div class="userName">{{user.name}} &nbsp;</div>
+              <div class="userName">{{getName(user.firstName, user.lastName)}} &nbsp;</div>
               <div>is interested</div>
             </li>
           </ul>
@@ -118,6 +118,9 @@ export default {
     }
   },
   methods: {
+    getName (firstName, lastName) {
+      return `${firstName} ${lastName}`
+    },
     interested (opportunity) {
       let userId = localStorage.getItem('graphcool-user-id')
       console.log('Interested', opportunity.interestedUsers)

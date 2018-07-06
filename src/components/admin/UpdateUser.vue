@@ -1,11 +1,18 @@
 <template>
   <div>
     <form class="box">
-      <h1>{{user.name}}</h1>
+      <h1>{{user.firstName}} &nbsp; {{user.lastName}}</h1>
       <div class="field">
         <label>First Name</label>
         <input
-          v-model="user.name"
+          v-model="user.firstName"
+          type="text"
+        >
+      </div>
+      <div class="field">
+        <label>Last Name</label>
+        <input
+          v-model="user.lastName"
           type="text"
         >
       </div>
@@ -27,13 +34,14 @@ export default {
   methods: {
     submit () {
       // Save the user input in case of an error
-      const name = this.user.name
+      // const name = this.user.name
 
       this.$apollo.mutate({
         mutation: UPDATE_USER_MUTATION,
         variables: {
           id: this.user.id,
-          name: name
+          firstName: this.user.firstName,
+          lastName: this.user.lastName
         },
         update: (store, { data: { updateUser } }) => {
           // Get data from store

@@ -29,10 +29,10 @@
           :index="index"
           @click="viewUser(entry)"
         >
-        <div v-if="isCreatedAt(col.dbField)">
+        <div v-if="col.dbField === 'createdAt'">
           <span>{{entry[col.dbField] | formatDate}}</span>
         </div>
-        <div v-else-if="isUpdatedAt(col.dbField)">
+        <div v-else-if="col.dbField === 'updatedAt'">
           <span>{{entry[col.dbField] | relativeTime}}</span>
         </div>
          <div v-else>

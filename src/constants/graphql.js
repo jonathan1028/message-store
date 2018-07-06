@@ -5,7 +5,8 @@ export const ALL_USERS_QUERY = gql`
   query AllUsersQuery {
     allUsers {
       id
-      name
+      firstName
+      lastName
       email
       createdAt
       updatedAt
@@ -13,11 +14,32 @@ export const ALL_USERS_QUERY = gql`
   }
 `
 
+export const GET_USER_QUERY = gql`
+  query User ($id: ID!){
+    User(id: $id) {
+      id
+      firstName
+      lastName
+      email
+      birthYear
+      phone
+    }
+  }
+`
+
+// query Post($id: ID!) {
+//   Post(id: $id) {
+//     id
+//     imageUrl
+//     description
+//   }
+
 export const USERS_ON_FEED_QUERY = gql`
   query AllUsersQuery {
     allUsers {
       id
-      name
+      firstName
+      lastName
       email
       createdAt
       updatedAt
@@ -81,7 +103,8 @@ export const ALL_OPPORTUNITIES_QUERY = gql`
       }
       interestedUsers {
         id
-        name
+        firstName
+        lastName
       }
     }
   }
@@ -120,9 +143,10 @@ export const ALL_LINKS_SEARCH_QUERY = gql`
 // CreateUser mutation will be executed before the signinUser mutation.
 // Bundling two mutations like this allows you to sign up and login in a single request!
 export const CREATE_USER_MUTATION = gql`
-  mutation CreateUserMutation($name: String, $email: String!, $password: String!) {
+  mutation CreateUserMutation($firstName: String, $lastName: String, $email: String!, $password: String!) {
     createUser(
-      name: $name,
+      firstName: $firstName,
+      lastName: $lastName,
       authProvider: {
         email: {
           email: $email,
@@ -154,7 +178,8 @@ export const SIGNIN_USER_MUTATION = gql`
       token
       user {
         id
-        name
+        firstName
+        lastName
         email
       }
     }
@@ -206,7 +231,8 @@ export const CREATE_OPPORTUNITY_MUTATION = gql`
       address
       ownedBy {
         id
-        name
+        firstName
+        lastName
       }
     }
   }
@@ -232,22 +258,25 @@ export const UPDATE_OPPORTUNITY_MUTATION = gql`
       address
       ownedBy {
         id
-        name
+        firstName
+        lastName
       }
       interestedUsers {
         id
-        name
+        firstName
+        lastName
       }
     }
   }
 `
 
 export const UPDATE_INTERESTED_USERS_MUTATION = gql`
-  mutation UpdateOpportunityMutation($id: ID!, $name: String, $description: String, 
+  mutation UpdateOpportunityMutation($id: ID!, $firstName: String, $lastName: String, $description: String, 
   $startTime: DateTime, $endTime: DateTime, $address: String, $interestedUsersIds: [ID!]) {
     updateOpportunity(
       id: $id,
-      name: $name
+      firstName: $firstName
+      lastName: $lastName
       description: $description
       startTime: $startTime
       endTime: $endTime
@@ -262,24 +291,31 @@ export const UPDATE_INTERESTED_USERS_MUTATION = gql`
       address
       ownedBy {
         id
-        name
+        firstName
+        lastName
       }
       interestedUsers {
         id
-        name
+        firstName
+        lastName
       }
     }
   }
 `
 
 export const UPDATE_USER_MUTATION = gql`
-  mutation UpdateUserMutation($id: ID!,  $name: String) {
+  mutation UpdateUserMutation($id: ID!,  $firstName: String, $lastName: String, $phone: String, 
+  $birthYear: String) {
     updateUser(
       id: $id,
-      name: $name,
+      firstName: $firstName,
+      lastName: $lastName,
+      phone: $phone,
+      birthYear: $birthYear,
     ) {
       id
-      name
+      firstName
+      lastName
     }
   }
 `
