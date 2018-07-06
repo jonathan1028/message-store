@@ -3,8 +3,9 @@ import router from '../../router/index'
 import { GC_USER_ID } from '../../constants/settings'
 // import { GC_USER_ID, GC_AUTH_TOKEN } from '../../constants/settings'
 // import { SIGNIN_USER_MUTATION } from '../../constants/graphql'
-import { CREATE_USER_MUTATION, SIGNIN_USER_MUTATION } from '../../constants/graphql'
+import { GET_USER_QUERY, CREATE_USER_MUTATION, SIGNIN_USER_MUTATION } from '../../constants/graphql'
 import apolloClient from '../../apollo-client'
+// import { GET_USER_QUERY, UPDATE_USER_MUTATION } from '../../constants/graphql'
 // import { GET_USER_QUERY, CREATE_USER_MUTATION } from '../../constants/graphql'
 // const jwt = require('jsonwebtoken')
 
@@ -37,6 +38,7 @@ const mutations = {
     state.user = authResult.user
     console.log('User Info', state.user)
     localStorage.setItem(GC_USER_ID, authResult.user.id)
+    console.log('Local Storage ID', localStorage.getItem(GC_USER_ID))
     // state.accessToken = authData.accessToken
     // state.idToken = authData.idToken
     // state.expiresAt = authData.expiresIn * 1000 + new Date().getTime()
@@ -77,11 +79,15 @@ const mutations = {
 
     // Navigate to the home route
     router.replace('home')
+  },
+  updateUser (state, data) {
+    console.log('User State Changed')
+    state.user = JSON.parse(JSON.stringify(data))
   }
 }
 
 const actions = {
-  login ({commit}, {email, password}) {
+  login ({commit, dispatch}, {email, password}) {
     // const { name, email, password } = this.$data
     apolloClient
       .mutate({
@@ -94,6 +100,7 @@ const actions = {
         // commit('authenticated')
         if (result.data.signinUser.user.id) {
           commit('authenticated', result.data.signinUser)
+          dispatch('preloadUser', result.data.signinUser.user)
         } else {
           console.log('Incorrect username/password')
         }
@@ -102,11 +109,27 @@ const actions = {
       })
   },
 
+  // This function caches the GET_USER_QUERY so that all user info
+  // can be accessed immediately throughout the site
+  preloadUser ({ commit }, user) {
+    apolloClient
+      .query({
+        query: GET_USER_QUERY,
+        variables: {
+          id: user.id
+        }
+      }).then((result) => {
+        commit('updateUser', user)
+      }).catch((error) => {
+        console.error(error)
+      })
+  },
+
   logout ({ commit }) {
     commit('logout')
   },
 
-  // Creates user in graphCool
+  // Creates user in graphCool database
   createUser ({dispatch, commit, state}, user) {
     console.log('Create user ran')
     apolloClient
