@@ -11,7 +11,6 @@
       <button>Change Password</button>
     </div>
     <div class="profileTabs">
-      <!-- <div class="p2_blank_tab"></div> -->
       <div v-bind:class="{ active_tab: true }"
         class="tab"
         @click.prevent=""
@@ -134,12 +133,7 @@
 </template>
 
 <script>
-// import Feed from './Feed'
 import { GET_USER_QUERY, UPDATE_USER_MUTATION } from '../../../constants/graphql'
-// import { ALL_USERS_QUERY, UPDATE_USER_MUTATION } from '../../../constants/graphql'
-// import { GC_USER_ID } from '../../../constants/settings'
-
-// import CreateOpportunity from './CreateOpportunity'
 
 export default {
   name: 'FeedPage',
@@ -148,42 +142,16 @@ export default {
   },
   data () {
     return {
-      // showCreatePerson: this.$store.showCreatePerson,
-      // allOpportunities: [
-      // {name: 'Opp1'},
-      // {name: 'Opp2'},
-      // {name: 'Opp3'}
-      sortColumn: '',
-      searchQuery: '',
-      columns: [
-        {dbField: 'name', title: 'Name'},
-        {dbField: 'description', title: 'description'},
-        {dbField: 'startTime', title: 'Start Time'},
-        {dbField: 'endTime', title: 'End Time'},
-        {dbField: 'address', title: 'Location'}
-      ],
-      lastName: '',
       keyword: '',
       userId: this.$store.state.auth.user.id,
       User: {}
-      // gridData: [
-      //   { name: 'Chuck Norris', power: Infinity },
-      //   { name: 'Bruce Lee', power: 9000 },
-      //   { name: 'Jackie Chan', power: 7000 },
-      //   { name: 'Jet Li', power: 8000 }
-      // ]
     }
   },
   methods: {
     getName (firstName, lastName) {
       return `${firstName} ${lastName}`
     },
-    openCreate () {
-      this.$store.commit('toggleCreateOpportunity')
-    },
     update () {
-      const phone = this.User.phone
-
       console.log('Update User Ran', this.User.birthYear)
       this.$apollo.mutate({
         mutation: UPDATE_USER_MUTATION,
@@ -191,25 +159,24 @@ export default {
           id: this.User.id,
           firstName: this.User.firstName,
           lastName: this.User.lastName,
-          phone: phone,
+          phone: this.User.phone,
           birthYear: this.User.birthYear,
           email: this.User.email
         },
         update: (store, { data: { updateUser } }) => {
-          console.log('Updated User', updateUser)
-          this.$store.commit('updateUser', updateUser)
-          // Get data from store
-          // const data = store.readQuery({ query: ALL_USERS_QUERY })
-          // // Delete the current person and replace it with a copay
-          // let index = data.allUsers.findIndex(x => x.id === this.user.id)
-          // if (index !== -1) {
-          //   data.allUsers[index] = Object.assign({}, this.user)
-          // }
-          // // Update the store
-          // store.writeQuery({ query: ALL_USERS_QUERY, data: data })
-          // 1. Write user to Apollo Store at login
-          // 2. Pull from store at profile page
-          // 3. Update Apollo store at save
+          // Gets the data from the stored query that existed before the mutation
+          const data = store.readQuery({
+            query: GET_USER_QUERY,
+            variables: {
+              id: this.User.id
+            }
+          })
+          // Sets the data.User in the cache to the newly modified User
+          data.User = JSON.parse(JSON.stringify(this.User))
+          // Writes the updated data back to the store
+          store.writeQuery(
+            {query: GET_USER_QUERY, data: data}
+          )
         }
       })
     }
@@ -217,15 +184,16 @@ export default {
   apollo: {
     User: {
       query: GET_USER_QUERY,
-      // Changing variables to a function with a return makes apollo wait on the data before querrying
-      // and prevents an undefined error
+      // Changing variables: to a function with a return statement makes Apollo
+      // wait on the data of userId to be defined before querrying and prevents an undefined error
       variables () {
         return {
           id: this.userId
         }
       },
       result ({ data }) {
-        this.User = Object.assign({}, data.User)
+        // Creates clone of data because Apollo data is read only
+        this.User = JSON.parse(JSON.stringify(data.User))
       }
     }
   }
