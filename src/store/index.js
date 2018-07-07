@@ -21,7 +21,8 @@ const store = new Vuex.Store({
     activeModal: null,
     currentOpportunity: null,
     showCreatePerson: false,
-    showCreateOpportunity: false
+    showCreateOpportunity: false,
+    activeProfileTab: null
   },
   mutations: {
     increment (state) {
@@ -40,6 +41,9 @@ const store = new Vuex.Store({
     },
     updateCurrentOpportunity (state, data) {
       state.currentOpportunity = JSON.parse(JSON.stringify(data))
+    },
+    updateActiveProfileTab (state, data) {
+      state.activeProfileTab = data
     }
   },
   plugins: [vuexLocal.plugin]

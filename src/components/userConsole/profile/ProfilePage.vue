@@ -183,28 +183,34 @@
       <div class="profileTabs">
         <div v-bind:class="{ active_tab: true }"
           class="tab"
-          @click.prevent=""
+          @click.prevent="isActiveTab('profile')"
         >
           Profile
         </div>
         <div v-bind:class="{ active_tab: true }"
           class="tab"
-          @click.prevent="">
+          @click.prevent="isActiveTab('volunteerPreferences')"
+        >
           My Volunteer Preferences
         </div>
         <div v-bind:class="{ active_tab: true }"
           class="tab"
-          @click.prevent="">
+          @click.prevent="isActiveTab('volunteerLogging')"
+        >
           My Volunteer Logging
         </div>
         <div v-bind:class="{ active_tab: true }"
           class="tab"
-          @click.prevent="">
+          @click.prevent="isActiveTab('privacyStatement')"
+        >
           Privacy Statement
         </div>
       </div>
       <div class="profilePanels">
-        <div class="panel">
+        <div
+            class="panel"
+            v-if="activeTab === 'profile'"
+        >
           <div class="inputs">
             <div class="field">
               <label for="">First Name</label>
@@ -254,7 +260,10 @@
             </div>
           </div>
         </div>
-        <div class="panel">
+        <!-- --------------------------------------------- Volunteer Preferences ----------------------- -->
+        <div class="panel"
+          v-if="activeTab === 'volunteerPreferences'"
+        >
           <div class="field">
             <label for="">Location:</label>
             <input
@@ -291,11 +300,19 @@
               placeholder="">
           </div>
         </div>
-        <div class="panel">
+        <!-- --------------------------------------------- Volunteer Loggin ----------------------- -->
+        <div
+          class="panel"
+          v-if="activeTab === 'volunteerLogging'"
+        >
           Panel3
           <button>+ Create Volunteer Logging</button>
         </div>
-        <div class="panel">
+        <!-- --------------------------------------------- Privacy Statement ----------------------- -->
+        <div
+          class="panel"
+          v-if="activeTab === 'privacyStatement'"
+        >
           Privacy Statement Content
         </div>
       </div>
@@ -316,7 +333,8 @@ export default {
     return {
       keyword: '',
       userId: this.$store.state.auth.user.id,
-      User: {}
+      User: {},
+      activeTab: 'profile'
     }
   },
   filters: {
@@ -324,7 +342,13 @@ export default {
       return moment(time).fromNow()
     }
   },
+  computed: {
+  },
   methods: {
+    isActiveTab (data) {
+      this.activeTab = data
+      return this.activeTab
+    },
     getName (firstName, lastName) {
       return `${firstName} ${lastName}`
     },
