@@ -11,6 +11,10 @@ export default {
 </script>
 
 <style lang="scss">
+// @import '../../node_modules/bootstrap/scss/bootstrap.scss';
+// @import "../assets/scss/style.scss";
+// @import "../assets/scss/main.scss";
+
 @import "../assets/global.scss";
 /* ------------------------ Application Padding, Margin, & Background --------------- */
 /* Removes default margin and padding for all html elements */
