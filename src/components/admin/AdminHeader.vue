@@ -84,14 +84,12 @@ export default {
   grid-template-rows: 6vh auto;
 }
 .main-content {
-  margin-top: 6vh;
+  margin-top: 8vh;
 }
 .header{
   width: 100%;
-  height: 6vh;
   background-color: var(--theme-color1);
   margin-bottom: 2vh;
-  top: 0;
   -webkit-box-shadow:0 1px 4px rgba(0, 0, 0, 0.3), 0 0 40px rgba(0, 0, 0, 0.1) inset;
   -moz-box-shadow:0 1px 4px rgba(0, 0, 0, 0.3), 0 0 40px rgba(0, 0, 0, 0.1) inset;
   box-shadow:0 1px 4px rgba(0, 0, 0, 0.3), 0 0 40px rgba(0, 0, 0, 0.1) inset;
