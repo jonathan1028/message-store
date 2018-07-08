@@ -180,7 +180,8 @@ table {
 
 th {
   height: 40px;
-  background-color: rgb(220,220,220);
+  background-color: var(--theme-color3);
+  color: white;
 }
 
 /* thead > tr {

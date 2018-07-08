@@ -205,7 +205,6 @@ export default {
   width: 38%;
 }
 .feedPageLayout {
-  margin-top: 10vh;
   margin-left: 5vw;
   margin-right: 5vw;
   display: grid;
@@ -228,12 +227,12 @@ export default {
   font-size: 1vw;
   // border-top: .3vh solid var(--theme-color4);
   padding: 2vh 2vh;
-  margin: 2vh;
+  margin: 1vh 1.5vh;
   background-color: var(--theme-color4);
 }
 .__card-row {
   font-size: 1vw;
-  margin: 0vh 2vh 2vh 2vh;
+  margin: 0vh 1.5vh 1.5vh 2vh;
   // background-color: var(--theme-color4);
   display: grid;
   grid-template-columns: 38% 38% 20%;

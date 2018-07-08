@@ -1,10 +1,10 @@
 <template>
   <div class="feedPageLayout">
-    <div class="box">Left Column</div>
-    <div class="box">
+    <div class="_box">Left Column</div>
+    <div class="_box">
         <div>
           <span
-            class="searchBlock box"
+            class="searchBlock _box"
             v-if="activeModal === null"
           >
             <form class="search">
@@ -31,7 +31,7 @@
           </my-opportunities>
         </div>
     </div>
-    <div class="box">Right Column</div>
+    <div class="_box">Right Column</div>
   </div>
 </template>
 
@@ -113,7 +113,6 @@ export default {
   }
 }
 .feedPageLayout {
-  margin-top: 10vh;
   margin-left: 5vw;
   margin-right: 5vw;
   display: grid;

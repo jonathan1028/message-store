@@ -207,6 +207,7 @@ export default {
   grid-column-start: 1;
   grid-column-end: 2;
   background-color: lightgray;
+  border-radius: 5vh;
 }
 .textBlock {
   grid-row-start: 1;

@@ -173,7 +173,7 @@
     </div> -->
     <div class="pageLayout">
       <div class="profileHeader">
-        <div class="profileImage">Image</div>
+        <div class="profileImage"></div>
         <div class="UserName">{{getName(User.firstName, User.lastName)}}</div>
         <div>Location:</div>
         <div>Last Login:</div>
@@ -410,7 +410,6 @@ export default {
   display: grid;
   grid-template-columns: 100%;
   grid-template-rows: 20vh auto auto;
-  margin-top: 10vh;
   margin-left: 20vw;
   margin-right: 20vw;
   padding: 3%;
@@ -425,11 +424,14 @@ export default {
   font-size: 4vh;
 }
 .profileImage {
+  height: 20vh;
+  width: 20vh;
   grid-column-start: 1;
   grid-column-end: 2;
   grid-row-start: 1;
   grid-row-end: -1;
   background-color: lightgray;
+  border-radius: 10vh;
 }
 .profileTabs {
   display: grid;

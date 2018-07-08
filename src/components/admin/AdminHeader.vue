@@ -78,10 +78,10 @@ export default {
 
 <style>
 .header{
-  /* position: fixed; */
   width: 100%;
-  height: 7vh;
-  background-color: white;
+  height: 6vh;
+  background-color: var(--theme-color1);
+  margin-bottom: 2vh;
   top: 0;
   -webkit-box-shadow:0 1px 4px rgba(0, 0, 0, 0.3), 0 0 40px rgba(0, 0, 0, 0.1) inset;
   -moz-box-shadow:0 1px 4px rgba(0, 0, 0, 0.3), 0 0 40px rgba(0, 0, 0, 0.1) inset;
@@ -107,18 +107,18 @@ export default {
   display: flex;
   justify-content:space-between;
   align-items: center;
-  color: #3273dc;
+  color: var(--theme-color3);
   cursor: pointer;
   text-decoration: none;
 }
 
 .nav-buttons a{
-  color: #3273dc;
+  color: var(--theme-color3);
   text-decoration: none;
 }
 
 .nav-buttons a:visited{
-  color: #3273dc;
+  color: var(--theme-color3);
   text-decoration: none;
 }
 
@@ -134,12 +134,12 @@ export default {
 }
 
 .login a{
-   color: #3273dc;
+   color: var(--theme-color3);
    text-decoration: none;
 }
 
 .login a:visited{
-  color: #3273dc;
+  color: var(--theme-color3);
   text-decoration: none;
 }
 
@@ -147,7 +147,7 @@ export default {
   color: gray;
 }
 .link {
-  color: #3273dc;
+  color: var(--theme-color3);
   text-decoration: none;
   cursor: pointer;
 }

@@ -1,7 +1,7 @@
 <template>
   <div class="adminPage">
-    <div class="box effect6">
-      <div class="box-content">
+    <div class="_box effect6">
+      <div class="_box-content">
         <h1>Users</h1>
         <div>
           <form class="search">
@@ -62,6 +62,6 @@ export default {
   width: 38%;
 }
 .adminPage {
-  margin-top: 10vh;
+  margin: 0vh 5vw;
 }
 </style>
