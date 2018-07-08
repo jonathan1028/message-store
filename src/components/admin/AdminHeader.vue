@@ -46,7 +46,9 @@
           </div>
       </div>
     </div>
-    <router-view></router-view>
+    <div class="main-content">
+      <router-view></router-view>
+    </div>
   </div>
 </template>
 
@@ -80,6 +82,9 @@ export default {
 .adminConsoleLayout {
   display: grid;
   grid-template-rows: 6vh auto;
+}
+.main-content {
+  margin-top: 6vh;
 }
 .header{
   width: 100%;
