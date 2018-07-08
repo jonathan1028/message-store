@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="adminConsoleLayout">
     <div class="header">
       <div class="header-content">
           <div class="main-nav">
@@ -77,6 +77,10 @@ export default {
 </script>
 
 <style>
+.adminConsoleLayout {
+  display: grid;
+  grid-template-rows: 6vh auto;
+}
 .header{
   width: 100%;
   height: 6vh;

@@ -85,7 +85,7 @@ a {
 //   background-color: rgb(52,62,71);
 // }
 /* ---------------------------------------- Application Component Styling ---------------------------- */
-.page {
+._page {
   height: calc(.98 * -var(--page-height));
   width: calc(.90 * var(--page-width));
   background-color: white;
@@ -103,14 +103,14 @@ a {
   border-radius: 3vh;
   border: .1vh solid lightgray;
 }
-.modal {
+._modal {
   margin-top: 5vh;
   border: .5vh solid rgb(70, 70, 70);
   -webkit-box-shadow: 0 .25vh 1vh #777;
   -moz-box-shadow: 0 .25vh 1vh #777;
   box-shadow: 2vh 5vh 2vh #777;
 }
-.card {
+._card {
 }
 .small_logo {
     background:url("/static/images/b1/small_logo_without_text.png") no-repeat;
@@ -177,7 +177,7 @@ li {
   // justify-self: center;
 }
 
-button{
+._button4{
   font-size: 2vh;
   padding: 1vh;
   height: auto;
@@ -186,7 +186,7 @@ button{
   -moz-box-shadow:0 0 0 rgba(0, 0, 0, 0.3), 0 0 0 rgba(0, 0, 0, 0.1) inset;
   box-shadow:0 0 0 rgba(0, 0, 0, 0.3), 0 0 0 rgba(0, 0, 0, 0.1) inset;
 }
-button:hover{
+._button:hover{
   cursor: pointer;
   /* background-color: rgb(250, 250, 250); */
   // -webkit-box-shadow:0 .3vh 1vh rgba(0, 0, 0, 0.3), 0 0 2vh rgba(0, 0, 0, 0.1) inset;

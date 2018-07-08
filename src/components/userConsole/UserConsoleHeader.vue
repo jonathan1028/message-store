@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="userConsoleLayout">
     <div class="header">
       <div class="header-content">
           <div class="main-nav">
@@ -49,6 +49,8 @@
       </div>
     </div>
     <router-view></router-view>
+    <!-- <div class="main-content">
+    </div> -->
   </div>
 </template>
 
@@ -79,10 +81,14 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+.userConsoleLayout {
+  display: grid;
+  grid-template-rows: 6vh auto;
+}
 .header{
-  /* position: fixed; */
+  // position: fixed;
   width: 100%;
-  height: 6vh;
+  // height: 6vh;
   background-color: var(--theme-color1);
   margin-bottom: 2vh;
   // top: 0;
@@ -154,4 +160,5 @@ export default {
   text-decoration: none;
   cursor: pointer;
 }
+
 </style>
