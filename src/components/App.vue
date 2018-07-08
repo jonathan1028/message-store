@@ -20,7 +20,7 @@ export default {
 /* Removes default margin and padding for all html elements */
 * { margin: 0; padding: 0; }
 html {
-  background-color: var(--background-color);
+  background-color: var(--theme-color5);
 }
 /* ------------------------- Application Variables ------------------------- */
 :root {
@@ -28,7 +28,9 @@ html {
   --page-width: 100vw;
   --theme-color1: #efba34;
   --theme-color2: #fff2c7;
-  --background-color: #e7e9ea;
+  --theme-color3: #47535d;
+  --theme-color4: lightgray;
+  --theme-color5: #e7e9ea;
   --color2: rgb(42, 177, 182);
   --link-color: rgb(48,62,240);
   --shadow3: 1.5vh -1vh 1vh rgba(0, 7, 2, 0.3);
@@ -93,11 +95,13 @@ a {
   -moz-box-shadow: 0 .25vh 1vh #777;
   box-shadow: 0 .5vh 2vh #777;
 }
-.box {
+._box {
   background-color: white;
-  -webkit-box-shadow: 0 .25vh 1vh #777;
-  -moz-box-shadow: 0 .25vh 1vh #777;
-  box-shadow: 0 .5vh 2vh #777;
+  // -webkit-box-shadow: 0 .25vh 1vh #777;
+  // -moz-box-shadow: 0 .25vh 1vh #777;
+  // box-shadow: 0 .5vh 2vh #777;
+  border-radius: 3vh;
+  border: .1vh solid lightgray;
 }
 .modal {
   margin-top: 5vh;
@@ -144,6 +148,35 @@ li {
   list-style-type: none;
 }
 /* ------------------------------------ Application Button Styling ----------------------------- */
+._button1 {
+  width: 100%;
+  background-color: #efba34;
+  border-radius: 3vh;
+  text-align: center;
+  white-space: nowrap;
+}
+._button2 {
+  width: 100%;
+  background-color: #fff2c7;
+  border-radius: 3vh;
+  border: .1vh solid #47535d;
+  text-align: center;
+  white-space: nowrap;
+}
+._button3 {
+  width: 100%;
+  background-color: #47535d;
+  color: white;
+  border-radius: 3vh;
+  // text-align: center;
+  white-space: nowrap;
+  display: flex;
+  justify-content: center;
+  // display: flex;
+  // align-self: flex-start;
+  // justify-self: center;
+}
+
 button{
   font-size: 2vh;
   padding: 1vh;
@@ -159,6 +192,12 @@ button:hover{
   // -webkit-box-shadow:0 .3vh 1vh rgba(0, 0, 0, 0.3), 0 0 2vh rgba(0, 0, 0, 0.1) inset;
   // -moz-box-shadow:0 .3vh 1vh rgba(0, 0, 0, 0.3), 0 0 2vh rgba(0, 0, 0, 0.1) inset;
   // box-shadow:0 .3vh 1vh rgba(0, 0, 0, 0.2), 0 0 2vh rgba(0, 0, 0, 0.1) inset;
+}
+
+._box-shadow {
+  -webkit-box-shadow: 0 .25vh 1vh #777;
+  -moz-box-shadow: 0 .25vh 1vh #777;
+  box-shadow: 0 .5vh 2vh #777;
 }
 // button{
 //   font-size: 2vh;

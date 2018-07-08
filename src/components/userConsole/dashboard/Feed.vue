@@ -2,7 +2,7 @@
   <div>
     <div class="searchBlock">
       <form class="search">
-        <input name="query" v-model="searchQuery" placeholder="Search">
+        <input name="query" v-model="searchQuery" placeholder="Search opportunities...">
       </form>
     </div>
     <ul class="feedList">
@@ -170,12 +170,12 @@ export default {
     width: 25vw;
     height: 4vh;
     font-size: 2.5vh;
-    color: var(--text-color1);
+    color: var(--theme-color3);
   }
 }
 .feedList {
-  height: 80vh;
-  overflow-y: scroll;
+  // height: 80vh;
+  // overflow-y: scroll;
 }
 .feedItem {
   display: grid;
@@ -200,6 +200,7 @@ export default {
   grid-column-start: 1;
   grid-column-end: 2;
   background-color: lightgray;
+  border-radius: 5vh;
 }
 .textBlock {
   grid-row-start: 1;
@@ -250,7 +251,7 @@ export default {
   grid-column-end: 3;
   padding-top: 3%;
   button {
-    border: .1vh solid var(--text-color1);
+    border: .1vh solid var(--theme-color3);
     background-color: var(--theme-color1);
   }
 }

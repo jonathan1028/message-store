@@ -11,7 +11,7 @@ import UserConsoleHeader from '../components/userConsole/UserConsoleHeader'
 // import ReadPerson from '../components/userConsole/People/ReadPerson'
 // import UpdatePerson from '../components/userConsole/People/UpdatePerson'
 
-import FeedPage from '../components/userConsole/feed/FeedPage'
+import UserDashboard from '../components/userConsole/dashboard/UserDashboard'
 
 import MyOpportunitiesPage from '../components/userConsole/volunteerOpportunities/MyOpportunitiesPage'
 
@@ -73,7 +73,7 @@ const router = new Router({
       children: [
         {
           path: '/feed',
-          component: FeedPage,
+          component: UserDashboard,
           meta: {
             requiresAuth: true
           }
