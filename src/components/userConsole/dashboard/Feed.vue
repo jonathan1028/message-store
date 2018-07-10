@@ -88,7 +88,7 @@ export default {
   computed: {
     filteredData: function () {
       var sortKey = this.sortKey
-      var filterKey = this.searchQuery && this.searchQuery.toLowerCase()
+      var filterKey = this.$store.state.searchQuery && this.$store.state.searchQuery.toLowerCase()
       var order = this.sortOrders[sortKey] || 1
       var data = this.allOpportunities
       if (filterKey) {

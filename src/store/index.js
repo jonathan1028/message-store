@@ -23,14 +23,14 @@ const store = new Vuex.Store({
     showCreatePerson: false,
     showCreateOpportunity: false,
     activeProfileTab: null,
-    searchQuery: 'store'
+    searchQuery: ''
   },
 
-  // getters: {
-  //   searchQuery (state) {
-  //     return state.searchQuery
-  //   }
-  // },
+  getters: {
+    searchQuery (state) {
+      return state.searchQuery
+    }
+  },
 
   mutations: {
     increment (state) {

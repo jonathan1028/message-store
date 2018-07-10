@@ -11,9 +11,13 @@ V2
 <template>
   <div class="search _box">
       <div class="searchRow">
-          <input name="query" v-model="searchQuery" placeholder="Search opportunities...">
+          <input
+            name="query"
+            v-model="searchQuery"
+            placeholder="Search opportunities..."
+          >
       </div>
-      {{searchQuery}}
+      <!-- {{search}} -->
       <div class="filter">
         <div>When:</div>
         <div>
@@ -56,12 +60,23 @@ V2
 </template>
 
 <script>
+// import { mapGetters } from 'vuex'
 
 export default {
   name: 'Feed',
   data: function () {
     return {
-      searchQuery: ''
+      // searchQuery: ''
+    }
+  },
+  computed: {
+    searchQuery: {
+      get () {
+        return this.$store.state.searchQuery
+      },
+      set (value) {
+        this.$store.commit('updateSearchQuery', value)
+      }
     }
   }
 }
