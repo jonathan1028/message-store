@@ -25,31 +25,7 @@
         <a>See all notifications...</a>
       </div>
     </div>
-    <div class="search _box">
-      <div class="searchRow">
-        <!-- <form class="search"> -->
-          <input name="query" v-model="searchQuery" placeholder="Search opportunities...">
-        <!-- </form> -->
-      </div>
-      <div class="filter">
-        <div>When:</div>
-        <div>
-          <input type="checkbox">
-          <label for="">Today</label>
-        </div>
-          <input type="checkbox">
-          <label for="">Tomorrow</label>
-        <div></div>
-        <div>
-          <input type="checkbox">
-          <label for="">This Week</label>
-        </div>
-        <div>
-          <input type="checkbox">
-          <label for="">This Weekend</label>
-        </div>
-      </div>
-    </div>
+    <search></search>
     <div class="carousel _box">
       <div class="__header">Help people affected by Hurricane Harvey</div>
       <div class="__image-row">Photos</div>
@@ -131,7 +107,7 @@
       <feed
         :data="allOpportunities"
         :columns="columns"
-        :filter-key="searchQuery">
+      >
       </feed>
     </div>
     <div class="button-menu _box">
@@ -148,13 +124,14 @@
 
 <script>
 import Feed from './Feed'
+import Search from './Search'
 import { ALL_OPPORTUNITIES_QUERY } from '../../../constants/graphql'
 // import CreateOpportunity from './CreateOpportunity'
 
 export default {
   name: 'FeedPage',
   components: {
-    Feed
+    Feed, Search
   },
   data () {
     return {
@@ -404,26 +381,7 @@ export default {
   // border-top: .3vh solid var(--theme-color4);
   padding: 0.5vh 2vw;
 }
-.search{
-  width: auto;
-  height: fit-content;
-  grid-row-start: 2;
-  grid-row-end: 3;
-  grid-column-start: 1;
-  grid-column-end: 2;
-  display: grid;
-  grid-template-rows: 7vh auto;
-  padding: 1vh 2vh;
-}
-.searchRow {
-  input {
-    width: calc(100% - 4vh);
-    padding: .5vh 2vh;
-    height: 4vh;
-    border-radius: 3vh;
-    border: .25vh solid var(--theme-color3);
-  }
-}
+
 .button-menu{
   height: 25vh;
   grid-row-start: 1;

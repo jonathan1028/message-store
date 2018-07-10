@@ -22,8 +22,16 @@ const store = new Vuex.Store({
     currentOpportunity: null,
     showCreatePerson: false,
     showCreateOpportunity: false,
-    activeProfileTab: null
+    activeProfileTab: null,
+    searchQuery: 'store'
   },
+
+  // getters: {
+  //   searchQuery (state) {
+  //     return state.searchQuery
+  //   }
+  // },
+
   mutations: {
     increment (state) {
       state.count++
@@ -44,6 +52,10 @@ const store = new Vuex.Store({
     },
     updateActiveProfileTab (state, data) {
       state.activeProfileTab = data
+    },
+    updateSearchQuery (state, data) {
+      console.log('Search Query', data)
+      state.searchQuery = data
     }
   },
   plugins: [vuexLocal.plugin]

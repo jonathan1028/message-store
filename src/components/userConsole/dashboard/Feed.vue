@@ -2,7 +2,7 @@
   <div>
     <div class="searchBlock">
       <form class="search">
-        <input name="query" v-model="searchQuery" placeholder="Search opportunities...">
+        <!-- <input name="query" v-model="searchQuery" placeholder="Search opportunities..."> -->
       </form>
     </div>
     <ul class="feedList">
@@ -65,6 +65,7 @@ export default {
     columns: Array
   },
   data: function () {
+    // console.log('Search Query', this.$store.state.searchQuery)
     var sortOrders = {}
     const fields = this.columns.map(x => x.dbField)
     fields.forEach(function (key) {
