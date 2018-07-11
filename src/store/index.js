@@ -23,12 +23,22 @@ const store = new Vuex.Store({
     showCreatePerson: false,
     showCreateOpportunity: false,
     activeProfileTab: null,
-    searchQuery: ''
+    searchQueryFilters: {
+      keywords: '',
+      today: false,
+      tomorrow: false,
+      thisWeek: false,
+      thisWeekend: false,
+      thisMonth: false,
+      mornings: false,
+      afternoons: false,
+      evenings: false
+    }
   },
 
   getters: {
     searchQuery (state) {
-      return state.searchQuery
+      return state.searchQueryFilters
     }
   },
 
@@ -53,9 +63,8 @@ const store = new Vuex.Store({
     updateActiveProfileTab (state, data) {
       state.activeProfileTab = data
     },
-    updateSearchQuery (state, data) {
-      console.log('Search Query', data)
-      state.searchQuery = data
+    updateSearchQueryFilters (state, data) {
+      state.searchQueryFilters = JSON.parse(JSON.stringify(data))
     }
   },
   plugins: [vuexLocal.plugin]

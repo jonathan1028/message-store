@@ -74,7 +74,7 @@ export default {
     return {
       sortKey: '',
       sortOrders: sortOrders,
-      searchQuery: '',
+      searchQueryFilters: [],
       allOpportunities: [],
       usersOnFeed: [
         // {name: 'Caleb Jones', status: 'is going'},
@@ -88,7 +88,7 @@ export default {
   computed: {
     filteredData: function () {
       var sortKey = this.sortKey
-      var filterKey = this.$store.state.searchQuery && this.$store.state.searchQuery.toLowerCase()
+      var filterKey = this.$store.state.searchQueryFilters.keywords && this.$store.state.searchQueryFilters.keywords.toLowerCase()
       var order = this.sortOrders[sortKey] || 1
       var data = this.allOpportunities
       if (filterKey) {

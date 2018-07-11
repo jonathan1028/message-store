@@ -1,19 +1,23 @@
 Component Documentation
 V1
-- Collect the search query
-- Pass the query to Vuex
+X Collect the search query
+X Pass the query to Vuex
 - In the Feed component, pull the searchQuery from Vuex
 V2
 - Collect the search query
 - Pass the search query via Apollo_Link_State
 - Call the GQL SEARCH_OPPORTUNITIES_QUERY and call Apollo_Link_State and pass the searchQuery into the GQL query
 
+Functionality
+- Search keywords and each checkbox gets added as attributes to the searchQueryFilters and then
+gets passed to the Feed component to be used on the data
+
 <template>
   <div class="search _box">
       <div class="searchRow">
           <input
             name="query"
-            v-model="searchQuery"
+            v-model="searchQueryFilters"
             placeholder="Search opportunities..."
           >
       </div>
@@ -21,62 +25,100 @@ V2
       <div class="filter">
         <div>When:</div>
         <div>
-          <input type="checkbox">
-          <label for="">Today</label>
-        </div>
-          <input type="checkbox">
+          <input
+            type="checkbox"
+            v-model="query.today"
+            @change="addToQuery('today', query.today)"
+            >
           <label for="">Tomorrow</label>
-        <div></div>
+        </div>
         <div>
-          <input type="checkbox">
+          <input
+            type="checkbox"
+            v-model="query.tomorrow"
+            @change="addToQuery('tomorrow', query.tomorrow)"
+            >
+          <label for="">Tomorrow</label>
+        </div>
+        <div>
+          <input
+            type="checkbox"
+            v-model="query.thisWeek"
+            @change="addToQuery('thisWeek', query.thisWeek)"
+          >
           <label for="">This Week</label>
         </div>
         <div>
-          <input type="checkbox">
+          <input
+            type="checkbox"
+            v-model="query.thisWeekend"
+            @change="addToQuery('thisWeekend', query.thisWeekend)"
+          >
           <label for="">This Weekend</label>
         </div>
         <div>
-          <input type="checkbox">
+          <input
+            type="checkbox"
+            v-model="query.thisMonth"
+            @change="addToQuery('thisMonth', query.thisMonth)"
+          >
           <label for="">This Month</label>
         </div>
         <div>
-          <input type="checkbox">
+          <input
+            type="checkbox"
+            v-model="query.mornings"
+            @change="addToQuery('mornings', query.mornings)"
+          >
           <label for="">Mornings</label>
         </div>
         <div>
-          <input type="checkbox">
+          <input
+            type="checkbox"
+            v-model="query.afternoons"
+            @change="addToQuery('afternoons', query.afternoons)"
+          >
           <label for="">Afternoons</label>
         </div>
         <div>
-          <input type="checkbox">
+          <input
+            type="checkbox"
+            v-model="query.evenings"
+            @change="addToQuery('evenings', query.evenings)"
+          >
           <label for="">Evenings</label>
-        </div>
-        <div>
-          <input type="checkbox">
-          <label for="">Date & Time Range</label>
         </div>
       </div>
     </div>
 </template>
 
 <script>
-// import { mapGetters } from 'vuex'
 
 export default {
   name: 'Feed',
   data: function () {
     return {
-      // searchQuery: ''
+      query: this.$store.state.searchQueryFilters
     }
   },
   computed: {
-    searchQuery: {
+    searchQueryFilters: {
       get () {
-        return this.$store.state.searchQuery
+        return this.$store.state.searchQueryFilters.keywords
       },
       set (value) {
-        this.$store.commit('updateSearchQuery', value)
+        let newObj = JSON.parse(JSON.stringify(this.$store.state.searchQueryFilters))
+        newObj.keywords = value
+        this.$store.commit('updateSearchQueryFilters', newObj)
       }
+    }
+  },
+  methods: {
+    addToQuery (key, value) {
+      let newObj = JSON.parse(JSON.stringify(this.$store.state.searchQueryFilters))
+      newObj[key] = value
+      console.log('New Query String', newObj)
+      this.$store.commit('updateSearchQueryFilters', newObj)
     }
   }
 }
