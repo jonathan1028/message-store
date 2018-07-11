@@ -23,70 +23,75 @@ gets passed to the Feed component to be used on the data
       </div>
       <!-- {{search}} -->
       <div class="filter">
-        <div>When:</div>
-        <div>
-          <input
-            type="checkbox"
-            v-model="query.today"
-            @change="addToQuery('today', query.today)"
+        <div>Days:</div>
+        <div class="days">
+          <div>
+            <input
+              type="checkbox"
+              v-model="query.today"
+              @change="addToQuery('today', query.today)"
+              >
+            <label for="">Today</label>
+          </div>
+          <div>
+            <input
+              type="checkbox"
+              v-model="query.tomorrow"
+              @change="addToQuery('tomorrow', query.tomorrow)"
+              >
+            <label for="">Tomorrow</label>
+          </div>
+          <div>
+            <input
+              type="checkbox"
+              v-model="query.thisWeek"
+              @change="addToQuery('thisWeek', query.thisWeek)"
             >
-          <label for="">Today</label>
-        </div>
-        <div>
-          <input
-            type="checkbox"
-            v-model="query.tomorrow"
-            @change="addToQuery('tomorrow', query.tomorrow)"
+            <label for="">This Week</label>
+          </div>
+          <div>
+            <input
+              type="checkbox"
+              v-model="query.thisWeekend"
+              @change="addToQuery('thisWeekend', query.thisWeekend)"
             >
-          <label for="">Tomorrow</label>
+            <label for="">This Weekend</label>
+          </div>
+          <div>
+            <input
+              type="checkbox"
+              v-model="query.thisMonth"
+              @change="addToQuery('thisMonth', query.thisMonth)"
+            >
+            <label for="">This Month</label>
+          </div>
         </div>
-        <div>
-          <input
-            type="checkbox"
-            v-model="query.thisWeek"
-            @change="addToQuery('thisWeek', query.thisWeek)"
-          >
-          <label for="">This Week</label>
-        </div>
-        <div>
-          <input
-            type="checkbox"
-            v-model="query.thisWeekend"
-            @change="addToQuery('thisWeekend', query.thisWeekend)"
-          >
-          <label for="">This Weekend</label>
-        </div>
-        <div>
-          <input
-            type="checkbox"
-            v-model="query.thisMonth"
-            @change="addToQuery('thisMonth', query.thisMonth)"
-          >
-          <label for="">This Month</label>
-        </div>
-        <div>
-          <input
-            type="checkbox"
-            v-model="query.mornings"
-            @change="addToQuery('mornings', query.mornings)"
-          >
-          <label for="">Mornings</label>
-        </div>
-        <div>
-          <input
-            type="checkbox"
-            v-model="query.afternoons"
-            @change="addToQuery('afternoons', query.afternoons)"
-          >
-          <label for="">Afternoons</label>
-        </div>
-        <div>
-          <input
-            type="checkbox"
-            v-model="query.evenings"
-            @change="addToQuery('evenings', query.evenings)"
-          >
-          <label for="">Evenings</label>
+        <div>Times:</div>
+        <div class="times">
+          <div>
+            <input
+              type="checkbox"
+              v-model="query.mornings"
+              @change="addToQuery('mornings', query.mornings)"
+            >
+            <label for="">Mornings</label>
+          </div>
+          <div>
+            <input
+              type="checkbox"
+              v-model="query.afternoons"
+              @change="addToQuery('afternoons', query.afternoons)"
+            >
+            <label for="">Afternoons</label>
+          </div>
+          <div>
+            <input
+              type="checkbox"
+              v-model="query.evenings"
+              @change="addToQuery('evenings', query.evenings)"
+            >
+            <label for="">Evenings</label>
+          </div>
         </div>
       </div>
     </div>
@@ -144,5 +149,8 @@ export default {
     border-radius: 3vh;
     border: .25vh solid var(--theme-color3);
   }
+}
+.days, .times {
+  margin: 1vw;
 }
 </style>

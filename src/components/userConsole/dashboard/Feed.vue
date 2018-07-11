@@ -116,8 +116,9 @@ export default {
       }
       if (filters.thisWeek) {
         data = data.filter(function (item) {
-          console.log('Today', isThisWeek(item.startTime))
-          return isThisWeek(item.startTime)
+          let meetsRange = (isThisWeek(item.startTime) && !isSaturday(item.startTime) && !isSunday(item.startTime))
+          console.log('This Week', meetsRange)
+          return meetsRange
         })
       }
       if (filters.thisMonth) {
