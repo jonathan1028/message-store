@@ -55,8 +55,8 @@
 <script>
 // import { ALL_USERS_QUERY } from '../../../constants/graphql'
 import { UPDATE_OPPORTUNITY_MUTATION, ALL_OPPORTUNITIES_QUERY } from '../../../constants/graphql'
-// import { USERS_ON_FEED_QUERY } from '../../../constants/graphql'
 import moment from 'moment'
+import { format, isToday, isTomorrow, isSaturday, isSunday, isThisWeek, isThisMonth } from 'date-fns'
 
 export default {
   name: 'Feed',
@@ -87,24 +87,85 @@ export default {
   },
   computed: {
     filteredData: function () {
-      var sortKey = this.sortKey
-      var filterKey = this.$store.state.searchQueryFilters.keywords && this.$store.state.searchQueryFilters.keywords.toLowerCase()
-      var order = this.sortOrders[sortKey] || 1
-      var data = this.allOpportunities
-      if (filterKey) {
+      let filters = JSON.parse(JSON.stringify(this.$store.state.searchQueryFilters))
+      let data = this.allOpportunities
+      // Removes case sensitivity
+      var keywords = filters.keywords && filters.keywords.toLowerCase()
+      // var sortKey = this.sortKey
+      // var order = this.sortOrders[sortKey] || 1
+      // console.log('Filter Key', filterKey)
+
+      if (filters.today) {
+        data = data.filter(function (item) {
+          console.log('Today', isToday(item.startTime))
+          return isToday(item.startTime)
+        })
+      }
+      if (filters.tomorrow) {
+        data = data.filter(function (item) {
+          console.log('Today', isTomorrow(item.startTime))
+          return isTomorrow(item.startTime)
+        })
+      }
+      if (filters.thisWeekend) {
+        data = data.filter(function (item) {
+          let test = isThisWeek(item.startTime) && (isSaturday(item.startTime) || isSunday(item.startTime))
+          console.log('This Weekend', test)
+          return test
+        })
+      }
+      if (filters.thisWeek) {
+        data = data.filter(function (item) {
+          console.log('Today', isThisWeek(item.startTime))
+          return isThisWeek(item.startTime)
+        })
+      }
+      if (filters.thisMonth) {
+        data = data.filter(function (item) {
+          console.log('Today', isThisMonth(item.startTime))
+          return isThisMonth(item.startTime)
+        })
+      }
+      if (filters.mornings) {
+        data = data.filter(function (item) {
+          let time = format(item.startTime, 'H')
+          console.log('Mornings', time)
+          return format(item.startTime, 'H') < 12
+        })
+      }
+      if (filters.afternoons) {
+        data = data.filter(function (item) {
+          let time = format(item.startTime, 'H')
+          let meetsRange = time > 12 && time < 17
+          console.log('Afternoons', meetsRange)
+          return meetsRange
+        })
+      }
+      if (filters.evenings) {
+        data = data.filter(function (item) {
+          let time = format(item.startTime, 'H')
+          let meetsRange = time > 16
+          console.log('Evenings', meetsRange)
+          return meetsRange
+        })
+      }
+      if (keywords) {
         data = data.filter(function (row) {
+          // Pulls out all keys in the current object and iterates over them
           return Object.keys(row).some(function (key) {
-            return String(row[key]).toLowerCase().indexOf(filterKey) > -1
+            // Returns the index# where this object's key matches the filterKey
+            return String(row[key]).toLowerCase().indexOf(keywords) > -1
           })
         })
       }
-      if (sortKey) {
-        data = data.slice().sort(function (a, b) {
-          a = a[sortKey]
-          b = b[sortKey]
-          return (a === b ? 0 : a > b ? 1 : -1) * order
-        })
-      }
+
+      // if (sortKey) {
+      //   data = data.slice().sort(function (a, b) {
+      //     a = a[sortKey]
+      //     b = b[sortKey]
+      //     return (a === b ? 0 : a > b ? 1 : -1) * order
+      //   })
+      // }
       return data
     }
   },

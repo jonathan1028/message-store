@@ -30,7 +30,7 @@ gets passed to the Feed component to be used on the data
             v-model="query.today"
             @change="addToQuery('today', query.today)"
             >
-          <label for="">Tomorrow</label>
+          <label for="">Today</label>
         </div>
         <div>
           <input
