@@ -1,10 +1,5 @@
 <template>
   <div>
-    <div class="searchBlock">
-      <form class="search">
-        <!-- <input name="query" v-model="searchQuery" placeholder="Search opportunities..."> -->
-      </form>
-    </div>
     <ul class="feedList">
       <li
         class="feedItem"
@@ -31,9 +26,18 @@
           1h
         </div>
         <div class="buttonsBlock">
-          <button @click='interested(item)'>Interested</button>
+          <button 
+            class="button1"
+            @click='interested(item)'
+          >
+            Interested
+          </button>
           <button>Going</button>
-          <button>Ignore</button>
+          <button
+            class="button3"
+          >
+            Ignore
+          </button>
         </div>
         <div class="usersBlock">
           <ul>
@@ -221,29 +225,19 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.searchBlock {
-  display: flex;
-  justify-content: space-between;
-  padding: 1%;
-}
-.search {
-  height: 4vh;
-  // padding: 1%;
-  input {
-    width: 25vw;
-    height: 4vh;
-    font-size: 2.5vh;
-    color: var(--theme-color3);
-  }
-}
 .feedList {
   // height: 80vh;
   // overflow-y: scroll;
 }
 .feedItem {
   display: grid;
+  // ------ GRID ----------
+  // pic title/org  timestamp
+  // pic opp-info   timestamp
+  // XXX button-row XXX
+  // ------ Followers -------
   grid-template-columns: 10% 68% 10%;
-  grid-template-rows: 20% 10% 10% 50%;
+  grid-template-rows: 20% 10% 20% 50%;
   grid-column-gap: 5%;
   background-color: white;
   margin-top: 1%;
@@ -254,6 +248,7 @@ export default {
   -webkit-box-shadow: 0 1px 2px #777;
   -moz-box-shadow: 0 2px 1px #777;
   box-shadow: 0 2px 1px #777;
+  border-radius: 3vh;
 }
 .imageBlock {
   height: 10vh;
@@ -308,14 +303,30 @@ export default {
   height: 10vh;
 }
 .buttonsBlock {
+  // border: 1px solid red;
   grid-row-start: 3;
   grid-row-end: 4;
   grid-column-start: 2;
   grid-column-end: 3;
-  padding-top: 3%;
+  margin-top: 1vh;
+  display: flex;
+  .button1 {
+    border-top-left-radius: 3vh;
+    border-bottom-left-radius: 3vh;
+    border-right: none;
+  }
+  .button3 {
+    border-top-right-radius: 3vh;
+    border-bottom-right-radius: 3vh;
+    border-left: none;
+  }
   button {
+    font-size: 2vh;
+    padding: 1vh;
+    margin: 0vh;
+    height: auto;
     border: .1vh solid var(--theme-color3);
-    background-color: var(--theme-color1);
+    // background-color: var(--theme-color1);
   }
 }
 .usersBlock {

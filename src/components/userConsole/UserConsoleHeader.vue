@@ -83,7 +83,7 @@ export default {
 <style lang="scss" scoped>
 .userConsoleLayout {
   display: grid;
-  grid-template-rows: 6vh auto;
+  grid-template-rows: 8vh auto;
 }
 .main-content {
   margin-top: 8vh;
@@ -91,7 +91,7 @@ export default {
 .header{
   // position: fixed;
   width: 100%;
-  background-color: var(--theme-color1);
+  background-image: linear-gradient(to bottom, #efba34, #f3cc6a, #f7dd9b, #fbeecb, #fffefb);
   margin-bottom: 2vh;
   -webkit-box-shadow:0 1px 4px rgba(0, 0, 0, 0.3), 0 0 40px rgba(0, 0, 0, 0.1) inset;
   -moz-box-shadow:0 1px 4px rgba(0, 0, 0, 0.3), 0 0 40px rgba(0, 0, 0, 0.1) inset;

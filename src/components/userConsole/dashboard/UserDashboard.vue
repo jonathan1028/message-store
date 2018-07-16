@@ -103,13 +103,11 @@
       </div>
       <div class="__carousel-footer"> ...... </div>
     </div>
-    <div class="feed _box">
-      <feed
-        :data="allOpportunities"
-        :columns="columns"
-      >
-      </feed>
-    </div>
+    <feed
+      :data="allOpportunities"
+      :columns="columns"
+    >
+    </feed>
     <div class="button-menu _box">
       <div class="__header">Grow the GCN Community</div>
       <div class="__row --border-collapse">
@@ -336,7 +334,7 @@ export default {
   grid-template-rows: 8vh 1fr 1fr 1fr 1fr 1fr 1fr;
 }
 .notifications__header {
-  background-color: var(--theme-color1);
+  background-image: linear-gradient(to bottom, #efba34, #f3cc6a, #f7dd9b, #fbeecb, #fffefb);
   border-top-right-radius: 3vh;
   border-top-left-radius: 3vh;
   font-weight: 900;
@@ -391,9 +389,12 @@ export default {
   background-color: white;
   display: grid;
   grid-template-rows: 8vh auto auto;
+  button {
+    height: 100%;
+  }
 }
 .__header {
-  background-color: var(--theme-color1);
+  background-image: linear-gradient(to bottom, #efba34, #f3cc6a, #f7dd9b, #fbeecb, #fffefb);
   border-top-right-radius: 3vh;
   border-top-left-radius: 3vh;
   font-weight: 900;
