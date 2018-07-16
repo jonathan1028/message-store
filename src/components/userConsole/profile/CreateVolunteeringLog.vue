@@ -14,17 +14,17 @@
         </div>
         <div class="field">
           <label for="">Start Time:</label>
-          <input
+          <flat-pickr
             v-model="startTime"
-            type="text"
-            placeholder="">
+            :config="config"
+          ></flat-pickr>
         </div>
         <div class="field">
           <label for="">End Time:</label>
-          <input
+          <flat-pickr
             v-model="endTime"
-            type="text"
-            placeholder="">
+            :config="config"
+          ></flat-pickr>
         </div>
         <div class="field">
           <label for="">Location:</label>
@@ -63,10 +63,13 @@ import Datepicker from 'vuejs-datepicker'
 // import { CREATE_PERSON_MUTATION } from '../constants/graphql'
 import { CREATE_VOLUNTEERING_LOG_MUTATION, ALL_VOLUNTEERING_LOGS_QUERY } from '../../../constants/graphql'
 import { GC_USER_ID } from '../../../constants/settings'
+import flatPickr from 'vue-flatpickr-component'
+import 'flatpickr/dist/flatpickr.css'
+// import { format } from 'date-fns'
 
 export default {
   name: 'CreateOpportunity',
-  components: { Datepicker },
+  components: { Datepicker, flatPickr },
   data () {
     return {
       title: '',
@@ -74,7 +77,15 @@ export default {
       startTime: null,
       endTime: null,
       location: '',
-      activeModal: this.$store.state.createVolunteeringLogModal
+      activeModal: this.$store.state.createVolunteeringLogModal,
+      config: {
+        // wrap: true, // set wrap to true only when using 'input-group'
+        altFormat: 'F j, Y - h:iK',
+        altInput: true,
+        dateFormat: 'Z',
+        enableTime: true
+        // locale: Hindi // locale for this instance only
+      }
     }
   },
   methods: {

@@ -158,7 +158,7 @@
                 <th>Onsite</th>
                 <th>Start Time</th>
                 <th>End Time</th>
-                <th>Duration</th>
+                <th>Hours</th>
                 <!-- <th
                   v-for='(item, index) in columns'
                   :key='index'
@@ -183,9 +183,9 @@
                 <td>{{item.description}}</td>
                 <td>{{item.location}}</td>
                 <td>Onsite</td>
-                <td>{{item.startTime}}</td>
-                <td>{{item.endTime}}</td>
-                <td>Duration</td>
+                <td>{{item.startTime | dateTime}}</td>
+                <td>{{item.endTime | dateTime}}</td>
+                <td>{{calculateHours(item)}}</td>
               </tr>
             </tbody>
           </table>
@@ -206,6 +206,7 @@
 import { GET_USER_QUERY, UPDATE_USER_MUTATION, ALL_VOLUNTEERING_LOGS_QUERY } from '../../../constants/graphql'
 import moment from 'moment'
 import CreateVolunteeringLog from './CreateVolunteeringLog'
+import { format, differenceInMinutes } from 'date-fns'
 
 export default {
   name: 'ProfilePage',
@@ -224,6 +225,9 @@ export default {
   filters: {
     ago (time) {
       return moment(time).fromNow()
+    },
+    dateTime (data) {
+      return format(data, 'hh:mma on MM/DD/YY')
     }
   },
   computed: {
@@ -232,6 +236,10 @@ export default {
     }
   },
   methods: {
+    calculateHours (obj) {
+      console.log('time', obj.endTime, obj.startTime, differenceInMinutes(obj.endTime, obj.startTime))
+      return (parseFloat(differenceInMinutes(obj.endTime, obj.startTime)) / 60).toPrecision(2)
+    },
     toggleCreateVolunteeringLog () {
       console.log('button pushed')
       this.$store.commit('toggleCreateVolunteeringLog')
