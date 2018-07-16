@@ -22,6 +22,7 @@ const store = new Vuex.Store({
     currentOpportunity: null,
     showCreatePerson: false,
     showCreateOpportunity: false,
+    showCreateVolunteeringLog: false,
     activeProfileTab: null,
     searchQueryFilters: {
       keywords: '',
@@ -51,6 +52,9 @@ const store = new Vuex.Store({
     },
     toggleCreateOpportunity (state) {
       state.showCreateOpportunity = !state.showCreateOpportunity
+    },
+    toggleCreateVolunteeringLog (state) {
+      state.showCreateVolunteeringLog = !state.showCreateVolunteeringLog
     },
     updateActiveModal (state, data) {
       console.log('State Change', data)

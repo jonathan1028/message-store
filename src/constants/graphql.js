@@ -97,7 +97,7 @@ export const ALL_OPPORTUNITIES_QUERY = gql`
       description
       startTime
       endTime
-      address
+      location
       ownedBy {
         id
       }
@@ -105,6 +105,22 @@ export const ALL_OPPORTUNITIES_QUERY = gql`
         id
         firstName
         lastName
+      }
+    }
+  }
+`
+
+export const ALL_VOLUNTEERING_LOGS_QUERY = gql`
+  query AllVolunteeringLogsQuery {
+    allVolunteeringLogs {
+      id
+      title
+      description
+      location
+      startTime
+      endTime
+      ownedBy {
+        id
       }
     }
   }
@@ -214,21 +230,47 @@ export const CREATE_PERSON_MUTATION = gql`
 
 export const CREATE_OPPORTUNITY_MUTATION = gql`
   mutation CreateOpportunityMutation($name: String, $ownedById: ID!, $description: String, 
-  $startTime: DateTime, $endTime: DateTime, $address: String) {
+  $startTime: DateTime, $endTime: DateTime, $location: String) {
     createOpportunity(
       name: $name
       ownedById: $ownedById
       description: $description
       startTime: $startTime
       endTime: $endTime
-      address: $address
+      location: $location
     ) {
       id
       name
       description
       startTime
       endTime
-      address
+      location
+      ownedBy {
+        id
+        firstName
+        lastName
+      }
+    }
+  }
+`
+
+export const CREATE_VOLUNTEERING_LOG_MUTATION = gql`
+  mutation CreateVolunteeringLogMutation($title: String, $ownedById: ID!, $description: String, 
+  $startTime: DateTime, $endTime: DateTime, $location: String) {
+    createVolunteeringLog(
+      title: $title
+      ownedById: $ownedById
+      description: $description
+      location: $location
+      startTime: $startTime
+      endTime: $endTime
+    ) {
+      id
+      title
+      description
+      location
+      startTime
+      endTime
       ownedBy {
         id
         firstName
@@ -240,14 +282,14 @@ export const CREATE_OPPORTUNITY_MUTATION = gql`
 
 export const UPDATE_OPPORTUNITY_MUTATION = gql`
   mutation UpdateOpportunityMutation($id: ID!, $name: String, $description: String, 
-  $startTime: DateTime, $endTime: DateTime, $address: String, $interestedUsersIds: [ID!]) {
+  $startTime: DateTime, $endTime: DateTime, $location: String, $interestedUsersIds: [ID!]) {
     updateOpportunity(
       id: $id,
       name: $name
       description: $description
       startTime: $startTime
       endTime: $endTime
-      address: $address,
+      location: $location,
       interestedUsersIds: $interestedUsersIds
     ) {
       id
@@ -255,7 +297,7 @@ export const UPDATE_OPPORTUNITY_MUTATION = gql`
       description
       startTime
       endTime
-      address
+      location
       ownedBy {
         id
         firstName

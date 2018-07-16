@@ -141,54 +141,13 @@
         >
           <button
             class="_button1"
-            @click="toggleModal()"
+            @click="toggleCreateVolunteeringLog()"
           >
             + Create Volunteer Logging
           </button>
           <!-- Modal content -->
-          <span v-if="modalState === true">
-            <div class="modal _box-shadow">
-              <div class="modal-header">
-                <h2>Add Volunteering Hours</h2>
-              </div>
-              <div class="modal-body">
-                <form action="">
-                  <div class="field">
-                    <label for="">Title:</label>
-                    <input
-                      type="text"
-                      placeholder="">
-                  </div>
-                  <div class="field">
-                    <label for="">Duration:</label>
-                    <input
-                      type="text"
-                      placeholder="">
-                  </div>
-                  <div class="field">
-                    <label for="">Location:</label>
-                    <input
-                      type="text"
-                      placeholder="">
-                  </div>
-                  <div class="field">
-                    <label for="">Description:</label>
-                    <input
-                      type="text"
-                      placeholder="">
-                  </div>
-                </form>
-              </div>
-              <div class="modal-footer">
-                <button class="_button1">Create</button>
-                <button
-                  class="_button3"
-                  @click="toggleModal()"
-                >
-                  Cancel
-                </button>
-              </div>
-            </div>
+          <span v-if="modalState">
+            <create-volunteering-log></create-volunteering-log>
           </span>
           <table>
             <thead>
@@ -216,28 +175,18 @@
               </tr>
             </thead>
             <tbody>
-              <tr>Test</tr>
-              <!-- <tr
-                v-for='(entry, index) in filteredData'
+              <tr
+                v-for='(item, index) in allVolunteeringLogs'
                 :key='index'
-                :index="index"
               >
-                <td v-for='(col, index) in columns'
-                  :key='index'
-                  :index="index"
-                  @click="viewUser(entry)"
-                >
-                <div v-if="col.dbField === 'createdAt'">
-                  <span>{{entry[col.dbField] | formatDate}}</span>
-                </div>
-                <div v-else-if="col.dbField === 'updatedAt'">
-                  <span>{{entry[col.dbField] | relativeTime}}</span>
-                </div>
-                <div v-else>
-                  {{entry[col.dbField]}}
-                </div>
-                </td>
-              </tr> -->
+                <td>{{item.title}}</td>
+                <td>{{item.description}}</td>
+                <td>{{item.location}}</td>
+                <td>Onsite</td>
+                <td>{{item.startTime}}</td>
+                <td>{{item.endTime}}</td>
+                <td>Duration</td>
+              </tr>
             </tbody>
           </table>
         </div>
@@ -254,13 +203,14 @@
 </template>
 
 <script>
-import { GET_USER_QUERY, UPDATE_USER_MUTATION } from '../../../constants/graphql'
+import { GET_USER_QUERY, UPDATE_USER_MUTATION, ALL_VOLUNTEERING_LOGS_QUERY } from '../../../constants/graphql'
 import moment from 'moment'
+import CreateVolunteeringLog from './CreateVolunteeringLog'
 
 export default {
-  name: 'FeedPage',
+  name: 'ProfilePage',
   components: {
-    // Feed
+    CreateVolunteeringLog
   },
   data () {
     return {
@@ -268,7 +218,7 @@ export default {
       userId: this.$store.state.auth.user.id,
       User: {},
       activeTab: 'profile',
-      modalState: false
+      allVolunteeringLogs: []
     }
   },
   filters: {
@@ -277,10 +227,14 @@ export default {
     }
   },
   computed: {
+    modalState () {
+      return this.$store.state.showCreateVolunteeringLog
+    }
   },
   methods: {
-    toggleModal () {
-      this.modalState = !this.modalState
+    toggleCreateVolunteeringLog () {
+      console.log('button pushed')
+      this.$store.commit('toggleCreateVolunteeringLog')
     },
     isActiveTab (data) {
       this.activeTab = data
@@ -333,6 +287,9 @@ export default {
         // Creates clone of data because Apollo data is read only
         this.User = JSON.parse(JSON.stringify(data.User))
       }
+    },
+    allVolunteeringLogs: {
+      query: ALL_VOLUNTEERING_LOGS_QUERY
     }
   }
 }
@@ -523,66 +480,5 @@ th.active .arrow {
   border-left: 4px solid transparent;
   border-right: 4px solid transparent;
   border-top: 4px solid #fff;
-}
-.modal {
-    position: fixed; /* Stay in place */
-    z-index: 1; /* Sit on top */
-    //left: 0;
-    top: 20vh;
-    width: auto; /* Full width */
-    height: auto; /* Full height */
-    margin: auto;
-    padding: 5vh;
-    // overflow: auto; /* Enable scroll if needed */
-    opacity: 1;
-    background-color: #fefefe;
-    animation-name: animatetop;
-    animation-duration: 0.4s
-}
-.close-button {
-    color: #aaa;
-    float: right;
-    font-size: 5vh;
-    font-weight: bold;
-}
-.close:hover,
-.close:focus {
-    color: black;
-    text-decoration: none;
-    cursor: pointer;
-}
-.modal-header {
-  border-bottom: .15vh solid var(--theme-color1);
-    // padding: 2px 16px;
-    // background-color: #5cb85c;
-    // color: white;
-}
-.modal-body {
-  // padding: 2px 16px;
-}
-.modal-footer {
-  margin-top: 5vh;
-  display: flex;
-  justify-content: space-around;
-    // padding: 2px 16px;
-    // background-color: #5cb85c;
-    // color: white;
-}
-.modal-content {
-}
-/* Add Animation */
-@keyframes animatetop {
-    from {top: -300px; opacity: 0}
-    to {top: 20vh; opacity: 1}
-}
-.modal-background {
-  z-index: -1;
-  // position: fixed;
-  // top: 0;
-  // left: 0;
-  // width: 100%;
-  // height: 100%;
-  // background-color: #888;
-  // opacity: 0.5;
 }
 </style>
