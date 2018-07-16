@@ -26,7 +26,7 @@
           1h
         </div>
         <div class="buttonsBlock">
-          <button 
+          <button
             class="button1"
             @click='interested(item)'
           >

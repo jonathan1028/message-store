@@ -1,6 +1,6 @@
 <template>
-  <div>
-    <div class="pageLayout">
+  <div class="modal-background">
+    <div class="pageLayout modal-background">
       <div class="profileHeader">
         <div class="profileImage"></div>
         <div class="user-name">{{getName(User.firstName, User.lastName)}}</div>
@@ -10,14 +10,14 @@
         <button class="_button1 headerButton">Change Password</button>
       </div>
       <div class="profileTabs">
-        <div 
+        <div
           v-bind:class="{ 'active-tab': activeTab === 'profile' }"
           class="tab"
           @click.prevent="isActiveTab('profile')"
         >
           Profile
         </div>
-        <div 
+        <div
           v-bind:class="{ 'active-tab': activeTab === 'volunteerPreferences' }"
           class="tab"
           @click.prevent="isActiveTab('volunteerPreferences')"
@@ -134,13 +134,112 @@
               placeholder="">
           </div>
         </div>
-        <!-- --------------------------------------------- Volunteer Loggin ----------------------- -->
+        <!-- --------------------------------------------- Volunteer Logging ----------------------- -->
         <div
-          class="panel"
+          class="volunteer-logging-panel panel"
           v-if="activeTab === 'volunteerLogging'"
         >
-          Panel3
-          <button>+ Create Volunteer Logging</button>
+          <button
+            class="_button1"
+            @click="toggleModal()"
+          >
+            + Create Volunteer Logging
+          </button>
+          <!-- Modal content -->
+          <span v-if="modalState === true">
+            <div class="modal _box-shadow">
+              <div class="modal-header">
+                <h2>Add Volunteering Hours</h2>
+              </div>
+              <div class="modal-body">
+                <form action="">
+                  <div class="field">
+                    <label for="">Title:</label>
+                    <input
+                      type="text"
+                      placeholder="">
+                  </div>
+                  <div class="field">
+                    <label for="">Duration:</label>
+                    <input
+                      type="text"
+                      placeholder="">
+                  </div>
+                  <div class="field">
+                    <label for="">Location:</label>
+                    <input
+                      type="text"
+                      placeholder="">
+                  </div>
+                  <div class="field">
+                    <label for="">Description:</label>
+                    <input
+                      type="text"
+                      placeholder="">
+                  </div>
+                </form>
+              </div>
+              <div class="modal-footer">
+                <button class="_button1">Create</button>
+                <button
+                  class="_button3"
+                  @click="toggleModal()"
+                >
+                  Cancel
+                </button>
+              </div>
+            </div>
+          </span>
+          <table>
+            <thead>
+              <tr>
+                <th>Title</th>
+                <th>Description</th>
+                <th>Location</th>
+                <th>Onsite</th>
+                <th>Start Time</th>
+                <th>End Time</th>
+                <th>Duration</th>
+                <!-- <th
+                  v-for='(item, index) in columns'
+                  :key='index'
+                  :index="index"
+                  @click="sortBy(item.dbField)"
+                  :class="{ active: sortKey == item.dbField }">
+                  {{ item.title | capitalize }}
+                  <span class="arrow" :class="sortOrders[item.dbField] > 0 ? 'asc' : 'dsc'">
+                  </span>
+                </th>
+                <th>
+                  Links
+                </th> -->
+              </tr>
+            </thead>
+            <tbody>
+              <tr>Test</tr>
+              <!-- <tr
+                v-for='(entry, index) in filteredData'
+                :key='index'
+                :index="index"
+              >
+                <td v-for='(col, index) in columns'
+                  :key='index'
+                  :index="index"
+                  @click="viewUser(entry)"
+                >
+                <div v-if="col.dbField === 'createdAt'">
+                  <span>{{entry[col.dbField] | formatDate}}</span>
+                </div>
+                <div v-else-if="col.dbField === 'updatedAt'">
+                  <span>{{entry[col.dbField] | relativeTime}}</span>
+                </div>
+                <div v-else>
+                  {{entry[col.dbField]}}
+                </div>
+                </td>
+              </tr> -->
+            </tbody>
+          </table>
         </div>
         <!-- --------------------------------------------- Privacy Statement ----------------------- -->
         <div
@@ -168,7 +267,8 @@ export default {
       keyword: '',
       userId: this.$store.state.auth.user.id,
       User: {},
-      activeTab: 'profile'
+      activeTab: 'profile',
+      modalState: false
     }
   },
   filters: {
@@ -179,6 +279,9 @@ export default {
   computed: {
   },
   methods: {
+    toggleModal () {
+      this.modalState = !this.modalState
+    },
     isActiveTab (data) {
       this.activeTab = data
       return this.activeTab
@@ -353,5 +456,133 @@ input {
   button {
     width: 20vw;
   }
+}
+.volunteer-logging-panel {
+  display: grid;
+  grid-template-rows: 5vh auto;
+  button {
+    height: 5vh;
+    width: 15vw;
+  }
+}
+table {
+  /* border-collapse is needed to make the borders work properly on rows */
+  margin-top: 1%;
+  border-collapse: collapse;
+  border-bottom: 2px solid lightgray;
+  border-radius: 3px;
+  background-color: white;
+  width: 100%;
+}
+
+th {
+  height: 40px;
+  background-color: var(--theme-color3);
+  color: white;
+}
+
+/* thead > tr {
+  -webkit-box-shadow:0 1px 4px rgba(0, 0, 0, 0.3), 0 0 40px rgba(0, 0, 0, 0.1) inset;
+  -moz-box-shadow:0 1px 4px rgba(0, 0, 0, 0.3), 0 0 40px rgba(0, 0, 0, 0.1) inset;
+  box-shadow:0 1px 4px rgba(0, 0, 0, 0.3), 0 0 40px rgba(0, 0, 0, 0.1) inset;
+} */
+
+tr {
+  height: 40px;
+  border-bottom: 1px solid lightgray;
+}
+
+tr:hover {
+  background-color: rgb(245, 245, 245);
+}
+
+th.active {
+  color: #fff;
+}
+
+th.active .arrow {
+  opacity: 1;
+}
+
+.arrow {
+  display: inline-block;
+  vertical-align: middle;
+  width: 0;
+  height: 0;
+  margin-left: 5px;
+  opacity: 0.66;
+}
+
+.arrow.asc {
+  border-left: 4px solid transparent;
+  border-right: 4px solid transparent;
+  border-bottom: 4px solid #fff;
+}
+
+.arrow.dsc {
+  border-left: 4px solid transparent;
+  border-right: 4px solid transparent;
+  border-top: 4px solid #fff;
+}
+.modal {
+    position: fixed; /* Stay in place */
+    z-index: 1; /* Sit on top */
+    //left: 0;
+    top: 20vh;
+    width: auto; /* Full width */
+    height: auto; /* Full height */
+    margin: auto;
+    padding: 5vh;
+    // overflow: auto; /* Enable scroll if needed */
+    opacity: 1;
+    background-color: #fefefe;
+    animation-name: animatetop;
+    animation-duration: 0.4s
+}
+.close-button {
+    color: #aaa;
+    float: right;
+    font-size: 5vh;
+    font-weight: bold;
+}
+.close:hover,
+.close:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+}
+.modal-header {
+  border-bottom: .15vh solid var(--theme-color1);
+    // padding: 2px 16px;
+    // background-color: #5cb85c;
+    // color: white;
+}
+.modal-body {
+  // padding: 2px 16px;
+}
+.modal-footer {
+  margin-top: 5vh;
+  display: flex;
+  justify-content: space-around;
+    // padding: 2px 16px;
+    // background-color: #5cb85c;
+    // color: white;
+}
+.modal-content {
+}
+/* Add Animation */
+@keyframes animatetop {
+    from {top: -300px; opacity: 0}
+    to {top: 20vh; opacity: 1}
+}
+.modal-background {
+  z-index: -1;
+  // position: fixed;
+  // top: 0;
+  // left: 0;
+  // width: 100%;
+  // height: 100%;
+  // background-color: #888;
+  // opacity: 0.5;
 }
 </style>
