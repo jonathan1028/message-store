@@ -1,205 +1,38 @@
 <template>
   <div>
-    <!-- <div class="container">
-        <div class="content-body">
-            <div class="profile">
-                <div class="clearfix m-b-30">
-                    <div class="avatar-container pull-left">
-                        <img class="avatar" v-bind:src="User.customAvatar||User.avatar">
-                        <div class="text-center m-t-15">
-                            <button class="circle-btn yellow-btn" @click="showAvatarModal">
-                                <i class="fa fa-edit"></i> Edit
-                            </button>
-                        </div>
-                    </div>
-                    <div class="pull-left">
-                        <div class="details-top">
-                            <div class="name">
-                                <b>{{ User.fullName||User.email }}</b>
-                            </div>
-                            <div class="clearfix">
-                                <div class="info-row float-left m-r-25">SGC Balance:{{ User.sgcBalance }}</div>
-                                <div class="info-row float-left">GGC Balance:{{ User.ggcBalance }}</div>
-                            </div>
-                            <div class="description">
-                                <div class="info-row">
-                                    <i class="fa fa-map-marker"></i>
-                                    <span class="caption">Location:</span>
-                                    <span class="value" style="color:gray">{{ User.locale }}</span>
-
-                                </div>
-
-                                <div class="info-row">
-                                    <i class="fa fa-clock-o"></i>
-                                    <span class="caption"> Last login:</span>
-                                    <span class="value" style="color:gray">{{User.lastLogin}}</span>
-
-                                </div>
-
-                                <div class="info-row">
-                                    <i class="fa fa-calendar"></i>
-                                    <span class="caption">Joined:</span>
-                                    <span class="value" style="color:gray">{{ User.createdAt | ago }} </span>
-
-                                </div>
-                            </div>
-
-                        </div>
-                        <div class="text-center m-b-30 m-t-15">
-                            <button class="circle-btn dark-btn" @click="showPasswordModal()">Change password</button>
-                        </div>
-                    </div>
-                </div>
-                <div class="details">
-
-                    <div class="input-groups">
-                        <div class="form-group">
-                            <span class="top-title">User Name:</span>
-                            <div class="btm-input"><input class="form-control form-control-short" type="text" v-model="User.username"></div>
-                        </div>
-                        <div class="form-group">
-                            <span class="top-title">First Name:</span>
-                            <div class="btm-input"><input class="form-control form-control-short" type="text" v-model="User.firstName"></div>
-                        </div>
-                        <div class="form-group">
-                            <span class="top-title">Last Name:</span>
-                            <div class="btm-input"><input class="form-control form-control-short" type="text" v-model="User.lastName"></div>
-                        </div>
-                        <div class="form-group">
-                            <span class="top-title">Birth Year:</span>
-                            <div class="btm-input">
-                                <input class="form-control form-control-short" v-model="User.birthYear" type="number" onkeypress="return event.charCode >= 48 || event.charCode<=75" min="0">
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <span class="top-title">Volunteer Interest:</span>
-                            <div class="btm-input" v-for="(interest, index) in User.volunteerInterest" :key="index">
-                                <input class="form-control form-control-short" type="text" v-model="User.volunteerInterest[index]">
-                                <button type="button" class="button warning right-btn" @click="remove(User, interest)">
-                                    <i class="fa fa-trash"></i>
-                                </button>
-                            </div>
-                            <div class="btm-input">
-                                <input class="form-control form-control-short" type="text" v-model="interest">
-                                <button class="right-btn" style="margin-top:10px" @click="addInterest(User)">
-                                    <i class="fa fa-plus"></i>
-                                </button>
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <span class="top-title">My GCT Wallet Address:</span>
-                            <div class="btm-input"><input class="form-control form-control-short" type="text" v-model="User.wallet"></div>
-                            <button class="circle-btn dark-btn" style="margin-top:10px" @click="getGGCBalance(User)">Get GCT Balance
-                            </button>
-                        </div>
-                        <div class="form-group">
-                            <span class="top-title">Location:</span>
-                            <div class="btm-input">
-                                <gmap-autocomplete @place_changed="setPlace" class="form-control" v-model="User.locale">
-                                </gmap-autocomplete>
-                                <button @click="addMarker" class="right-btn" title="Show in map">
-                                    <i class="fa fa-map-marker"></i>
-                                </button>
-                            </div>
-                            <br>
-                            <gmap-map :center="center" :zoom="12" style="width:60%;  height: 400px;">
-                                <gmap-marker :key="index" v-for="(m, index) in markers" :position="m.position" @click="center=m.position"></gmap-marker>
-                            </gmap-map>
-
-                        </div>
-                        <div class="form-group">
-                            <span class="top-title">Mobile Phone No:</span>
-                            <div class="btm-input">
-                                <input class="form-control form-control-short" v-model="User.mobilePhoneNumber" onkeypress="return event.charCode >= 48 || event.charCode<=75" min="0">
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <span class="top-title">Email Address:</span>
-                            <div class="btm-input"><input class="form-control form-control-short" type="text" v-model="User.email" disabled=true></div>
-                        </div>
-                        <div class="btm-btn m-t-30 text-center">
-                            <button class="circle-btn yellow-btn" style="width:100%;" @click="update()">Save Changes</button>
-                        </div>
-                    </div>
-
-                </div>
-            </div>
-
-            <Modal v-model="showModal" title="Change Password" :closable="false" :mask-closable="false">
-                <div class="form-group">
-                    <span style="color:black">Old Password:</span>
-                    <input class="form-control" type="password" name="password" style="width:100%" v-model="profile.password" v-validate="'required'">
-                    <span v-show="errors.has('password')" style="color:red">{{ errors.first('password') }}</span>
-                </div>
-                <div class="form-group">
-                    <span style="color:black">New Password:</span>
-                    <input class="form-control" type="password" style="width:100%" id="newpassword" name="newpassword" v-model="profile.newpassword" data-vv-as="newpassword" v-validate="'required|min:8'">
-                    <span v-show="errors.has('newpassword')" style="color:red">{{ errors.first('newpassword') }}</span>
-                </div>
-                <div class="form-group">
-                    <span style="color:black">Confirm Password:</span>
-                    <input class="form-control" type="password" style="width:100%" id="confirmpassword" name="confirmpassword" v-model="profile.confirmpassword" data-vv-as="confirmpassword" v-validate="'required|min:8'">
-                    <span v-show="errors.has('confirmpassword')" style="color:red">{{ errors.first('confirmpassword') }}</span>
-                </div>
-                <span v-show="isShowErrorPasswordDoesNotMatch" style="color:red">The password confirmation does not match</span>
-                <span v-show="isShowErrorPasswordFormatInvalid" style="color:red">Password must contain three types of uppercase letters, lowercase letters, numbers, and special characters.</span>
-                <div class="form-group" v-if="showError">
-                    <span style="color:red">{{errorMessage}}</span>
-                </div>
-                <div slot="footer">
-                    <Button class="circle-btn dark-btn" size="large" @click="colsePasswordModal">Cancel</Button>
-                    <Button class="circle-btn yellow-btn" size="large" @click="changepwd(profile)">OK</Button>
-                </div>
-            </Modal>
-
-            <Modal v-model="editAvatar" title="Edit Avatar" :closable="true" :mask-closable="true">
-                <div class="form-group">
-                    <span style="color:black">Choose a picture(JPG/JPEG/PNG/
-                        </span>
-                            <input class="form-control" accept=".jpg, .jpeg, .png" type="file" style="width:100%" @change="avatarChanged($event)">
-                </div>
-                <div class="form-group">
-                    <span style="color:red">{{avatarMessage}}</span>
-                </div>
-                <div class="preview">
-                    <img class="avatar" v-bind:src="previewSrc" style="width:300px;height:300px">
-                </div>
-                <div slot="footer">
-                    <Button class="circle-btn dark-btn" size="large" @click="closeAvatarModal">Cancel</Button>
-                    <Button class="circle-btn yellow-btn" size="large" @click="saveAvatar(profile)">OK</Button>
-                </div>
-            </Modal>
-        </div>
-    </div> -->
     <div class="pageLayout">
       <div class="profileHeader">
         <div class="profileImage"></div>
-        <div class="UserName">{{getName(User.firstName, User.lastName)}}</div>
+        <div class="user-name">{{getName(User.firstName, User.lastName)}}</div>
         <div>Location:</div>
         <div>Last Login:</div>
         <div>Joined:</div>
-        <button>Change Password</button>
+        <button class="_button1 headerButton">Change Password</button>
       </div>
       <div class="profileTabs">
-        <div v-bind:class="{ active_tab: true }"
+        <div 
+          v-bind:class="{ 'active-tab': activeTab === 'profile' }"
           class="tab"
           @click.prevent="isActiveTab('profile')"
         >
           Profile
         </div>
-        <div v-bind:class="{ active_tab: true }"
+        <div 
+          v-bind:class="{ 'active-tab': activeTab === 'volunteerPreferences' }"
           class="tab"
           @click.prevent="isActiveTab('volunteerPreferences')"
         >
           My Volunteer Preferences
         </div>
-        <div v-bind:class="{ active_tab: true }"
+        <div
+          v-bind:class="{ 'active-tab': activeTab === 'volunteerLogging'}"
           class="tab"
           @click.prevent="isActiveTab('volunteerLogging')"
         >
           My Volunteer Logging
         </div>
-        <div v-bind:class="{ active_tab: true }"
+        <div
+          v-bind:class="{ 'active-tab': activeTab === 'privacyStatement' }"
           class="tab"
           @click.prevent="isActiveTab('privacyStatement')"
         >
@@ -213,50 +46,51 @@
         >
           <div class="inputs">
             <div class="field">
-              <label for="">First Name</label>
+              <label for="">First Name:</label>
               <input
                 v-model="User.firstName"
                 type="text"
                 placeholder="">
             </div>
             <div class="field">
-              <label for="">Last Name</label>
+              <label for="">Last Name:</label>
               <input
                 v-model="User.lastName"
                 type="text"
                 placeholder="">
             </div>
             <div class="field">
-              <label for="">Birth Year</label>
+              <label for="">Birth Year:</label>
               <input
                 v-model="User.birthYear"
                 type="text"
                 placeholder="">
             </div>
             <div class="field">
-              <label for="">Location</label>
+              <label for="">Location:</label>
               <input
                 v-model="User.location"
                 type="text"
                 placeholder="">
             </div>
             <div class="field">
-              <label for="">Phone Number</label>
+              <label for="">Phone Number:</label>
               <input
                 v-model="User.phone"
                 type="text"
                 placeholder="">
             </div>
             <div class="field">
-              <label for="">Email Address</label>
+              <label for="">Email Address:</label>
               <input
                 v-model="User.email"
                 type="text"
                 placeholder="">
             </div>
             <div class="buttonsRow">
-              <button @click.prevent='update()'>Save Changes</button>
-              <button>Cancel</button>
+              <button class="_button1" @click.prevent='update()'>Save Changes</button>
+              <button
+                class="_button3">Cancel</button>
             </div>
           </div>
         </div>
@@ -406,10 +240,14 @@ export default {
   width: 38%;
 }
 .pageLayout {
-  background-color: white;
   display: grid;
+  // ####### GRID ######
+  // Profile Header
+  // Tabs
+  // Tab Panels
   grid-template-columns: 100%;
-  grid-template-rows: 20vh auto auto;
+  grid-template-rows: 25vh auto auto;
+  background-color: white;
   margin-left: 20vw;
   margin-right: 20vw;
   padding: 3%;
@@ -417,11 +255,15 @@ export default {
 .profileHeader {
   display: grid;
   grid-template-columns: 25% 75%;
-  grid-template-rows: 20% 20% 20% 20% 20%;
+  grid-template-rows: 28% 18% 18% 18% 4vh;
   font-size: 2vh;
-}
-.userName {
-  font-size: 4vh;
+  margin-bottom: 5vh;
+  .user-name {
+    font-size: 3vh;
+  }
+  .headerButton {
+    width: 25%;
+  }
 }
 .profileImage {
   height: 20vh;
@@ -435,32 +277,40 @@ export default {
 }
 .profileTabs {
   display: grid;
-  grid-template-columns: max-content max-content max-content auto;
+  grid-template-columns: max-content max-content max-content max-content;
 }
 .tab {
   border: .1vh solid black;
-  padding: 3%;
+  border-bottom: none;
+  padding: 1vh;
   font-size: 2vh;
   display: flex;
   align-items: center;
   justify-content: center;
+  border-top-left-radius: 1vh;
+  border-top-right-radius: 1vh;
+  margin-right: 0.25vw;
+  background-color: var(--theme-color5);
   cursor: pointer;
 }
 .tab:hover {
 }
-.active_tab {
-  background-color: var( --background-color1);
+.active-tab {
+  background-color:white;
   border-bottom: none;
-  color: black;
+  color: var(--theme-color1);
   cursor: pointer;
+  margin-bottom: -1px;
+  z-index: 1;
 }
-.active_tab:hover {
+.active-tab:hover {
   cursor: pointer;
 }
 .panel {
   margin: auto;
   border: .15vh solid black;
-  padding: 3%;
+  padding: 5vh;
+  z-index: -1;
 }
 .inputs {
 }
@@ -474,18 +324,19 @@ label {
   justify-content: flex-start;
 }
 input {
-  width: 100%;
+  width: 98%;
+  padding-left: 1vw;
   font-size: 2vh;
   border-top: none;
   border-left: none;
   border-right: none;
   border-bottom: .25vh solid lightgray;
 }
-button {
-  width: 100%;
-  background-color: #efba34;
-  border-radius: 3vh;
-}
+// button {
+//   width: 100%;
+//   background-color: #efba34;
+//   border-radius: 3vh;
+// }
 .linkBlock {
   margin-top: 3vh;
   .link {
@@ -493,6 +344,14 @@ button {
   }
 }
 .buttonsRow {
+  width: 100%;
+  // border: 1px solid red;
+  margin-top: 5vh;
+  height: 5vh;
   display: flex;
+  justify-content: space-around;
+  button {
+    width: 20vw;
+  }
 }
 </style>
