@@ -8,35 +8,35 @@
         <div class="field">
           <label for="">Title:</label>
           <input
-            v-model="title"
+            v-model="log.title"
             type="text"
             placeholder="">
         </div>
         <div class="field">
           <label for="">Start Time:</label>
           <flat-pickr
-            v-model="startTime"
+            v-model="log.startTime"
             :config="config"
           ></flat-pickr>
         </div>
         <div class="field">
           <label for="">End Time:</label>
           <flat-pickr
-            v-model="endTime"
+            v-model="log.endTime"
             :config="config"
           ></flat-pickr>
         </div>
         <div class="field">
           <label for="">Location:</label>
           <input
-            v-model="location"
+            v-model="log.location"
             type="text"
             placeholder="">
         </div>
         <div class="field">
           <label for="">Description:</label>
           <input
-            v-model="description"
+            v-model="log.description"
             type="text"
             placeholder="">
         </div>
@@ -44,9 +44,9 @@
     </div>
     <div class="modal-footer">
       <button class="_button1"
-        @click="create()"
+        @click="update()"
       >
-        Create
+        Update
       </button>
       <button
         class="_button3"
@@ -60,16 +60,19 @@
 
 <script>
 import Datepicker from 'vuejs-datepicker'
-import { CREATE_VOLUNTEERING_LOG_MUTATION, ALL_VOLUNTEERING_LOGS_QUERY } from '../../../constants/graphql'
+// import { CREATE_PERSON_MUTATION } from '../constants/graphql'
+import { UPDATE_VOLUNTEERING_LOG_MUTATION, ALL_VOLUNTEERING_LOGS_QUERY } from '../../../constants/graphql'
 import { GC_USER_ID } from '../../../constants/settings'
 import flatPickr from 'vue-flatpickr-component'
 import 'flatpickr/dist/flatpickr.css'
+// import { format } from 'date-fns'
 
 export default {
-  name: 'CreateOpportunity',
+  name: 'UpdateVolunteeringLog',
   components: { Datepicker, flatPickr },
   data () {
     return {
+      log: this.$store.state.currentVolunteeringLog,
       title: '',
       description: '',
       startTime: null,
@@ -82,14 +85,15 @@ export default {
         altInput: true,
         dateFormat: 'Z',
         enableTime: true
+        // locale: Hindi // locale for this instance only
       }
     }
   },
   methods: {
     cancel () {
-      this.$store.commit('toggleCreateVolunteeringLog')
+      this.$store.commit('toggleUpdateVolunteeringLog')
     },
-    create () {
+    update () {
       // Checks permissions
       const currentUser = localStorage.getItem(GC_USER_ID)
       if (!currentUser) {
@@ -97,29 +101,23 @@ export default {
         return
       }
       this.$apollo.mutate({
-        mutation: CREATE_VOLUNTEERING_LOG_MUTATION,
+        mutation: UPDATE_VOLUNTEERING_LOG_MUTATION,
         variables: {
-          // Sets variables in graphql.js
-          // eslint-disable-next-line
-          title: this.title,
+          id: this.log.id,
           ownedById: currentUser,
-          description: this.description,
-          startTime: this.startTime,
-          endTime: this.endTime,
-          location: this.location
+          title: this.log.title,
+          description: this.log.description,
+          location: this.log.location,
+          startTime: this.log.startTime,
+          endTime: this.log.endTime
         },
-        update: (store, { data: { createVolunteeringLog } }) => {
-          // Pull data from the stored query
-          const data = store.readQuery({ query: ALL_VOLUNTEERING_LOGS_QUERY })
-          // We add the new data
-          data.allVolunteeringLogs.push(createVolunteeringLog)
-          // We update the cache
-          store.writeQuery({ query: ALL_VOLUNTEERING_LOGS_QUERY, data: data })
+        update: (store, { data: { updateVolunteeringLog } }) => {
+          store.writeQuery({ query: ALL_VOLUNTEERING_LOGS_QUERY, data: updateVolunteeringLog })
         }
       }).catch((error) => {
         console.error(error)
       })
-      this.$store.commit('toggleCreateVolunteeringLog')
+      this.$store.commit('toggleUpdateVolunteeringLog')
     }
   }
 }

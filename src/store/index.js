@@ -20,9 +20,11 @@ const store = new Vuex.Store({
     person: {},
     activeModal: null,
     currentOpportunity: null,
+    currentVolunteeringLog: null,
     showCreatePerson: false,
     showCreateOpportunity: false,
     showCreateVolunteeringLog: false,
+    showUpdateVolunteeringLog: false,
     activeProfileTab: null,
     searchQueryFilters: {
       keywords: '',
@@ -56,6 +58,9 @@ const store = new Vuex.Store({
     toggleCreateVolunteeringLog (state) {
       state.showCreateVolunteeringLog = !state.showCreateVolunteeringLog
     },
+    toggleUpdateVolunteeringLog (state) {
+      state.showUpdateVolunteeringLog = !state.showUpdateVolunteeringLog
+    },
     updateActiveModal (state, data) {
       console.log('State Change', data)
       state.activeModal = data
@@ -63,6 +68,9 @@ const store = new Vuex.Store({
     },
     updateCurrentOpportunity (state, data) {
       state.currentOpportunity = JSON.parse(JSON.stringify(data))
+    },
+    updateCurrentVolunteeringLog (state, data) {
+      state.currentVolunteeringLog = JSON.parse(JSON.stringify(data))
     },
     updateActiveProfileTab (state, data) {
       state.activeProfileTab = data

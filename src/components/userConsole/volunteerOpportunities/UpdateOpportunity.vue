@@ -32,7 +32,7 @@
       <div class="field">
         <label>Location</label>
         <input
-          v-model="opportunity.address"
+          v-model="opportunity.location"
           type="text">
       </div>
       <button @click.prevent="cancel()">Cancel</button>

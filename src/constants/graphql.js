@@ -121,6 +121,8 @@ export const ALL_VOLUNTEERING_LOGS_QUERY = gql`
       endTime
       ownedBy {
         id
+        firstName
+        lastName
       }
     }
   }
@@ -304,6 +306,32 @@ export const UPDATE_OPPORTUNITY_MUTATION = gql`
         lastName
       }
       interestedUsers {
+        id
+        firstName
+        lastName
+      }
+    }
+  }
+`
+
+export const UPDATE_VOLUNTEERING_LOG_MUTATION = gql`
+  mutation UpdateVolunteeringLogMutation($id: ID!, $title: String, $description: String, $location: String,
+  $startTime: DateTime, $endTime: DateTime) {
+    updateVolunteeringLog(
+      id: $id,
+      title: $title
+      description: $description
+      location: $location
+      startTime: $startTime
+      endTime: $endTime
+    ) {
+      id
+      title
+      description
+      location
+      startTime
+      endTime
+      ownedBy {
         id
         firstName
         lastName

@@ -146,12 +146,15 @@
             + Create Volunteer Logging
           </button>
           <!-- Modal content -->
-          <span v-if="modalState">
+          <span v-if="this.$store.state.showCreateVolunteeringLog">
             <create-volunteering-log></create-volunteering-log>
+          </span>
+          <span v-if="this.$store.state.showUpdateVolunteeringLog">
+            <update-volunteering-log></update-volunteering-log>
           </span>
           <div class="table">
             <div class="table-header">
-              <div class="border">Title</div>
+              <div class="">Title</div>
               <div>Location</div>
               <!-- <div>Onsite</div> -->
               <div class="">Time Logged</div>
@@ -181,7 +184,7 @@
                 <div>{{calculateHours(item)}}</div>
                 <div></div>
                 <div>
-                  <button>Edit</button>
+                  <button @click="toggleUpdateVolunteeringLog(item)">Edit</button>
                 </div>
               </div>
             </div>
@@ -203,12 +206,13 @@
 import { GET_USER_QUERY, UPDATE_USER_MUTATION, ALL_VOLUNTEERING_LOGS_QUERY } from '../../../constants/graphql'
 import moment from 'moment'
 import CreateVolunteeringLog from './CreateVolunteeringLog'
+import UpdateVolunteeringLog from './UpdateVolunteeringLog'
 import { format, differenceInMinutes } from 'date-fns'
 
 export default {
   name: 'ProfilePage',
   components: {
-    CreateVolunteeringLog
+    CreateVolunteeringLog, UpdateVolunteeringLog
   },
   data () {
     return {
@@ -240,12 +244,17 @@ export default {
       return `${format(startTime, 'MM/DD/YY')}   \u00A0 ${format(endTime, 'MM/DD/YY')}`
     },
     calculateHours (obj) {
-      console.log('time', obj.endTime, obj.startTime, differenceInMinutes(obj.endTime, obj.startTime))
+      // console.log('time', obj.endTime, obj.startTime, differenceInMinutes(obj.endTime, obj.startTime))
       return (parseFloat(differenceInMinutes(obj.endTime, obj.startTime)) / 60).toPrecision(1)
     },
     toggleCreateVolunteeringLog () {
-      console.log('button pushed')
+      // console.log('button pushed')
       this.$store.commit('toggleCreateVolunteeringLog')
+    },
+    toggleUpdateVolunteeringLog (obj) {
+      // console.log('button pushed')
+      this.$store.commit('updateCurrentVolunteeringLog', obj)
+      this.$store.commit('toggleUpdateVolunteeringLog')
     },
     isActiveTab (data) {
       this.activeTab = data
@@ -476,7 +485,7 @@ input {
     grid-row-start: 1;
     grid-row-end: 2;
     width: 100%;
-    border: 1px solid red;
+    // border: 1px solid red;
   }
   .description {
     grid-column-start: 1;
