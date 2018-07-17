@@ -27,13 +27,6 @@ export const GET_USER_QUERY = gql`
   }
 `
 
-// query Post($id: ID!) {
-//   Post(id: $id) {
-//     id
-//     imageUrl
-//     description
-//   }
-
 export const USERS_ON_FEED_QUERY = gql`
   query AllUsersQuery {
     allUsers {

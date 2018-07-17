@@ -190,12 +190,14 @@ export default {
     },
     interested (opportunity) {
       let userId = localStorage.getItem('graphcool-user-id')
-      console.log('Interested', opportunity.interestedUsers)
+      // console.log('Interested', opportunity.interestedUsers)
+      // Creates an array of user.ids
       let interestedUsersIds = opportunity.interestedUsers.map(x => {
         return x.id
       })
+      // Only adds the current user to the array if the user is not already on it
       if (opportunity.interestedUsers.find(user => user.id === userId)) {
-        return console.log('User Found')
+        // return console.log('User Found')
       } else {
         interestedUsersIds.push(userId)
       }
