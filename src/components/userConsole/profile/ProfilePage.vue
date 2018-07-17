@@ -149,46 +149,43 @@
           <span v-if="modalState">
             <create-volunteering-log></create-volunteering-log>
           </span>
-          <table>
-            <thead>
-              <tr>
-                <th>Title</th>
-                <th>Description</th>
-                <th>Location</th>
-                <th>Onsite</th>
-                <th>Start Time</th>
-                <th>End Time</th>
-                <th>Hours</th>
-                <!-- <th
-                  v-for='(item, index) in columns'
-                  :key='index'
-                  :index="index"
-                  @click="sortBy(item.dbField)"
-                  :class="{ active: sortKey == item.dbField }">
-                  {{ item.title | capitalize }}
-                  <span class="arrow" :class="sortOrders[item.dbField] > 0 ? 'asc' : 'dsc'">
-                  </span>
-                </th>
-                <th>
-                  Links
-                </th> -->
-              </tr>
-            </thead>
-            <tbody>
-              <tr
-                v-for='(item, index) in allVolunteeringLogs'
-                :key='index'
-              >
-                <td>{{item.title}}</td>
-                <td>{{item.description}}</td>
-                <td>{{item.location}}</td>
-                <td>Onsite</td>
-                <td>{{item.startTime | dateTime}}</td>
-                <td>{{item.endTime | dateTime}}</td>
-                <td>{{calculateHours(item)}}</td>
-              </tr>
-            </tbody>
-          </table>
+          <div class="table">
+            <div class="table-header">
+              <div class="border">Title</div>
+              <div>Location</div>
+              <!-- <div>Onsite</div> -->
+              <div class="">Time Logged</div>
+              <div class="align-right">Hours</div>
+            </div>
+            <div
+              class="table-row"
+              v-for='(item, index) in allVolunteeringLogs'
+              :key='index'
+            >
+              <div class="title">{{item.title}}</div>
+              <div class="description">{{item.description}}</div>
+              <div class="location">
+                <div>Palmer Event Center</div>
+                <div>555 Barton Springs</div>
+                <div>Austin, TX</div>
+              </div>
+              <!-- <div></div> -->
+              <div class="date-time">
+                <div>{{item.startTime | formatTime}} - {{item.endTime | formatTime}}</div>
+                <div>{{getDate(item.startTime, item.endTime)}}</div>
+              </div>
+              <!-- <div class="align-right">{{item.startTime | Time}}</div>
+              <div class="align-right">-</div>
+              <div class="align-right">{{item.endTime | dateTime}}</div> -->
+              <div class="align-right">
+                <div>{{calculateHours(item)}}</div>
+                <div></div>
+                <div>
+                  <button>Edit</button>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
         <!-- --------------------------------------------- Privacy Statement ----------------------- -->
         <div
@@ -226,8 +223,11 @@ export default {
     ago (time) {
       return moment(time).fromNow()
     },
-    dateTime (data) {
-      return format(data, 'hh:mma on MM/DD/YY')
+    formatDate (data) {
+      return format(data, 'MM/DD/YY')
+    },
+    formatTime (data) {
+      return format(data, 'hh:mma')
     }
   },
   computed: {
@@ -236,9 +236,12 @@ export default {
     }
   },
   methods: {
+    getDate (startTime, endTime) {
+      return `${format(startTime, 'MM/DD/YY')}   \u00A0 ${format(endTime, 'MM/DD/YY')}`
+    },
     calculateHours (obj) {
       console.log('time', obj.endTime, obj.startTime, differenceInMinutes(obj.endTime, obj.startTime))
-      return (parseFloat(differenceInMinutes(obj.endTime, obj.startTime)) / 60).toPrecision(2)
+      return (parseFloat(differenceInMinutes(obj.endTime, obj.startTime)) / 60).toPrecision(1)
     },
     toggleCreateVolunteeringLog () {
       console.log('button pushed')
@@ -362,6 +365,7 @@ export default {
   cursor: pointer;
 }
 .tab:hover {
+  color: var(--theme-color1);
 }
 .active-tab {
   background-color:white;
@@ -400,11 +404,6 @@ input {
   border-right: none;
   border-bottom: .25vh solid lightgray;
 }
-// button {
-//   width: 100%;
-//   background-color: #efba34;
-//   border-radius: 3vh;
-// }
 .linkBlock {
   margin-top: 3vh;
   .link {
@@ -430,7 +429,7 @@ input {
     width: 15vw;
   }
 }
-table {
+.table {
   /* border-collapse is needed to make the borders work properly on rows */
   margin-top: 1%;
   border-collapse: collapse;
@@ -438,55 +437,74 @@ table {
   border-radius: 3px;
   background-color: white;
   width: 100%;
+  button {
+    width: 5vw;
+    // background-color: blue;
+  }
+  .edit-button {
+    width: 2vw;
+  }
+  .align-right {
+    text-align: right;
+  }
+  .center {
+    text-align: center;
+  }
 }
-
-th {
-  height: 40px;
+.table-header {
+  padding: 1vh;
+  display: grid;
+  grid-template-columns: 35% 30% 25% 10%;
+  height: auto;
   background-color: var(--theme-color3);
   color: white;
 }
-
-/* thead > tr {
-  -webkit-box-shadow:0 1px 4px rgba(0, 0, 0, 0.3), 0 0 40px rgba(0, 0, 0, 0.1) inset;
-  -moz-box-shadow:0 1px 4px rgba(0, 0, 0, 0.3), 0 0 40px rgba(0, 0, 0, 0.1) inset;
-  box-shadow:0 1px 4px rgba(0, 0, 0, 0.3), 0 0 40px rgba(0, 0, 0, 0.1) inset;
-} */
-
-tr {
-  height: 40px;
-  border-bottom: 1px solid lightgray;
+.border {
+  border: 1px solid red;
 }
-
-tr:hover {
+.table-row {
+  display: grid;
+  grid-template-columns: 35% 30% 25% 10%;
+  grid-template-rows: 3vh 7vh;
+  padding: 1vh;
+  overflow: hidden;
+  // min-height: 10vh;
+  border-bottom: 1px solid lightgray;
+  .title {
+    grid-column-start: 1;
+    grid-column-end: 2;
+    grid-row-start: 1;
+    grid-row-end: 2;
+    width: 100%;
+    border: 1px solid red;
+  }
+  .description {
+    grid-column-start: 1;
+    grid-column-end: 2;
+    grid-row-start: 2;
+    grid-row-end: 3;
+    font-size: 1.8vh;
+  }
+  .location {
+    grid-column-start: 2;
+    grid-column-end: 3;
+    grid-row-start: 1;
+    grid-row-end: -1;
+    font-size: 2vh;
+  }
+  .date-time {
+    font-size: 2vh;
+  }
+  button {
+    height: 2vh;
+    width: 3vw;
+    margin-top: 5vh;
+    background-color: var(--theme-color1);
+    border-radius: 2vh;
+  }
+}
+.table-row:hover {
   background-color: rgb(245, 245, 245);
 }
 
-th.active {
-  color: #fff;
-}
-
-th.active .arrow {
-  opacity: 1;
-}
-
-.arrow {
-  display: inline-block;
-  vertical-align: middle;
-  width: 0;
-  height: 0;
-  margin-left: 5px;
-  opacity: 0.66;
-}
-
-.arrow.asc {
-  border-left: 4px solid transparent;
-  border-right: 4px solid transparent;
-  border-bottom: 4px solid #fff;
-}
-
-.arrow.dsc {
-  border-left: 4px solid transparent;
-  border-right: 4px solid transparent;
-  border-top: 4px solid #fff;
-}
 </style>
