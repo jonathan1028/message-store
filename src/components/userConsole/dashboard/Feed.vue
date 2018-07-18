@@ -44,21 +44,23 @@
           </button>
         </div>
         <div class="usersBlock">
-          <ul>
-            <li
-              class="userStatus"
-              v-for='(user, index) in item.interestedUsers'
-              :key="index + '-interested'"
-            >
-              <div class="userName">{{getName(user.firstName, user.lastName)}} &nbsp;</div>
+          <ul
+            v-for='(user, index) in item.interestedUsers'
+            :key="index + '-interested'"
+          >
+            <li class="userStatus">
+              <div class="userName">{{getName(user.firstName, user.lastName)}}&nbsp;</div>
               <div>is interested</div>
             </li>
+            <div>Recognize</div>
+          </ul>
+          <ul>
             <li
               class="userStatus"
               v-for='(user, index) in item.goingUsers'
               :key="index + '-going'"
             >
-              <div class="userName">{{getName(user.firstName, user.lastName)}} &nbsp;</div>
+              <div class="userName">{{getName(user.firstName, user.lastName)}}&nbsp;</div>
               <div>is going</div>
             </li>
           </ul>

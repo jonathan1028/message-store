@@ -6,6 +6,8 @@ import router from './router'
 import { GC_USER_ID } from './constants/settings'
 import store from './store/index'
 import moment from 'moment'
+import Icon from 'vue-awesome/components/Icon'
+import 'vue-awesome/icons'
 
 let userId = localStorage.getItem(GC_USER_ID)
 
@@ -21,6 +23,8 @@ Vue.filter('relativeTime', function (value) {
     return moment(String(value)).startOf('day').fromNow()
   }
 })
+
+Vue.component('icon', Icon)
 
 /* eslint-disable no-new */
 new Vue({

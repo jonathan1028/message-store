@@ -194,10 +194,15 @@ li {
   // box-shadow:0 .3vh 1vh rgba(0, 0, 0, 0.2), 0 0 2vh rgba(0, 0, 0, 0.1) inset;
 }
 
-._box-shadow {
+._box-shadow1 {
   -webkit-box-shadow: 0 .25vh 1vh #777;
   -moz-box-shadow: 0 .25vh 1vh #777;
-  box-shadow: 0 .5vh 2vh #777;
+  box-shadow: 0 .25vh 1vh #777;
+}
+._box-shadow2 {
+  -webkit-box-shadow: 0 .25vh 1vh #777;
+  -moz-box-shadow: 0 .25vh 1vh #777;
+  box-shadow: 0 .25vh 1vh #777;
 }
 // button{
 //   font-size: 2vh;

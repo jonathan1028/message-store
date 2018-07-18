@@ -12,10 +12,9 @@ import UserConsoleHeader from '../components/userConsole/UserConsoleHeader'
 // import UpdatePerson from '../components/userConsole/People/UpdatePerson'
 
 import UserDashboard from '../components/userConsole/dashboard/UserDashboard'
-
 import MyOpportunitiesPage from '../components/userConsole/volunteerOpportunities/MyOpportunitiesPage'
-
 import ProfilePage from '../components/userConsole/profile/ProfilePage'
+import NotificationsPage from '../components/userConsole/notifications/NotificationsPage'
 
 import AdminHeader from '../components/admin/AdminHeader'
 import Admin from '../components/admin/Admin'
@@ -81,6 +80,13 @@ const router = new Router({
         {
           path: '/myopportunities',
           component: MyOpportunitiesPage,
+          meta: {
+            requiresAuth: true
+          }
+        },
+        {
+          path: '/notifications',
+          component: NotificationsPage,
           meta: {
             requiresAuth: true
           }

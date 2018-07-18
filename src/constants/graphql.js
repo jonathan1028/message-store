@@ -65,6 +65,16 @@ export const ALL_LINKS_QUERY = gql`
   }
 `
 
+export const ALL_NOTIFICATIONS_QUERY = gql`
+  query AllNotificationsQuery {
+    allNotifications {
+      id
+      message
+      createdAt
+    }
+  }
+`
+
 export const ALL_PEOPLE_QUERY = gql`
   query AllPersonsQuery {
     allPersons {
@@ -229,6 +239,17 @@ export const CREATE_PERSON_MUTATION = gql`
         id
         name
       }
+    }
+  }
+`
+
+export const CREATE_NOTIFICATION_MUTATION = gql`
+  mutation CreateNotificationMutation($message: String, $ownedById: ID!) {
+    createNotification(
+      message: $message
+      ownedById: $ownedById
+    ) {
+      id
     }
   }
 `

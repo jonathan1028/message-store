@@ -1,36 +1,12 @@
 <template>
   <div class="feedPageLayout">
-    <div class="notifications _box">
-      <div class="notifications__header">
-        <div class="__userPhoto"></div>
-        <div class="__userName">User Name</div>
-        <div class="__userLocation">Austin, TX</div>
-      </div>
-      <div class="notifications__row">
-        Recognitions
-      </div>
-      <div class="notifications__row">
-        Thank You Notes
-      </div>
-      <div class="notifications__row">
-        My Events
-      </div>
-     <div class="notifications__row">
-        Friend's Events
-      </div>
-      <div class="notifications__row">
-        GCT Total
-      </div>
-      <div class="notifications__row --bottom-row">
-        <a>See all notifications...</a>
-      </div>
-    </div>
+    <notifications-box></notifications-box>
     <search></search>
     <div class="carousel _box">
       <div class="__header">Help people affected by Hurricane Harvey</div>
       <div class="__image-row">Photos</div>
       <div class="__card-row">
-        <div class="__volunteer-card _box-shadow">
+        <div class="__volunteer-card _box-shadow1">
           <div class="__card-header">Volunteer</div>
           <div class="__card-item1 --no-margin">
             <div>Icon</div>
@@ -60,7 +36,7 @@
             <button class="_button3">More Ways to Help</button>
           </div>
         </div>
-        <div class="__support-card _box-shadow">
+        <div class="__support-card _box-shadow1">
           <div class="__card-header">Support</div>
           <div class="__card-item2 --no-margin">
             <div class="__card-item-icon">Icon</div>
@@ -90,7 +66,7 @@
             <button class="_button3">Donate Goods</button>
           </div>
         </div>
-        <div class="__donate-card _box-shadow">
+        <div class="__donate-card _box-shadow1">
           <div class="__card-header">Donate</div>
           <div class="__card-item3 --no-margin">$500</div>
           <div class="__card-item3">$100</div>
@@ -123,13 +99,14 @@
 <script>
 import Feed from './Feed'
 import Search from './Search'
+import NotificationsBox from './NotificationsBox'
 import { ALL_OPPORTUNITIES_QUERY } from '../../../constants/graphql'
 // import CreateOpportunity from './CreateOpportunity'
 
 export default {
   name: 'FeedPage',
   components: {
-    Feed, Search
+    Feed, Search, NotificationsBox
   },
   data () {
     return {

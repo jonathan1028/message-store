@@ -8,6 +8,8 @@
             <div class="nav-buttons">
               <router-link to="/feed">Feed</router-link>
               <div>|</div>
+              <router-link to="/notifications">Notifications</router-link>
+              <div>|</div>
               <router-link to="/profile">Profile</router-link>
               <div>|</div>
               <router-link to="/myopportunities">My Opportunities</router-link>

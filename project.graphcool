@@ -1,5 +1,5 @@
 # project: cjj61omlj2d790156bk4oimkn
-# version: 9
+# version: 10
 
 type User @model {
   id: ID! @isUnique
@@ -13,6 +13,7 @@ type User @model {
   phone: String
   opportunities: [Opportunity!]! @relation(name: "UserOpportunities")
   volunteeringLogs: [VolunteeringLog!]! @relation(name: "UserVolunteeringLogs")
+  notifications: [Notification!]! @relation(name: "UserNotifications")
   persons: [Person!]! @relation(name: "UsersPersons")
   interestedOpportunities: [Opportunity!]! @relation(name: "InterestedOpportunities")
   goingOpportunities: [Opportunity!]! @relation(name: "GoingOpportunities")
@@ -55,6 +56,14 @@ type VolunteeringLog @model {
   location: String
   startTime: DateTime
   endTime: DateTime
+}
+
+type Notification @model {
+  id: ID! @isUnique
+  createdAt: DateTime!
+  updatedAt: DateTime!
+  ownedBy: User @relation(name: "UserNotifications")
+  message: String
 }
 
 type Person @model {
