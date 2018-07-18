@@ -1,5 +1,5 @@
 <template>
-  <div class="notifications _box">
+  <div class="notifications-box _box">
     <div class="notifications__header">
       <div class="__userPhoto"></div>
       <div class="__userName">User Name</div>
@@ -91,9 +91,10 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.notifications {
+.notifications-box {
   // width: 100%;
   height: 50vh;
+  top: 0;
   margin: 0vh;
   padding: 0vh;
   grid-row-start: 1;

@@ -1,7 +1,6 @@
 <template>
     <div class="pageLayout">
       <notifications-box></notifications-box>
-      <!-- <div class="test">Test</div> -->
       <div class="notifications">
         <ul>
           <li
@@ -127,17 +126,14 @@ export default {
 
 <style lang="scss" scoped>
 .pageLayout {
-  padding: 0vh;
-  background-color: pink;
+  // padding: 0vh;
+  // background-color: pink;
   margin-left: 5vw;
   margin-right: 5vw;
   display: grid;
   grid-template-columns: 18vw auto 18vw;
   grid-column-gap: 2vh;
   grid-row-gap: 2vh;
-}
-.test {
-  background-color: red;
 }
 .notifications {
   background-color: white;
