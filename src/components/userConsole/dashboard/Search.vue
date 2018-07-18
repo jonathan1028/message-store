@@ -93,6 +93,33 @@ gets passed to the Feed component to be used on the data
             <label for="">Evenings</label>
           </div>
         </div>
+        <div>My Activity:</div>
+        <div class="times">
+          <div>
+            <input
+              type="checkbox"
+              v-model="query.interested"
+              @change="addToQuery('interested', query.interested)"
+            >
+            <label for="">Interested</label>
+          </div>
+          <div>
+            <input
+              type="checkbox"
+              v-model="query.going"
+              @change="addToQuery('going', query.going)"
+            >
+            <label for="">Going</label>
+          </div>
+          <div>
+            <input
+              type="checkbox"
+              v-model="query.attended"
+              @change="addToQuery('attended', query.attended)"
+            >
+            <label for="">Attended</label>
+          </div>
+        </div>
       </div>
     </div>
 </template>
@@ -103,7 +130,8 @@ export default {
   name: 'Feed',
   data: function () {
     return {
-      query: this.$store.state.searchQueryFilters
+      query: this.$store.state.searchQueryFilters,
+      userId: localStorage.getItem('graphcool-user-id')
     }
   },
   computed: {
@@ -119,10 +147,13 @@ export default {
     }
   },
   methods: {
+    // Add user id to query string
+    // Filter opportunities by interestedUsers
     addToQuery (key, value) {
       let newObj = JSON.parse(JSON.stringify(this.$store.state.searchQueryFilters))
       newObj[key] = value
       console.log('New Query String', newObj)
+      newObj.userId = this.userId
       this.$store.commit('updateSearchQueryFilters', newObj)
     }
   }
@@ -139,7 +170,7 @@ export default {
   grid-column-end: 2;
   display: grid;
   grid-template-rows: 7vh auto;
-  padding: 1vh 2vh;
+  padding: 2vh;
 }
 .searchRow {
   input {
@@ -151,6 +182,7 @@ export default {
   }
 }
 .days, .times {
-  margin: 1vw;
+  margin: 0vw 1vw;
+  font-size: 2.1vh;
 }
 </style>

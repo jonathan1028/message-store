@@ -35,7 +35,10 @@ const store = new Vuex.Store({
       thisMonth: false,
       mornings: false,
       afternoons: false,
-      evenings: false
+      evenings: false,
+      interested: false,
+      going: false,
+      attended: false
     }
   },
 
@@ -77,6 +80,7 @@ const store = new Vuex.Store({
     },
     updateSearchQueryFilters (state, data) {
       state.searchQueryFilters = JSON.parse(JSON.stringify(data))
+      console.log('Updated Query', state.searchQueryFilters)
     }
   },
   plugins: [vuexLocal.plugin]

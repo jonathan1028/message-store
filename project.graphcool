@@ -1,5 +1,5 @@
 # project: cjj61omlj2d790156bk4oimkn
-# version: 8
+# version: 9
 
 type User @model {
   id: ID! @isUnique
@@ -15,6 +15,8 @@ type User @model {
   volunteeringLogs: [VolunteeringLog!]! @relation(name: "UserVolunteeringLogs")
   persons: [Person!]! @relation(name: "UsersPersons")
   interestedOpportunities: [Opportunity!]! @relation(name: "InterestedOpportunities")
+  goingOpportunities: [Opportunity!]! @relation(name: "GoingOpportunities")
+  attendedOpportunities: [Opportunity!]! @relation(name: "AttendedOpportunities")
 }
 
 type File @model {
@@ -39,6 +41,8 @@ type Opportunity @model {
   startTime: DateTime
   endTime: DateTime
   interestedUsers: [User!]! @relation(name: "InterestedOpportunities")
+  goingUsers: [User!]! @relation(name: "GoingOpportunities")
+  attendedUsers: [User!]! @relation(name: "AttendedOpportunities")
 }
 
 type VolunteeringLog @model {

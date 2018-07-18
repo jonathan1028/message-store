@@ -99,6 +99,16 @@ export const ALL_OPPORTUNITIES_QUERY = gql`
         firstName
         lastName
       }
+      goingUsers {
+        id
+        firstName
+        lastName
+      }
+      attendedUsers {
+        id
+        firstName
+        lastName
+      }
     }
   }
 `
@@ -218,6 +228,34 @@ export const CREATE_PERSON_MUTATION = gql`
       ownedBy {
         id
         name
+      }
+    }
+  }
+`
+
+export const ADD_INTEREST_TO_OPPORTUNITIES_MUTATION = gql`
+  mutation addToInterestedOpportunities($interestedUsersUserId: ID!, 
+  $interestedOpportunitiesOpportunityId: ID!) {
+    addToInterestedOpportunities (
+      interestedUsersUserId: $interestedUsersUserId
+      interestedOpportunitiesOpportunityId: $interestedOpportunitiesOpportunityId
+    ) {
+      interestedOpportunitiesOpportunity {
+        id
+      }
+    }
+  }
+`
+
+export const ADD_GOING_TO_OPPORTUNITIES_MUTATION = gql`
+  mutation addToGoingOpportunities($userId: ID!, 
+  $opportunityId: ID!) {
+    addToGoingOpportunities (
+      goingUsersUserId: $userId
+      goingOpportunitiesOpportunityId: $opportunityId
+    ) {
+      goingOpportunitiesOpportunity {
+        id
       }
     }
   }

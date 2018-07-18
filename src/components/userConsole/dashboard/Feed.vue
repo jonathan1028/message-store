@@ -32,7 +32,11 @@
           >
             Interested
           </button>
-          <button>Going</button>
+          <button
+            @click='going(item)'
+          >
+            Going
+          </button>
           <button
             class="button3"
           >
@@ -44,10 +48,18 @@
             <li
               class="userStatus"
               v-for='(user, index) in item.interestedUsers'
-              :key='index'
+              :key="index + '-interested'"
             >
               <div class="userName">{{getName(user.firstName, user.lastName)}} &nbsp;</div>
               <div>is interested</div>
+            </li>
+            <li
+              class="userStatus"
+              v-for='(user, index) in item.goingUsers'
+              :key="index + '-going'"
+            >
+              <div class="userName">{{getName(user.firstName, user.lastName)}} &nbsp;</div>
+              <div>is going</div>
             </li>
           </ul>
         </div>
@@ -58,7 +70,7 @@
 
 <script>
 // import { ALL_USERS_QUERY } from '../../../constants/graphql'
-import { UPDATE_OPPORTUNITY_MUTATION, ALL_OPPORTUNITIES_QUERY } from '../../../constants/graphql'
+import { ADD_INTEREST_TO_OPPORTUNITIES_MUTATION, ADD_GOING_TO_OPPORTUNITIES_MUTATION, ALL_OPPORTUNITIES_QUERY } from '../../../constants/graphql'
 import moment from 'moment'
 import { format, isToday, isTomorrow, isSaturday, isSunday, isThisWeek, isThisMonth } from 'date-fns'
 
@@ -93,6 +105,7 @@ export default {
     filteredData: function () {
       let filters = JSON.parse(JSON.stringify(this.$store.state.searchQueryFilters))
       let data = this.allOpportunities
+      let userId = localStorage.getItem('graphcool-user-id')
       // Removes case sensitivity
       var keywords = filters.keywords && filters.keywords.toLowerCase()
       // var sortKey = this.sortKey
@@ -154,6 +167,33 @@ export default {
           return meetsRange
         })
       }
+      if (filters.interested) {
+        data = data.filter(function (item) {
+          // Creates an array of interestedUsersIds
+          let interestedUsersIds = item.interestedUsers.map(x => {
+            return x.id
+          })
+          return interestedUsersIds.includes(userId)
+        })
+      }
+      if (filters.going) {
+        data = data.filter(function (item) {
+          // Creates an array of interestedUsersIds
+          let goingUsersIds = item.goingUsers.map(x => {
+            return x.id
+          })
+          return goingUsersIds.includes(userId)
+        })
+      }
+      if (filters.attended) {
+        data = data.filter(function (item) {
+          // Creates an array of interestedUsersIds
+          let attendedUsersIds = item.attendedUsers.map(x => {
+            return x.id
+          })
+          return attendedUsersIds.includes(userId)
+        })
+      }
       if (keywords) {
         data = data.filter(function (row) {
           // Pulls out all keys in the current object and iterates over them
@@ -190,31 +230,63 @@ export default {
     },
     interested (opportunity) {
       let userId = localStorage.getItem('graphcool-user-id')
-      // console.log('Interested', opportunity.interestedUsers)
       // Creates an array of user.ids
       let interestedUsersIds = opportunity.interestedUsers.map(x => {
         return x.id
       })
-      // Only adds the current user to the array if the user is not already on it
-      if (opportunity.interestedUsers.find(user => user.id === userId)) {
-        // return console.log('User Found')
-      } else {
-        interestedUsersIds.push(userId)
+      // Only add user to interestedUsers array if they are not already on it
+      if (!interestedUsersIds.includes(userId)) {
+        this.$apollo.mutate({
+          mutation: ADD_INTEREST_TO_OPPORTUNITIES_MUTATION,
+          variables: {
+            interestedUsersUserId: userId,
+            interestedOpportunitiesOpportunityId: opportunity.id
+          },
+          update: (store, { data: { updateOpportunity } }) => {
+            // Pull data from the store
+            let user = this.$store.state.auth.user
+            let data = store.readQuery({ query: ALL_OPPORTUNITIES_QUERY })
+            // Replace the object in the store with the updated version
+            let index = data.allOpportunities.findIndex(x => x.id === opportunity.id)
+            if (index !== -1) {
+              data.allOpportunities[index].interestedUsers.push({id: opportunity.id, firstName: user.firstName, lastName: user.lastName, __typename: 'User'})
+            }
+            // Write new data back to the store
+            store.writeQuery({ query: ALL_OPPORTUNITIES_QUERY, data: data })
+          }
+        })
       }
-
-      console.log('UserIds', interestedUsersIds)
-
-      this.$apollo.mutate({
-        mutation: UPDATE_OPPORTUNITY_MUTATION,
-        variables: {
-          id: opportunity.id,
-          name: opportunity.name,
-          interestedUsersIds: interestedUsersIds
-        },
-        update: (store, { data: { updateOpportunity } }) => {
-          store.writeQuery({ query: ALL_OPPORTUNITIES_QUERY, data: updateOpportunity })
-        }
+    },
+    going (opportunity) {
+      console.log('Test', opportunity.goingUsers)
+      console.log('Test', opportunity.interestedUsers)
+      let userId = localStorage.getItem('graphcool-user-id')
+      // Creates an array of user.ids
+      let goingUsersIds = opportunity.goingUsers.map(x => {
+        return x.id
       })
+      // Only add user to interestedUsers array if they are not already on it
+      if (!goingUsersIds.includes(userId)) {
+        this.$apollo.mutate({
+          mutation: ADD_GOING_TO_OPPORTUNITIES_MUTATION,
+          variables: {
+            userId: userId,
+            opportunityId: opportunity.id
+          },
+          update: (store, { data: { updateOpportunity } }) => {
+            // Pull data from the store
+            let user = this.$store.state.auth.user
+            let data = store.readQuery({ query: ALL_OPPORTUNITIES_QUERY })
+            // Replace the object in the store with the updated version
+            let index = data.allOpportunities.findIndex(x => x.id === opportunity.id)
+            if (index !== -1) {
+              data.allOpportunities[index].goingUsers.push({id: opportunity.id, firstName: user.firstName, lastName: user.lastName, __typename: 'User'})
+            }
+            // Write new data back to the store
+            store.writeQuery({ query: ALL_OPPORTUNITIES_QUERY, data: data })
+          }
+        })
+      }
     }
   },
   apollo: {
@@ -243,7 +315,7 @@ export default {
   grid-column-gap: 5%;
   background-color: white;
   margin-top: 1%;
-  padding: 2%;
+  padding: 2vh;
   /* border: 1px solid #BFBFBF;
   background-color: white;
   box-shadow: 3px 3px 3px 3px #aaaaaa; */
