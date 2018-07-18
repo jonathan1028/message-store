@@ -34,6 +34,7 @@ export default {
     NotificationsBox
   },
   data () {
+    console.log('NotificationType', this.$store.state.notificationType)
     return {
       allNotifications: []
     }

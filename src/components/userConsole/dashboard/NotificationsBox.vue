@@ -5,7 +5,10 @@
       <div class="__userName">User Name</div>
       <div class="__userLocation">Austin, TX</div>
     </div>
-    <div class="notifications__row">
+    <div
+      class="notifications__row"
+      @click="redirect('thankYouNotes')"
+      >
       <icon
         class="icon"
         name="comment-alt"
@@ -13,7 +16,10 @@
       <div class="notification-label">Thank You Notes:</div>
       <div class="count">0</div>
     </div>
-    <div class="notifications__row">
+    <div
+      class="notifications__row"
+      @click="redirect('follow')"
+    >
       <icon
         class="icon"
         name="user-plus"
@@ -21,7 +27,10 @@
       <div class="notification-label">Follow:</div>
       <div class="count">0</div>
     </div>
-    <div class="notifications__row">
+    <div
+      class="notifications__row"
+      @click="redirect('donations')"
+    >
       <icon
         class="icon"
         name="hand-holding-usd"
@@ -29,7 +38,10 @@
       <div class="notification-label">Donations:</div>
       <div class="count">0</div>
     </div>
-    <div class="notifications__row">
+    <div
+      class="notifications__row"
+      @click="redirect('volunteer')"
+    >
       <icon
         class="icon"
         name="hands-helping"
@@ -37,7 +49,10 @@
       <div class="notification-label">Volunteer:</div>
       <div class="count">0</div>
     </div>
-    <div class="notifications__row">
+    <div
+      class="notifications__row"
+      @click="redirect('support')"
+    >
       <icon
         class="icon"
         name="medkit"
@@ -45,7 +60,10 @@
       <div class="notification-label">Support:</div>
       <div class="count">0</div>
     </div>
-    <div class="notifications__row">
+    <div
+      class="notifications__row"
+      @click="redirect('interested')"
+    >
       <icon
         class="icon"
         name="heart"
@@ -53,7 +71,10 @@
       <div class="notification-label">Interested:</div>
       <div class="count">0</div>
     </div>
-    <div class="notifications__row">
+    <div
+      class="notifications__row"
+      @click="redirect('going')"
+    >
       <icon
         class="icon"
         name="hourglass"
@@ -61,7 +82,10 @@
       <div class="notification-label">Going:</div>
       <div class="count">0</div>
     </div>
-    <div class="notifications__row">
+    <div
+      class="notifications__row"
+      @click="redirect('recognitions')"
+    >
       <icon
         class="icon"
         name="trophy"
@@ -69,7 +93,10 @@
       <div class="notification-label">Recognitions:</div>
       <div class="count">0</div>
     </div>
-    <div class="notifications__row">
+    <div
+      class="notifications__row"
+      @click="redirect('share')"
+    >
       <icon
         class="icon"
         name="paper-plane"
@@ -94,6 +121,12 @@ export default {
   name: 'NotificationsBox',
   data () {
     return {
+    }
+  },
+  methods: {
+    redirect (notificationType) {
+      this.$store.commit('updateNotificationType', notificationType)
+      this.$router.push('notifications')
     }
   }
 }
@@ -153,6 +186,7 @@ export default {
   padding: 0.5vh 2vw;
   display: flex;
   align-content: center;
+  cursor: pointer;
   .notification-label {
     font-weight: 100;
     color: var(--theme-color3);

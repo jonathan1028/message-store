@@ -26,6 +26,7 @@ const store = new Vuex.Store({
     showCreateVolunteeringLog: false,
     showUpdateVolunteeringLog: false,
     activeProfileTab: null,
+    notificationType: '',
     searchQueryFilters: {
       keywords: '',
       today: false,
@@ -81,6 +82,9 @@ const store = new Vuex.Store({
     updateSearchQueryFilters (state, data) {
       state.searchQueryFilters = JSON.parse(JSON.stringify(data))
       console.log('Updated Query', state.searchQueryFilters)
+    },
+    updateNotificationType (state, data) {
+      state.notificationType = data
     }
   },
   plugins: [vuexLocal.plugin]
