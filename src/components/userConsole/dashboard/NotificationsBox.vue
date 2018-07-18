@@ -10,63 +10,72 @@
         class="icon"
         name="comment-alt"
       ></icon>
-      <div>Thank You Notes:</div>
+      <div class="notification-label">Thank You Notes:</div>
+      <div class="count">0</div>
     </div>
     <div class="notifications__row">
       <icon
         class="icon"
         name="user-plus"
       ></icon>
-      <div>Follow:</div>
+      <div class="notification-label">Follow:</div>
+      <div class="count">0</div>
     </div>
     <div class="notifications__row">
       <icon
         class="icon"
         name="hand-holding-usd"
       ></icon>
-      <div>Donations:</div>
+      <div class="notification-label">Donations:</div>
+      <div class="count">0</div>
     </div>
     <div class="notifications__row">
       <icon
         class="icon"
         name="hands-helping"
       ></icon>
-      <div>Volunteer:</div>
+      <div class="notification-label">Volunteer:</div>
+      <div class="count">0</div>
     </div>
     <div class="notifications__row">
       <icon
         class="icon"
         name="medkit"
       ></icon>
-      <div>Support:</div>
+      <div class="notification-label">Support:</div>
+      <div class="count">0</div>
     </div>
     <div class="notifications__row">
       <icon
         class="icon"
         name="heart"
       ></icon>
-      <div>Interested:</div>
+      <div class="notification-label">Interested:</div>
+      <div class="count">0</div>
     </div>
     <div class="notifications__row">
       <icon
         class="icon"
         name="hourglass"
       ></icon>
-      <div>Going:</div>
+      <div class="notification-label">Going:</div>
+      <div class="count">0</div>
     </div>
     <div class="notifications__row">
       <icon
         class="icon"
         name="trophy"
       ></icon>
-      <div>Recognitions:</div>
+      <div class="notification-label">Recognitions:</div>
+      <div class="count">0</div>
     </div>
     <div class="notifications__row">
       <icon
         class="icon"
         name="paper-plane"
       ></icon>
-      <div>Share:</div>
+      <div class="notification-label">Share:</div>
+      <div class="count">0</div>
     </div>
     <div class="notifications__row --bottom-row">
       <a>See all notifications...</a>
@@ -144,9 +153,18 @@ export default {
   padding: 0.5vh 2vw;
   display: flex;
   align-content: center;
+  .notification-label {
+    font-weight: 100;
+    color: var(--theme-color3);
+    // color: blue;
+  }
   .icon {
     margin-top: 0.5vh;
     margin-right: 2vh;
+  }
+  .count {
+    margin-left: .5vw;
+    font-weight: 900;
   }
 }
 .__row {
