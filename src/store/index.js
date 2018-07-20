@@ -2,6 +2,8 @@ import Vue from 'vue'
 import Vuex from 'vuex'
 import auth from './modules/auth'
 import VuexPersistence from 'vuex-persist'
+import { CREATE_NOTIFICATION_MUTATION, ALL_NOTIFICATIONS_QUERY } from '../constants/graphql'
+import apolloClient from '../apollo-client'
 
 Vue.use(Vuex)
 
@@ -85,6 +87,32 @@ const store = new Vuex.Store({
     },
     updateNotificationType (state, data) {
       state.notificationType = data
+    }
+  },
+  actions: {
+    createNotification ({state}, message) {
+      console.log('Create Note Ran')
+      apolloClient.mutate({
+        mutation: CREATE_NOTIFICATION_MUTATION,
+        variables: {
+          message: message,
+          ownedById: state.auth.user.id
+        }
+      }).catch((error) => {
+        alert(error)
+      }).then(mutationResult => {
+        // Since we need the createdAt attribute for our notifications, we update the store
+        // after the createNotification result is received rather than typically done throught the update() function
+        // A query needs to be run first here in case there is not one in the cache already for Notifications
+        // otherwise apollo.cache.readQuery will return undefined
+        apolloClient.query({
+          query: ALL_NOTIFICATIONS_QUERY
+        }).then((queryResult) => {
+          const data = apolloClient.cache.readQuery({ query: ALL_NOTIFICATIONS_QUERY })
+          data.allNotifications.push(mutationResult.data.createNotification)
+          apolloClient.cache.writeQuery({ query: ALL_NOTIFICATIONS_QUERY, data: data })
+        })
+      })
     }
   },
   plugins: [vuexLocal.plugin]

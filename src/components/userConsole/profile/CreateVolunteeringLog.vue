@@ -118,6 +118,9 @@ export default {
         }
       }).catch((error) => {
         console.error(error)
+      }).then((result) => {
+        console.log('Test Ressult', result)
+        this.$store.dispatch('createNotification', `Volunteering time logged for ${this.title}`)
       })
       this.$store.commit('toggleCreateVolunteeringLog')
     }

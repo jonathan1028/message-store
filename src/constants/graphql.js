@@ -250,6 +250,8 @@ export const CREATE_NOTIFICATION_MUTATION = gql`
       ownedById: $ownedById
     ) {
       id
+      message
+      createdAt
     }
   }
 `

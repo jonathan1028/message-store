@@ -130,7 +130,6 @@ export default {
           id: obj.id
         },
         update: (store, { data: { deleteOpportunity } }) => {
-          // Read the data from our cache for this query.
           const data = store.readQuery({ query: ALL_OPPORTUNITIES_QUERY })
           // Remove item from the list
           const index = data.allOpportunities.findIndex(x => x.id === obj.id)

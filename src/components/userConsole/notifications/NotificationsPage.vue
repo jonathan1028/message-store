@@ -23,11 +23,9 @@
 <script>
 import { ALL_NOTIFICATIONS_QUERY } from '../../../constants/graphql'
 import NotificationsBox from '../dashboard/NotificationsBox'
-// import moment from 'moment'
-// import CreateVolunteeringLog from './CreateVolunteeringLog'
-// import UpdateVolunteeringLog from './UpdateVolunteeringLog'
 import { format } from 'date-fns'
 console.log('UserId', localStorage.getItem('graphcool-user-id'))
+
 export default {
   name: 'NotificationsPage',
   components: {
@@ -44,80 +42,7 @@ export default {
       return format(data, 'MMMM Do YYYY, h:mm:ssa')
     }
   },
-  computed: {
-    modalState () {
-      return this.$store.state.showCreateVolunteeringLog
-    }
-  },
-  // methods: {
-  //   getDate (startTime, endTime) {
-  //     return `${format(startTime, 'MM/DD/YY')}   \u00A0 ${format(endTime, 'MM/DD/YY')}`
-  //   },
-  //   calculateHours (obj) {
-  //     // console.log('time', obj.endTime, obj.startTime, differenceInMinutes(obj.endTime, obj.startTime))
-  //     return (parseFloat(differenceInMinutes(obj.endTime, obj.startTime)) / 60).toPrecision(1)
-  //   },
-  //   toggleCreateVolunteeringLog () {
-  //     // console.log('button pushed')
-  //     this.$store.commit('toggleCreateVolunteeringLog')
-  //   },
-  //   toggleUpdateVolunteeringLog (obj) {
-  //     // console.log('button pushed')
-  //     this.$store.commit('updateCurrentVolunteeringLog', obj)
-  //     this.$store.commit('toggleUpdateVolunteeringLog')
-  //   },
-  //   isActiveTab (data) {
-  //     this.activeTab = data
-  //     return this.activeTab
-  //   },
-  //   getName (firstName, lastName) {
-  //     return `${firstName} ${lastName}`
-  //   },
-  //   update () {
-  //     console.log('Update User Ran', this.User.birthYear)
-  //     this.$apollo.mutate({
-  //       mutation: UPDATE_USER_MUTATION,
-  //       variables: {
-  //         id: this.User.id,
-  //         firstName: this.User.firstName,
-  //         lastName: this.User.lastName,
-  //         phone: this.User.phone,
-  //         birthYear: this.User.birthYear,
-  //         email: this.User.email
-  //       },
-  //       update: (store, { data: { updateUser } }) => {
-  //         // Gets the data from the stored query that existed before the mutation
-  //         const data = store.readQuery({
-  //           query: GET_USER_QUERY,
-  //           variables: {
-  //             id: this.User.id
-  //           }
-  //         })
-  //         // Sets the data.User in the cache to the newly modified User
-  //         data.User = JSON.parse(JSON.stringify(this.User))
-  //         // Writes the updated data back to the store
-  //         store.writeQuery(
-  //           {query: GET_USER_QUERY, data: data}
-  //         )
-  //       }
-  //     })
-  //   }
-  // },
   apollo: {
-    // User: {
-    //   query: GET_USER_QUERY,
-    //   // Changing variables: to a function with a return statement makes Apollo
-    //   // wait on the data of userId to be defined before querrying and prevents an undefined error
-    //   variables () {
-    //     return {
-    //       id: this.userId
-    //     }
-    //   },
-    //   result ({ data }) {
-    //     // Creates clone of data because Apollo data is read only
-    //     this.User = JSON.parse(JSON.stringify(data.User))
-    //   }
-    // },
     allNotifications: {
       query: ALL_NOTIFICATIONS_QUERY
     }
