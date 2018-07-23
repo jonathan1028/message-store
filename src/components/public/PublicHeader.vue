@@ -6,9 +6,9 @@
           <div class="logo">GCN</div>
           <!-- Main navigation -->
           <div class="nav-buttons">
-            <router-link to="/admin">About</router-link>
+            <!-- <router-link to="/admin">About</router-link>
             <div>|</div>
-            <router-link to="/newusers">Contact</router-link>
+            <router-link to="/newusers">Contact</router-link> -->
           </div>
         </div>
         <!-- Login buttons   -->
