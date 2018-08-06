@@ -162,6 +162,7 @@ li {
   border: .1vh solid #47535d;
   text-align: center;
   white-space: nowrap;
+  cursor: pointer;
 }
 ._button3 {
   width: 100%;

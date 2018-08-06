@@ -27,6 +27,7 @@ const store = new Vuex.Store({
     showCreateOpportunity: false,
     showCreateVolunteeringLog: false,
     showUpdateVolunteeringLog: false,
+    showCreateMedallionModal: false,
     activeProfileTab: null,
     notificationType: '',
     searchQueryFilters: {
@@ -66,6 +67,9 @@ const store = new Vuex.Store({
     },
     toggleUpdateVolunteeringLog (state) {
       state.showUpdateVolunteeringLog = !state.showUpdateVolunteeringLog
+    },
+    toggleCreateMedallionModal (state) {
+      state.showCreateMedallionModal = !state.showCreateMedallionModal
     },
     updateActiveModal (state, data) {
       console.log('State Change', data)

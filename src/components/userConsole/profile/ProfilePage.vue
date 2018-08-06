@@ -145,13 +145,14 @@
           >
             + Create Volunteer Logging
           </button>
-          <!-- Modal content -->
+          <!------------------------------------------ Modal- Create/Update Volunteering Log  ------------ -->
           <span v-if="this.$store.state.showCreateVolunteeringLog">
             <create-volunteering-log></create-volunteering-log>
           </span>
           <span v-if="this.$store.state.showUpdateVolunteeringLog">
             <update-volunteering-log></update-volunteering-log>
           </span>
+          <!------------------------------------------ End of Modal Content  ---------------------------- -->
           <div class="table">
             <div class="table-header">
               <div class="">Title</div>

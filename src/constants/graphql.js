@@ -15,8 +15,8 @@ export const ALL_USERS_QUERY = gql`
 `
 
 export const GET_USER_QUERY = gql`
-  query User ($id: ID!){
-    User(id: $id) {
+  query User ($id: ID, $email: String){
+    User(id: $id, email: $email) {
       id
       firstName
       lastName
@@ -252,6 +252,16 @@ export const CREATE_NOTIFICATION_MUTATION = gql`
       id
       message
       createdAt
+    }
+  }
+`
+
+export const CREATE_MEDALLION_MUTATION = gql`
+  mutation CreateMedallionMutation($ownedById: ID!) {
+    createMedallion(
+      ownedById: $ownedById
+    ) {
+      id
     }
   }
 `

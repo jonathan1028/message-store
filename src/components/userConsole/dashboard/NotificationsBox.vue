@@ -139,10 +139,6 @@ export default {
   top: 0;
   margin: 0vh;
   padding: 0vh;
-  grid-row-start: 1;
-  grid-row-end: 2;
-  grid-column-start: 1;
-  grid-column-end: 2;
   display: grid;
   // grid-template-rows: 8vh repeat(10, 4vh);
   align-content: start;
@@ -151,6 +147,7 @@ export default {
   background-image: linear-gradient(to bottom, #efba34, #f3cc6a, #f7dd9b, #fbeecb, #fffefb);
   border-top-right-radius: 3vh;
   border-top-left-radius: 3vh;
+  height: 8vh;
   font-weight: 900;
   text-align: center;
   white-space: nowrap;

@@ -1,8 +1,12 @@
 <template>
   <div class="feedPageLayout">
-    <notifications-box></notifications-box>
-    <search></search>
-    <div class="carousel _box">
+    <notifications-box
+      class="notifications-component"
+    ></notifications-box>
+    <search
+      class="search-component"
+    ></search>
+    <div class="carousel-component _box">
       <div class="__header">Help people affected by Hurricane Harvey</div>
       <div class="__image-row">Photos</div>
       <div class="__card-row">
@@ -80,11 +84,12 @@
       <div class="__carousel-footer"> ...... </div>
     </div>
     <feed
+      class="feed-component"
       :data="allOpportunities"
       :columns="columns"
     >
     </feed>
-    <div class="button-menu _box">
+    <div class="action-buttons-component _box">
       <div class="__header">Grow the GCN Community</div>
       <div class="__row --border-collapse">
         <button class="_button2 ">Send a Thank You Note</button>
@@ -92,13 +97,27 @@
       <div class="__row">
         <button class="_button2">Invite Friends</button>
       </div>
+      <div class="__row">
+        <button
+          class="_button2"
+          @click="open()"
+        >Issue Medallions</button>
+      </div>
     </div>
+    <!------------------------------------------ Modal- Create Medallion  ------------------------- -->
+      <span v-if="this.$store.state.showCreateMedallionModal">
+        <create-medallion
+          class="create-medallion-component"
+        ></create-medallion>
+      </span>
+    <!------------------------------------------ End of Modal Content  ---------------------------- -->
   </div>
 </template>
 
 <script>
 import Feed from './Feed'
 import Search from './Search'
+import CreateMedallion from './CreateMedallion'
 import NotificationsBox from './NotificationsBox'
 import { ALL_OPPORTUNITIES_QUERY } from '../../../constants/graphql'
 // import CreateOpportunity from './CreateOpportunity'
@@ -106,16 +125,13 @@ import { ALL_OPPORTUNITIES_QUERY } from '../../../constants/graphql'
 export default {
   name: 'FeedPage',
   components: {
-    Feed, Search, NotificationsBox
+    Feed, Search, NotificationsBox, CreateMedallion
   },
   data () {
     return {
       // showCreatePerson: this.$store.showCreatePerson,
-      allOpportunities: [
-        // {name: 'Opp1'},
-        // {name: 'Opp2'},
-        // {name: 'Opp3'}
-      ],
+      // showCreateMedallionModal: this.$store.showCreateMedallionModal
+      allOpportunities: [],
       sortColumn: '',
       searchQuery: '',
       columns: [
@@ -134,8 +150,8 @@ export default {
     }
   },
   methods: {
-    openCreate () {
-      this.$store.commit('toggleCreateOpportunity')
+    open () {
+      this.$store.commit('toggleCreateMedallionModal')
     }
     // processData (data) {
     //   console.log(data)
@@ -153,24 +169,21 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.search{
-  width: 38%;
-}
 .feedPageLayout {
   margin-left: 5vw;
   margin-right: 5vw;
   display: grid;
   grid-template-columns: 18vw auto 18vw;
+  grid-template-areas:
+     "notifications-component carousel-component action-buttons-component"
+     "search-component        feed-component     .";
   grid-column-gap: 2vh;
   grid-row-gap: 2vh;
 }
-.carousel {
+.carousel-component {
+  grid-area: carousel-component;
   // width: 100%;
   height: 65vh;
-  grid-row-start: 1;
-  grid-row-end: 2;
-  grid-column-start: 2;
-  grid-column-end: 3;
   background-color: white;
   display: grid;
   grid-template-rows: 4vh 6fr 10fr 1fr
@@ -296,79 +309,22 @@ export default {
   justify-content: center;
   // border: 1px solid black;
 }
-.feed {
-  // width: 100%;
-  height: auto;
-}
-.notifications {
-  // width: 100%;
-  height: 35vh;
-  grid-row-start: 1;
-  grid-row-end: 2;
-  grid-column-start: 1;
-  grid-column-end: 2;
-  display: grid;
-  grid-template-rows: 8vh 1fr 1fr 1fr 1fr 1fr 1fr;
-}
-.notifications__header {
-  background-image: linear-gradient(to bottom, #efba34, #f3cc6a, #f7dd9b, #fbeecb, #fffefb);
-  border-top-right-radius: 3vh;
-  border-top-left-radius: 3vh;
-  font-weight: 900;
-  text-align: center;
-  white-space: nowrap;
-  border-bottom: .3vh solid var(--theme-color4);
-  display: grid;
-  grid-template-rows: 1fr 2fr;
-  grid-template-columns: 1fr 3fr;
-  padding: 0.8vh 0vh 0vh 3vh;
-}
-.__userPhoto{
-  width: 6vh;
-  height: 6vh;
-  grid-row-start: 1;
-  grid-row-end: -1;
-  grid-column-start: 1;
-  grid-column-end: 2;
-  background-color: white;
-  border: .15vh solid var(--theme-color3);
-  border-radius: 3vh;
-}
-.__userName {
-  grid-row-start: 1;
-  grid-row-end: 2;
-  grid-column-end: 2;
-  grid-column-start: 3;
-  // background-color: var(--theme-color4);
-  text-align: left;
-}
-.__userLocation {
-  grid-row-start: 2;
-  grid-row-end: 3;
-  grid-column-start: 2;
-  grid-column-end: 3;
-  // background-color: var(--theme-color4);
-  font-size: 1.5vh;
-  text-align: left;
-}
-.notifications__row {
-  font-size: 1vw;
-  // border-top: .3vh solid var(--theme-color4);
-  padding: 0.5vh 2vw;
+.feed-component {
+  grid-area: feed-component;
 }
 
-.button-menu{
-  height: 25vh;
-  grid-row-start: 1;
-  grid-row-end: 2;
-  grid-column-start: 3;
-  grid-column-end: 4;
-  background-color: white;
+.action-buttons-component{
+  grid-area: action-buttons-component;
   display: grid;
-  grid-template-rows: 8vh auto auto;
+  grid-template-rows: 8.8vh repeat(auto-fill, 10vh);
+  height: fit-content;
+  background-color: white;
   button {
-    height: 100%;
+    height: 6vh;
   }
+}
+.create-medallion-component {
+  grid-area: carousel-component;
 }
 .__header {
   background-image: linear-gradient(to bottom, #efba34, #f3cc6a, #f7dd9b, #fbeecb, #fffefb);
