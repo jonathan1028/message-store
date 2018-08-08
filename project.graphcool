@@ -1,5 +1,5 @@
 # project: cjj61omlj2d790156bk4oimkn
-# version: 11
+# version: 12
 
 type User @model {
   id: ID! @isUnique
@@ -15,6 +15,7 @@ type User @model {
   volunteeringLogs: [VolunteeringLog!]! @relation(name: "UserVolunteeringLogs")
   notifications: [Notification!]! @relation(name: "UserNotifications")
   medallions: [Medallion!]! @relation(name: "UserMedallions")
+  medallionsIssued: [Medallion!]! @relation(name: "UserIssuedMedallions")
   persons: [Person!]! @relation(name: "UsersPersons")
   interestedOpportunities: [Opportunity!]! @relation(name: "InterestedOpportunities")
   goingOpportunities: [Opportunity!]! @relation(name: "GoingOpportunities")
@@ -71,8 +72,11 @@ type Medallion @model {
   id: ID! @isUnique
   createdAt: DateTime!
   updatedAt: DateTime!
+  message: String
+  category: String
   ownedBy: User @relation(name: "UserMedallions")
   previousOwnerId: String
+  issuedBy: User @relation(name: "UserIssuedMedallions")
 }
 
 type Person @model {

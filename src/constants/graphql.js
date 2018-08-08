@@ -10,6 +10,22 @@ export const ALL_USERS_QUERY = gql`
       email
       createdAt
       updatedAt
+      medallions {
+        id
+        createdAt
+        message
+        category
+        issuedBy {
+          id
+          firstName
+          lastName
+        }
+        ownedBy {
+          id
+          firstName
+          lastName
+        }
+      }
     }
   }
 `
@@ -23,6 +39,9 @@ export const GET_USER_QUERY = gql`
       email
       birthYear
       phone
+      medallions {
+        id
+      }
     }
   }
 `
@@ -71,6 +90,25 @@ export const ALL_NOTIFICATIONS_QUERY = gql`
       id
       message
       createdAt
+    }
+  }
+`
+
+export const ALL_MEDALLIONS_QUERY = gql`
+  query AllMedallionsQuery {
+    allMedallions {
+      id
+      createdAt
+      message
+      category
+      ownedBy {
+        firstName
+        lastName
+      }
+      issuedBy {
+        firstName
+        lastName
+      }
     }
   }
 `
@@ -257,11 +295,15 @@ export const CREATE_NOTIFICATION_MUTATION = gql`
 `
 
 export const CREATE_MEDALLION_MUTATION = gql`
-  mutation CreateMedallionMutation($ownedById: ID!) {
+  mutation CreateMedallionMutation($ownedById: ID!, $issuedById: ID!, $message: String, $category: String ) {
     createMedallion(
       ownedById: $ownedById
+      issuedById: $issuedById
+      message: $message
+      category: $category
     ) {
       id
+      createdAt
     }
   }
 `

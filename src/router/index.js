@@ -22,6 +22,7 @@ import UpdateUser from '../components/admin/UpdateUser'
 import ReadUser from '../components/admin/ReadUser'
 import NewUsers from '../components/admin/NewUsers'
 import { GC_USER_ID } from '../constants/settings'
+import UsersMedallionsTable from '../components/admin/UsersMedallionsTable'
 
 let userId = localStorage.getItem(GC_USER_ID)
 
@@ -146,6 +147,21 @@ const router = new Router({
           path: '/user/update/:id',
           component: UpdateUser,
           name: 'updateUser',
+          meta: {
+            requiresAuth: true
+          }
+        },
+        {
+          path: '/user/:id/medallions/',
+          component: UsersMedallionsTable,
+          name: 'usersMedallions',
+          meta: {
+            requiresAuth: true
+          }
+        },
+        {
+          path: '/medallion/:id',
+          component: ReadUser,
           meta: {
             requiresAuth: true
           }

@@ -19,6 +19,22 @@
             type="text"
             placeholder="">
         </div>
+        <div class="field">
+          <label for="">Message:</label>
+          <input
+            v-model="message"
+            type="text"
+            placeholder="">
+        </div>
+        <div class="field">
+          <label for="">Category:</label>
+          <select v-model="category">
+            <option v-if="category === null" disabled :value="null">Select an option</option>
+            <option>A</option>
+            <option>B</option>
+            <option>C</option>
+          </select>
+        </div>
       </form>
     </div>
     <div class="modal-footer">
@@ -47,7 +63,9 @@ export default {
       User: {},
       qty: '',
       email: '',
-      userId: ''
+      currentUserId: this.$store.state.auth.user.id,
+      message: '',
+      category: null
     }
   },
   methods: {
@@ -55,8 +73,9 @@ export default {
       this.$store.commit('toggleCreateMedallionModal')
     },
     submit () {
+      // Add message and reason fields and issuerID
       // Get form data
-      console.log('Modal Items', this.qty, this.email, this.userId)
+      console.log('Modal Items', this.qty, this.email, this.currentUserId)
 
       // Lookup User by the email submitted
       this.$apollo.query({
@@ -74,7 +93,10 @@ export default {
           this.$apollo.mutate({
             mutation: CREATE_MEDALLION_MUTATION,
             variables: {
-              ownedById: result.data.User.id
+              ownedById: result.data.User.id,
+              issuedById: this.currentUserId,
+              message: this.message,
+              category: this.category
             }
             //   update: (store, { data: { createVolunteeringLog } }) => {
             //     // Pull data from the stored query

@@ -14,19 +14,21 @@
           </user-table>
         </div>
       </div>
+      <medallions-issued-table></medallions-issued-table>
     </div>
   </div>
 </template>
 
 <script>
 import UserTable from './UserTable'
+import MedallionsIssuedTable from './MedallionsIssuedTable'
 import { ALL_USERS_QUERY } from '../../constants/graphql'
 // import { ALL_PEOPLE_QUERY, NEW_PEOPLE_SUBSCRIPTION } from '../constants/graphql'
 
 export default {
   name: 'Admin',
   components: {
-    UserTable
+    UserTable, MedallionsIssuedTable
   },
   data () {
     return {
