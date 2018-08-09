@@ -1,25 +1,40 @@
 <template>
-  <div class="box">
+  <div class="_box loginContainer">
     <div class="companyName">Good Citizen Network</div>
     <div class="inputs">
       <div class="field">
+        <label for="">Username</label>
         <input
           v-model="email"
           type="text"
-          placeholder="Your email address">
+          placeholder="Your email address or mobile number">
       </div>
       <div class="field">
+        <label for="">Email</label>
         <input
           v-model="password"
           type="password"
           placeholder="Password">
       </div>
     </div>
+    <div class="forgot-password align-right">
+      <router-link
+        class="link"
+        to="signup"
+      >
+        Forgot Password?
+      </router-link>
+    </div>
     <div>
-      <button @click="login">
-        Login
+      <button 
+        class="_button1"
+        @click="login">
+        LOGIN
       </button>
     </div>
+    <div>or</div>
+    <button class="_button3">LOGIN WITH FACEBOOK</button>
+    <button class="_button3">LOGIN WITH GOOGLE</button>
     <div class="linkBlock">
       <router-link
         class="link"
@@ -100,24 +115,23 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.box {
+.loginContainer {
   width: 25vw;
   // height: 40vh;
   margin: auto;
-  margin-top: 15vh;
+  margin-top: 10vh;
   padding: 2vh;
   //display: flex;
   // align-items: center;
   //justify-content: center;
   text-align: center;
 }
+.box {
+}
 .companyName {
   margin-top: 10vh;
   color: var(--text-color1);
   font-size: 4vh;
-}
-.inputs {
-  // margin-top: 5vh;
 }
 .field {
   width: 100%;
@@ -130,26 +144,43 @@ label {
   width: 100%;
   display: flex;
   justify-content: flex-start;
+  color: var(--font-color3);
+  font-size: 1.8vh;
 }
 input {
   width: 100%;
-  font-size: 2vh;
-  // margin-top: 5vh;
+  font-size: 2.2vh;
+  color: var(--font-color1);
+  padding: 1vh 0vh;
   border-top: none;
   border-left: none;
   border-right: none;
   border-bottom: .25vh solid lightgray;
 }
+// This is a hack required to make the input background not turn yellow after
+// user has entered data which is the default functionality for Chrome
+input:-webkit-autofill {
+    -webkit-box-shadow: 0 0 0px 1000px white inset;
+}
 button {
-  width: 100%;
-  margin-top: 5vh;
-  background-color: #efba34;
-  border-radius: 3vh;
+  margin-top: 1.2vh;
+}
+.forgot-password {
+  margin-top: 0.5vh;
+  margin-bottom: 2vh;
+  .link {
+    font-size: 2.5vh;
+    color: var(--font-color1);
+  }
 }
 .linkBlock {
-  margin-top: 3vh;
+  margin-top: 1.8vh;
   .link {
-    color: var(--text-color1);
+    font-size: 2.5vh;
+    color: var(--font-color1);
   }
+}
+.align-right {
+  text-align: right;
 }
 </style>

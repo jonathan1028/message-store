@@ -20,13 +20,22 @@ export default {
 /* Removes default margin and padding for all html elements */
 * { margin: 0; padding: 0; }
 html {
-  background-color: var(--theme-color5);
+  background-color: var(--background-color2);
 }
 /* ------------------------- Application Variables ------------------------- */
 :root {
   --page-height: 100vh;
   --page-width: 100vw;
-  --theme-color1: #efba34;
+
+  --font-color1: #47535e;
+  --font-color3: #f7ca44;
+  --font-color4: lightgray;
+
+  --background-color1: #fc0;
+  --background-color2: white;
+  --background-color3: #555;
+
+  --theme-color1: #f7ca44;
   --theme-color2: #fff2c7;
   --theme-color3: #47535d;
   --theme-color4: lightgray;
@@ -100,7 +109,7 @@ a {
   // -webkit-box-shadow: 0 .25vh 1vh #777;
   // -moz-box-shadow: 0 .25vh 1vh #777;
   // box-shadow: 0 .5vh 2vh #777;
-  border-radius: 3vh;
+  // border-radius: 3vh;
   border: .1vh solid lightgray;
 }
 ._modal {
@@ -150,10 +159,14 @@ li {
 /* ------------------------------------ Application Button Styling ----------------------------- */
 ._button1 {
   width: 100%;
-  background-color: #efba34;
+  height: 6vh;
+  color: var(--font-color1);
+  font-size: 2vh;
+  background-color: var(--background-color1);
   border-radius: 3vh;
   text-align: center;
   white-space: nowrap;
+  border: none;
 }
 ._button2 {
   width: 100%;
@@ -166,7 +179,9 @@ li {
 }
 ._button3 {
   width: 100%;
-  background-color: #47535d;
+  height: 6vh;
+  font-size: 2vh;
+  background-color: var(--background-color3);
   color: white;
   border-radius: 3vh;
   // text-align: center;
