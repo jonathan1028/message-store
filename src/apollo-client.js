@@ -12,7 +12,7 @@ import { getMainDefinition } from 'apollo-utilities'
 const httpLink = new HttpLink({
   // You should use an absolute URL here
   // uri: 'http://localhost:4000/graphql'
-  uri: 'https://api.graph.cool/simple/v1/cjj61omlj2d790156bk4oimkn'
+  uri: 'https://api.graph.cool/simple/v1/cjl45rf677l5i0154ep715aua'
 })
 
 // Create a WebSocket link:

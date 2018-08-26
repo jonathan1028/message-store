@@ -15,6 +15,7 @@ import UserDashboard from '../components/userConsole/dashboard/UserDashboard'
 import MyOpportunitiesPage from '../components/userConsole/volunteerOpportunities/MyOpportunitiesPage'
 import ProfilePage from '../components/userConsole/profile/ProfilePage'
 import NotificationsPage from '../components/userConsole/notifications/NotificationsPage'
+import Poker from '../components/userConsole/poker/Poker'
 
 import AdminHeader from '../components/admin/AdminHeader'
 import Admin from '../components/admin/Admin'
@@ -71,6 +72,13 @@ const router = new Router({
       path: '/',
       component: UserConsoleHeader,
       children: [
+        {
+          path: '/poker',
+          component: Poker,
+          meta: {
+            requiresAuth: true
+          }
+        },
         {
           path: '/feed',
           component: UserDashboard,

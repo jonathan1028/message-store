@@ -59,6 +59,31 @@ export const USERS_ON_FEED_QUERY = gql`
   }
 `
 
+export const ALL_CARDS_QUERY = gql`
+  query AllCardsQuery ($code: String){
+    allCards (filter: {code: $code}) {
+      id
+      number
+      suit
+      code
+    }
+  }
+`
+
+export const ALL_HANDS_QUERY = gql`
+  query AllHandsQuery {
+    allHands {
+      id
+      rank
+      preflopOdds
+      code
+      cards {
+        code
+      }
+    }
+  }
+`
+
 export const ALL_LINKS_QUERY = gql`
   query AllLinksQuery($first: Int, $skip: Int, $orderBy: LinkOrderBy) {
     allLinks(first: $first, skip: $skip, orderBy: $orderBy) {
@@ -250,6 +275,24 @@ export const SIGNIN_USER_MUTATION = gql`
         firstName
         lastName
         email
+      }
+    }
+  }
+`
+export const CREATE_HAND_MUTATION = gql`
+  mutation CreateHandMutation($rank: Int, $preflopOdds: Float, $code: String, $cardsIds: [ID!]) {
+    createHand(
+      rank: $rank,
+      preflopOdds: $preflopOdds,
+      code: $code
+      cardsIds: $cardsIds
+    ) {
+      id
+      rank
+      preflopOdds
+      code
+      cards {
+        code
       }
     }
   }

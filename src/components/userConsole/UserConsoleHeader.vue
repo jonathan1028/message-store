@@ -6,6 +6,8 @@
             <!-- Logo -->
             <div class="logo">GCN</div>
             <div class="nav-buttons">
+              <router-link to="/poker">Poker</router-link>
+              <div>|</div>
               <router-link to="/feed">Feed</router-link>
               <div>|</div>
               <router-link to="/notifications">Notifications</router-link>
