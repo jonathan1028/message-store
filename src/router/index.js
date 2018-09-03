@@ -7,6 +7,8 @@ import SignUp from '../components/public/SignUp'
 import Home from '@/components/public/Home'
 
 import UserConsoleHeader from '../components/userConsole/UserConsoleHeader'
+import Dashboard from '../components/userConsole/Dashboard'
+import CreateMessage from '../components/userConsole/CreateMessage'
 // import People from '../components/userConsole/People/People'
 // import ReadPerson from '../components/userConsole/People/ReadPerson'
 // import UpdatePerson from '../components/userConsole/People/UpdatePerson'
@@ -15,7 +17,6 @@ import UserDashboard from '../components/userConsole/dashboard/UserDashboard'
 import MyOpportunitiesPage from '../components/userConsole/volunteerOpportunities/MyOpportunitiesPage'
 import ProfilePage from '../components/userConsole/profile/ProfilePage'
 import NotificationsPage from '../components/userConsole/notifications/NotificationsPage'
-import Poker from '../components/userConsole/poker/Poker'
 
 import AdminHeader from '../components/admin/AdminHeader'
 import Admin from '../components/admin/Admin'
@@ -73,8 +74,15 @@ const router = new Router({
       component: UserConsoleHeader,
       children: [
         {
-          path: '/poker',
-          component: Poker,
+          path: '/dashboard',
+          component: Dashboard,
+          meta: {
+            requiresAuth: true
+          }
+        },
+        {
+          path: '/createMessage',
+          component: CreateMessage,
           meta: {
             requiresAuth: true
           }

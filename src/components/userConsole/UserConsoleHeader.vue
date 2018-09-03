@@ -4,10 +4,12 @@
       <div class="header-content">
           <div class="main-nav">
             <!-- Logo -->
-            <div class="logo">GCN</div>
+            <div class="logo">Message Store</div>
             <div class="nav-buttons">
-              <router-link to="/poker">Poker</router-link>
+              <router-link to="/home">Dashboard</router-link>
               <div>|</div>
+              <router-link to="/createMessage">New Message</router-link>
+              <!-- <div>|</div>
               <router-link to="/feed">Feed</router-link>
               <div>|</div>
               <router-link to="/notifications">Notifications</router-link>
@@ -16,7 +18,7 @@
               <div>|</div>
               <router-link to="/myopportunities">My Opportunities</router-link>
               <div>|</div>
-              <router-link to="/admin">Admin</router-link>
+              <router-link to="/admin">Admin</router-link> -->
               <!-- Logged in navigation -->
               <!-- <div class="authenticated-nav" v-if="userId">
                 <router-link to="/people">People</router-link>

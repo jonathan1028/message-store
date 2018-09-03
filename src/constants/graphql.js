@@ -1,6 +1,32 @@
 import gql from 'graphql-tag'
 
 // ----------------------------------------- Queries ---------------------------------------------
+export const ALL_MESSAGES_QUERY = gql`
+  query AllMessagesQuery {
+    allMessages {
+      id
+      createdAt
+      updatedAt
+      text
+    }
+  }
+`
+
+export const CREATE_MESSAGE_MUTATION = gql`
+  mutation CreateMessageMutation($text: String) {
+    createMessage(
+      text: $text
+    ) {
+      id
+      createdAt
+      updatedAt
+      text
+      __typename
+    }
+  }
+`
+
+// ----------------------------------------- Queries ---------------------------------------------
 export const ALL_USERS_QUERY = gql`
   query AllUsersQuery {
     allUsers {
