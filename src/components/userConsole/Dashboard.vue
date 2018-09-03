@@ -162,10 +162,10 @@ export default {
 
 <style lang="scss" scoped>
 .pageLayout {
-  margin-left: 5vw;
-  margin-right: 5vw;
+  margin-left: 10vw;
+  margin-right: 10vw;
   display: grid;
-  grid-template-columns: 90vw;
+  grid-template-columns: 80vw;
 }
 .searchRow {
   input {
@@ -181,6 +181,7 @@ export default {
 }
 .timestamp {
   text-align: right;
+  color: var(--font-color1);
 }
 .rank {
   color: blue;
