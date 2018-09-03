@@ -63,11 +63,6 @@ export const GET_USER_QUERY = gql`
       firstName
       lastName
       email
-      birthYear
-      phone
-      medallions {
-        id
-      }
     }
   }
 `
