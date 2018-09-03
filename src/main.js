@@ -13,14 +13,14 @@ let userId = localStorage.getItem(GC_USER_ID)
 
 Vue.use(Vuex)
 
-Vue.filter('formatDate', function (value) {
-  if (value) {
-    return format('MM/DD/YYYY')
+Vue.filter('formatDate', function (data) {
+  if (data) {
+    return format(data, 'MMMM Do YYYY, h:mm:ssa')
   }
 })
-Vue.filter('relativeTime', function (value) {
-  if (value) {
-    return distanceInWords(value, new Date()) + ' ago'
+Vue.filter('relativeTime', function (data) {
+  if (data) {
+    return distanceInWords(data, new Date()) + ' ago'
   }
 })
 

@@ -4,10 +4,11 @@
       <h1>New Message</h1>
       <div class="field">
         <label>Message</label>
-        <input
+        <textarea
           v-model="text"
-          type="textarea"
-        >
+          rows="10"
+          cols="30"
+        ></textarea>
       </div>
       <button @click.prevent="cancel()">Cancel</button>
       <button @click.prevent="create()">Submit</button>

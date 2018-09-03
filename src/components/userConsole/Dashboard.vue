@@ -1,8 +1,7 @@
 <template>
   <div class="pageLayout">
-
     <div>
-      All Messages
+      <h1>All Messages</h1>
       <div class="searchRow">
           <input
             name="query"
@@ -12,15 +11,15 @@
       </div>
       <ul>
         <li
-          class="hands"
+          class="cards _box-shadow1"
           v-for="(message,index) in filteredData"
           :key='index'
         >
-        <div>
+        <div class="message">
           {{message.text}}
         </div>
-        <div>
-          {{message.createdAt | relativeTime}}
+        <div class="timestamp">
+          {{message.createdAt | formatDate}}
         </div>
         </li>
       </ul>
@@ -166,19 +165,22 @@ export default {
   margin-left: 5vw;
   margin-right: 5vw;
   display: grid;
-  grid-template-columns: 18vw auto 18vw;
-  grid-template-areas:
-     "notifications-component carousel-component action-buttons-component"
-     "search-component        feed-component     .";
-  grid-column-gap: 2vh;
-  grid-row-gap: 2vh;
+  grid-template-columns: 90vw;
 }
-.hands {
-  border: .25vh solid lightgray;
-  padding: 1vh;
+.searchRow {
+  input {
+    font-size: 3vh;
+  }
+  margin-top: 3vh;
+  margin-bottom: 3vh;
 }
 .cards {
-  font-size: 3vh;
+  border: .25vh solid lightgray;
+  padding: 1vh;
+  margin-bottom: 3vh;
+}
+.timestamp {
+  text-align: right;
 }
 .rank {
   color: blue;
